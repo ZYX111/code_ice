@@ -1,0 +1,10 @@
+<script>
+    var it1={aa:123};
+    var it2={
+        aa:1234,
+        fun:function (){document.write(this.aa);}
+        }
+    it2.fun.call(it1);
+    document.write("</br>");
+    it2.fun();
+</script>
