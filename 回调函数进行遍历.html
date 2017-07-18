@@ -1,0 +1,14 @@
+<script>
+    function each(obj,callback){  
+        for(var i=0,l = obj.length;i<l;i++){  
+            callback.call(obj,i,obj[i]); //此处的意思是，用callback来替换obj，所以实现为callback(i,obj[i]),正好将数组遍历;  
+        }             
+    }  
+    function fun1(a,b){
+        return a+b;
+    }
+    function fun2(c,d){
+        return c+d;
+    }
+    document.write(fun1.call(fun2,3,1));
+</script>
