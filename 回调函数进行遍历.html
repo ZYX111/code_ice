@@ -5,10 +5,17 @@
         }             
     }  
     function fun1(a,b){
+        document.write(a+"  ");
         return a+b;
     }
     function fun2(c,d){
+        document.write(d+"  ");
         return c+d;
     }
+    // function fun2(e,f){
+    //     document.write(f+"  ");
+    //     return c+d;
+    // }
     document.write(fun1.call(fun2,3,1));
+    document.write(fun2(4,6));
 </script>
