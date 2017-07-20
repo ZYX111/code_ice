@@ -10,10 +10,11 @@
 <button type="button" onclick="myFunction()">计数!</button>
 <p id="demo">0</p>
 <script>
-var add = (function () {
+    var aa=function () {
     var counter = 0;
     return function () {return counter += 1;}
-})();
+}
+var add = (aa)();
 function myFunction(){
     document.getElementById("demo").innerHTML = add();
 }
