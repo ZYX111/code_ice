@@ -11,12 +11,12 @@
 <p id="demo">0</p>
 <script>
     var aa=function () {
-    var counter = 0;
-    return function () {return counter += 1;}
-}
+        var counter = 0;
+        return function () {return counter += 1;}
+        }
 var add = (aa)();
 function myFunction(){
-    document.getElementById("demo").innerHTML = add();
+    document.getElementById("demo").innerHTML = add;
 }
 </script>
 
