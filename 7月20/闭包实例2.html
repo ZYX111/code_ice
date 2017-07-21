@@ -14,8 +14,7 @@
         var counter = 0;
         return function () {return counter += 1;}
         }
-    aa();
-    var add=function () {return counter += 1;};
+    var add=aa();
 function myFunction(){
     document.getElementById("demo").innerHTML = add();
 }
