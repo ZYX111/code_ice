@@ -6,23 +6,20 @@
 </head>
 <body>
 
-<p>点击一下段落由1变2，再点击由2变1</p>
-<p>只进行js改动</p>
-<p>不要更改这个文件，在当前文件夹新建一个文件进行编写，文件名署上自己的名字</p>
 <p id="demo" onclick="fun();">1</p>
 <script>
-   var fun2=function(){
-       var a=0;
+   var func=function(){
+       var counter=0;
        return function(){
-           if(a%2){
-               document.getElementById("demo").innerHTML=1;
+           if(counter%2==0){
+               document.getElementById('demo').innerHTML=2;
            }else{
-                document.getElementById("demo").innerHTML=2;
+               document.getElementById('demo').innerHTML=1;
            }
-           a++;
-       };
+           counter++;
+       }
    }
-   var fun=fun2();
+   var fun=func();
 </script>
 </body>
 </html>
