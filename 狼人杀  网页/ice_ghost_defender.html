@@ -1,0 +1,49 @@
+﻿<html>
+ <head>
+  <title>守卫界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	window.onload = function(){
+		timedText();//timedText方法的作用就是做一个定时器，时间到后，自动跳转下个页面
+	}
+	var loop=15;//计时器倒计时15秒
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	var timedText = function(){
+		if(loop==0){
+			nextPage();//如果倒计时到0，则通过nextPage方法跳转到下个界面
+		}
+		document.getElementById('txt').value=loop+"秒";
+		loop--;//方法每执行一次，则倒计时减一秒
+		setTimeout("timedText();",1000)//1000ms后执行一次timedText方法，通过执行方法本身，来达到循环计时的效果
+		if(lrs_data.defenderLast!=-1) document.getElementById('txt1').value=lrs_data.defengderLast;
+	}
+	function defendPerson(){
+		if(parseInt(document.all.defendNum.value)!=lrs_data.defenderLast){//判断要守的人是否为上轮守过的人
+		    	if(parseInt(document.all.defendNum.value)/*将输入框里输入的玩家编号(字符型)变为整型*/==lrs_data.killed[0]){                    //如果要守护的玩家编号与今夜死亡的玩家编号相同
+				lrs_data.killed[0]=0;//则今夜无人被刀死
+			}
+		}
+		lrs_data.defenderLast=parseInt(document.all.defendNum.value);//将本轮守得人放入上轮守人变量中
+	}
+	var nextPage = function(){
+		defendPerson();//调用守人方法
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		var url="./ice_ghost_dieDisplay.html";//跳转到死亡界面
+		location.href=url;
+	}
+  </script>
+  <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:300px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+ <form>
+输入你要守卫的人：
+<input style="width:40px;" type="text" name="defendNum" />
+<br />
+<input id="txt" style="width:60px;" type="text"  />
+</form>
+ </body>
+</html>

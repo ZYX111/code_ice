@@ -1,0 +1,43 @@
+﻿<html>
+ <head>
+  <title>放逐界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	var lrs_data = JSON.parse(getCookie('lrs_data'));//获得库中的数据
+	var nextPage3 = function(){
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href="./ice_ghost_wolf.html";//链接到狼人界面
+	}
+	var nextPage1 = function(){
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		if(lrs_data.persons[lrs_data.murder].type=="hunter"&&lrs_data.lrs_data.killed[1]!=lrs_data.murder+1){
+			location.href="./ice_ghost_hunter2.html";//链接到猎人界面
+		}
+		else location.href="./ice_ghost_wolf.html";//链接到狼人界面
+	}
+	var nextPage2 = function(){
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		if(lrs_data.persons[lrs_data.murder].type=="fool"){
+			location.href="./ice_ghost_fool.html";//链接到白痴界面
+		}
+		else location.href="./ice_ghost_wolf.html";//链接到狼人界面
+	}
+  </script>
+  <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:100px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+ <form>
+ 你被放逐请留遗言
+<br />
+猎人翻牌？<input type ="button" value ="确定" onclick = "nextPage1();"><!--点击该键会执行nextPage1方法-->
+<br />
+是白痴？<input type ="button" value ="确定" onclick = "nextPage2();"><!--点击该键会执行nextPage2方法-->
+<br />
+<input type ="button" value ="确定" onclick = "nextPage3();"><!--点击该键会执行nextPage3方法-->
+</form>
+ </body>
+</html>

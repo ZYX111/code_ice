@@ -1,0 +1,50 @@
+﻿<html>
+ <head>
+  <title> 狼人界面 </title>
+<script src="./utils.js"></script>
+<script language="javascript">
+	var loop = 9, lrs_data = JSON.parse(getCookie('lrs_data'));
+	window.onload = function(){//计时器详解请看defender界面
+		timedText();
+	}
+	var timedText = function(){
+		if(loop==0){     
+			nextPage();
+		}
+		document.getElementById('txt').value=loop+"秒";
+		loop--;
+		setTimeout("timedText()",1000)
+	}
+	function wolfKill(){
+		var num=parseInt(document.all.killnum.value)
+		if(num>=0&&num<=16)
+		lrs_data.killed[0]=parseInt(document.all.killnum.value);
+	}
+	var nextPage = function(){
+		wolfKill();
+		var url = "./ice_ghost_prophet.html";
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href=url;
+	}
+</script>
+<style type="text/css">
+<!--body{margin:0;padding:0;}-->
+.kill{width:300px;margin:0 auto;}
+.time{border:1px soild #F00;margin:0 auto;}/*灰色边框*/
+html,body{text-align:center;margin:0px auto;line-height:240px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+
+  <body>
+  <div class="kill">
+    <form class="killnum">
+    <span>输入你要杀死的人：</span>
+    <input class="out" style="width:40px;" type="text" name="killnum" />
+	<br />
+    <!--<form class="time">-->
+    <input id="txt" style="width:27px;" align="center" type="text" />
+    </form>
+  </div>
+  </body>
+</html>

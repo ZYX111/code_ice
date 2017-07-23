@@ -1,0 +1,31 @@
+﻿<html>
+ <head>
+  <title>猎人界面2</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	function kill(){
+		writeKillList(parseInt(document.all.killNum.value));//将输入的玩家编号写入死亡清单
+	}
+	var nextPage = function(){
+		kill();
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href="./ice_ghost_wolf.html";
+		judge();//调用库中的judge方法，判断游戏是否结束
+	}
+  </script>
+  <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:300px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+  <form>
+输入你要射杀的人：
+<input class="out" style="width:40px;" type="text" name="killNum" />
+<br />
+<input type ="button" value ="确定"onclick = "nextPage();">
+</form>
+ </body>
+</html>

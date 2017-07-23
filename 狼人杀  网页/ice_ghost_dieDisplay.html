@@ -1,0 +1,51 @@
+﻿<html>
+ <head>
+  <title>死亡界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	window.onload = function(){
+		document.getElementById('an').value=lrs_data.killed[0];
+		document.getElementById('an2').value=lrs_data.killed[1];
+	}
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	var nextPage2 = function(){
+		writeKillList(lrs_data.killed[0]/*该数组元素存放被狼杀死的玩家编号*/);//将此玩家编号写入死亡清单
+		writeKillList(lrs_data.killed[1]/*该数组元素存放被女巫毒杀死的玩家编号*/);//将此玩家编号写入死亡清单
+		lrs_data.killed[0]=0;//将该数组元素清空
+		lrs_data.killed[1]=0;//将该数组元素清空
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href="./ice_ghost_vote.html";//跳转到投票界面
+		judge();//调用库中的judge方法，判断游戏是否结束
+	}
+	var nextPage1 = function(){
+		writeKillList(lrs_data.killed[0]);
+		lrs_data.murder=lrs_data.killed[0]-1;
+		writeKillList(lrs_data.killed[1]);
+		lrs_data.killed[0]=0;
+		lrs_data.killed[1]=0;
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		if(lrs_data.persons[lrs_data.murder].type=="wolf"){
+			location.href="./ice_ghost_hunter.html";
+		}
+		else location.href="./ice_ghost_vote.html";
+		judge();//调用库中的judge方法，判断游戏是否结束
+	}
+  </script>
+  <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:100px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+ <form>
+<input id='an' style="width:40px;" type="text" name="killed1" />号玩家死亡
+<br />
+<input id='an2' style="width:40px;" type="text" name="killed2" />号玩家死亡
+<br />
+猎人翻牌？<input type ="button" value ="确定" onclick = "nextPage1();">
+<br />
+<input type ="button" value ="确定" onclick = "nextPage2();">
+</form>
+ </body>
+</html>

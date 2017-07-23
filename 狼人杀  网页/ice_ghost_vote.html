@@ -1,0 +1,32 @@
+﻿<html>
+ <head>
+  <title>投票界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	function kill(){
+		writeKillList(parseInt(document.all.killNum.value));//写入死亡清单
+		lrs_data.murder=parseInt(document.all.killNum.value)-1;
+	}
+	var nextPage = function(){
+		kill();
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href="./ice_ghost_banish.html";
+		judge();
+	}
+  </script>
+  <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:300px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+  <form>
+输入白天将要被放逐的人：
+<input class="out" style="width:40px;" type="text" name="killNum" />
+<br />
+<input type ="button" value ="确定" onclick = "nextPage();">
+</form>
+ </body>
+</html>

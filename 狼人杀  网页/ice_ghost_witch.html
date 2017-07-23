@@ -1,0 +1,66 @@
+﻿<html>
+ <head>
+  <title>女巫界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	window.onload = function(){//计时器详解请看defender界面
+		timedText();
+		document.getElementById('an').value=lrs_data.killed[0];
+	}		
+	var loop=15;
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	var timedText = function(){
+		if(loop==0){
+			nextPage();
+		}
+		document.getElementById('txt').value=loop+"秒";
+		loop--;
+		setTimeout("timedText();",1000)
+	}
+	function witchKill(){
+		lrs_data.killed[1]=parseInt(document.all.killnum2.value);
+	}
+	function witchSave(){
+		lrs_data.killed[0]=0;
+	}
+	var nextPage = function(){
+		if(document.all.poison.checked){
+			witchKill();
+		}
+		if(document.all.drug.checked){
+			witchSave();
+		}
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		var url="./ice_ghost_dieDisplay.html";
+		for(var i in lrs_data.persons){
+			if(lrs_data.persons[i].type=="defender")
+				var url="./ice_ghost_defender.html";
+		}
+		location.href=url;
+	}
+ </script>
+ <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:70px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body id='all'>
+  <form>
+bug（毒药解药能一起用）
+<br />
+<input id='poisonId' type="checkbox" name="poison" />
+毒药
+&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<input id='drugId' type="checkbox" name="drug" />
+解药
+<br />
+输入你要杀死的人：
+<input style="width:40px;" type="text" name="killnum2" />
+&emsp;&emsp;&emsp;&emsp;&emsp;
+昨晚<input id="an" style="width:40px;" type="text" name="dieNum" value="0"/>号死了
+<br />
+<input id="txt" style="width:60px;" align="center" type="text" />
+</form>
+ </body>
+</html>

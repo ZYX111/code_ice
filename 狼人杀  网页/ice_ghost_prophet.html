@@ -1,0 +1,59 @@
+﻿<html>
+ <head>
+  <title>预言家界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	window.onload = function(){//计时器的详解请看defender界面
+		timedText();
+	}
+	var loop=15;
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	var timedText = function(){
+		if(loop==0){
+			nextPage();
+		}
+		document.getElementById('txt').value=loop+"秒";
+		loop--;
+		setTimeout("timedText();",1000)//1000ms
+	}
+	function yanRen(){
+		if(lrs_data.persons[parseInt(document.all.targetperson.value)-1].type=="wolf"){
+			document.all.isgood.value = "坏人";
+		}else{
+			document.all.isgood.value = "好人";
+		}
+	}
+	var nextPage = function(){
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		var url="./ice_ghost_dieDisplay.html";//如果没有女巫和守卫，则跳转到死亡界面
+		for(var i in lrs_data.persons){//对每个人物对象进行遍历，判断是否有以下两种角色
+			if(lrs_data.persons[i].type=="defender")var url="./ice_ghost_defender.html";
+		}
+		for(var i in lrs_data.persons){
+			if(lrs_data.persons[i].type=="witch")var url="./ice_ghost_witch.html";
+		}
+		location.href=url;
+	}
+ </script>
+<style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:70px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+ <form>
+输入你要查看的人（bug使用一次）
+<br />
+<input type="text" name="targetperson" />
+<input type="button" value="显示" onClick="yanRen();" />
+<br />
+<br />
+你查看的人是这个
+<br />
+<input type="text" name="isgood" />
+<br />
+<input id="txt" type="text" />
+</form>
+ </body>
+</html>

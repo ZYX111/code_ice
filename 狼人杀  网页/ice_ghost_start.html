@@ -1,0 +1,158 @@
+﻿<html>
+ <head>
+  <title> 狼人杀 </title>
+   <script src="./utils.js"></script><!--引入utils.js方法包-->
+  <script type="text/javascript">
+  	var lrs_data;
+	var prepare = function(){//部署方法（随机分配玩家身份）
+		var playernum/*玩家人数（int型）*/ = parseInt(document.all.playernum.value/*获取文本框的值*/)
+		/*parseInt（）是把字符串型转换成int型的方法*/
+		lrs_data = {//创建lrs_data对象
+			persons: new Array(playernum),//该对象里的数组,数组里还是对象
+			killed: new Array(2),//该对象里的数组，数组里是int型
+			defenderLast:-1,//记录上一轮守人
+			murder:0//用来记录本轮死的人，用于判断此人是否为猎人(白痴)
+		};
+		lrs_data.killed[1]=0;//赋值给lrs_data对象里的killed数组的第二个元素，女巫杀得人
+		lrs_data.killed[0]=0;//赋值给lrs_data对象里的killed数组的第一个元素，狼人杀得人
+		
+		for(var i=0;i<playernum;i++){//把lrs_data对象里的persons数组里的每个对象都赋成“平民”对象
+			lrs_data.persons[i]={//“平民”这个对象里有type、name、image、life属性
+				type: "villager",//type是字符串型
+				name:"平民",//name是字符串型
+				image:'./images/平民图片.jpg',//image是字符串型
+				life:1//life是int型
+			};
+		}
+		var wolfnum/*狼人数量（int型）*/ = parseInt(document.all.wolfnum.value/*获取文本框的值*/);//获取的是字符串型
+		/*parseInt（）是把字符串型转换成int型的方法*/
+		for(var i=0;i<wolfnum;i++){//把lrs_data对象里的persons数组里的其中的“平民”对象替换成“狼人”对象
+			var idx = Math.floor(Math.random()*playernum/*产生随机数的方法*/);
+			/*math.floor()是把浮点型转换成int型的方法,idx得到的是0到玩家人数之间的随机数*/     
+			if(lrs_data.persons[idx].type=="wolf")
+				i--;//如果“狼人”对象替换“狼人”对象则再执行一遍
+			lrs_data.persons[idx] = {//替换成“狼人”对象
+				type: "wolf",
+				name:"狼人",
+				image:"./images/狼人图片.jpg",
+				life:1
+			};
+		}
+		var witch = document.all.witch.checked/*获取复选框的值（该值是个bool型（turn or false））*/;
+		if(witch){
+			for(;;){
+				var idx = Math.floor(Math.random()*playernum);
+				if(lrs_data.persons[idx].type=="villager"){
+						lrs_data.persons[idx] = {
+							type: "witch",       //女巫的英文！！！！！
+							name:"女巫",
+							image:'./images/女巫图片.jpg',
+							life:1
+						};
+						break;
+				}
+			}
+		}
+		var hunter = document.all.hunter.checked;
+		if(hunter){
+			for(;;){
+				var idx = Math.floor(Math.random()*playernum);
+				if(lrs_data.persons[idx].type=="villager"){
+						lrs_data.persons[idx] = {
+							type: "hunter",   //猎人的英文！！！！
+							name:"猎人",
+							image:'./images/猎人图片.jpg',
+							life:1
+						};
+						break;
+				}
+			}
+		}
+		var fool = document.all.fool.checked;
+		if(fool){
+			for(;;){
+				var idx = Math.floor(Math.random()*playernum);
+				if(lrs_data.persons[idx].type=="villager"){
+						lrs_data.persons[idx] = {
+							type: "fool",
+							name:"白痴",
+							image:'./images/白痴图片.jpg',
+							life:1
+						};
+						break;
+				}
+			}
+		}
+		var defender = document.all.defender.checked;
+		if(defender){
+			for(;;){
+				var idx = Math.floor(Math.random()*playernum);
+				if(lrs_data.persons[idx].type=="villager"){
+						lrs_data.persons[idx] = {
+							type: "defender",
+							name:"守卫",
+							image:'./images/守卫图片.jpg',
+							life:1
+						};
+						break;
+				}
+			}
+		}
+		var prophet = document.all.prophet.checked;
+		if(prophet){
+			for(;;){
+				var idx = Math.floor(Math.random()*playernum);
+				if(lrs_data.persons[idx].type=="villager"){
+					lrs_data.persons[idx] = {
+						type: "prophet",   //预言家的英文！！！！！
+						name:"预言家",
+						image:'./images/预言家图片.jpg',
+						life:1
+					};
+					break;
+				}
+			}
+		}
+		
+	}
+	var nextPage = function(){
+		prepare();//调用部署方法(准备游戏)
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		//setcookie（）是进库的方法，json.stringify（）是把对象转换成字符的方法
+		location.href="ice_ghost_checkPlayerNum.html";//跳转到ice_ghost_checkPlayerNum.html页面
+	}
+</script>
+
+<style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:70px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+ <p id="all">
+<form >
+玩家人数: 
+<input type="text" name="playernum" />
+<br />
+<input type="checkbox" name="witch" />
+  女巫
+<input type="checkbox" name="hunter" />
+  猎人
+<br />
+<input type="checkbox" name="fool" />
+  白痴
+<input type="checkbox" name="defender" />
+守卫
+<br/>
+<input type="checkbox" name="prophet" />
+预言家
+<br/>
+狼人数量: 
+<input type="text" name="wolfnum" />
+<br/>
+<input type ="button" value ="确定" onclick="nextPage();"><!--如果点击该按钮则执行该方法-->
+<br />
+</form>
+  </p>
+ </body>
+</html>

@@ -1,0 +1,53 @@
+﻿<html>
+ <head>
+  <title>选择界面</title>
+ <script src="./utils.js"></script>
+ <script language="javascript">
+	window.onload = function(){//该方法是加载页面时会被调用（执行）
+		document.getElementById('roleimage').src='./images/牌背图片.jpg';
+		//等号左边是界面的图像，右边等号是牌背图片的路径(是字符串型)
+		document.all.rolename.value="";
+		//等号左边是界面的文本框，右边等号是“ ”字符
+	}
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	//getcookie（）是出库的方法，json.parse（）是把字符型转换成对象的方法
+	var status=0;//定义一个名字叫status的属性（全局变量）
+	var curRole = 0;//表示放人的数组的下标
+	function Click(){
+		if(status==0){
+			if(curRole==lrs_data.persons.length)
+			//lrs_data.persons.length表示的是person数组的数组长度也就是玩家人数
+				nextPage();//调用nextPage（）方法
+			document.getElementById('roleimage').src=lrs_data.persons[curRole].image;
+			//lrs_data.persons[curRole].image意思是取出person数组第“curRole”元素里的image属性（牢记image是个字符串型）
+			document.all.rolename.value=lrs_data.persons[curRole].name;
+			//lrs_data.persons[curRole].name意思是取出person数组第“curRole”元素里的name属性（牢记name也是个字符串型）
+			status = 1;//改变status的值，使图片再次变为牌背
+			curRole++;
+		}else{
+			document.getElementById('roleimage').src='./images/牌背图片.jpg';
+			document.all.rolename.value='';//当图片为牌背时，图片下方的文本框为空
+			status = 0;//改变status的值，使图片再次变为牌的正面
+		}
+	}
+	var nextPage = function(){
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href="ice_ghost_wolf.html";//跳转到狼人界面
+	}
+  </script>
+<style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:150px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+ <form align="center">
+<img id="roleimage" width="128" height="128" align="center" onclick="Click();"><!--点击该键会执行Click方法-->
+<br />
+<input align="center" type="text" name="rolename" />
+<br />
+</form>
+
+ </body>
+
+</html>

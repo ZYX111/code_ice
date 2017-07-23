@@ -1,0 +1,25 @@
+﻿<html>
+ <head>
+  <title>白痴界面</title>
+    <script type="text/javascript" src="utils.js">
+  </script>
+  <script language="javascript">
+	var lrs_data = JSON.parse(getCookie('lrs_data'));
+	var nextPage = function(){
+		setCookie('lrs_data', JSON.stringify(lrs_data));
+		location.href="./ice_ghost_wolf.html";
+	}
+  </script>
+  <style type="text/css">
+html,body{text-align:center;margin:0px auto;line-height:300px;font-family:"华文中宋";font-size:20px}
+</style>
+ </head>
+
+ <body>
+  <form>
+  你竟然是白痴！！！
+  <br />
+<input type ="button" value ="确定" onclick = "nextPage();">
+</form>
+ </body>
+</html>
