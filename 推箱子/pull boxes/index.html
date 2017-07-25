@@ -1,0 +1,180 @@
+﻿<!doctype html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>pull boxs
+</title>
+
+
+</head>
+<canvas id="canvas" width="560" height="560"></canvas>
+<body onkeydown="doKeyDown(event)">
+	<canvas id="canvas" width="560" height="560"></canvas>
+<script>
+
+var can = document.getElementById("canvas");
+var cxt = can.getContext("2d");
+var w = 35,h = 35;
+
+var map=[
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0],
+[0,0,0,0,1,4,0,0,1,0,0,0,0,0,0,0],
+[0,0,0,0,1,0,3,3,1,0,1,1,1,0,0,0],
+[0,0,0,0,1,0,3,0,1,0,1,2,1,0,0,0],
+[0,0,0,0,1,1,1,0,1,1,1,2,1,0,0,0],
+[0,0,0,0,0,1,1,0,0,0,0,2,1,0,0,0],
+[0,0,0,0,0,1,0,0,0,1,0,0,1,0,0,0],
+[0,0,0,0,0,1,0,0,0,1,1,1,1,0,0,0],
+[0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+
+
+var oImgs = {
+		"block" : "images/block.png",
+		"wall" : "images/wall.png",
+		"box1" : "images/box1.png",
+		"box2" : "images/box2.png",
+		"point" : "images/point.png",
+		"man" :"images/man.png",
+}
+function imgPreload(srcs,callback){
+		var count = 0,imgNum = 0,images = {};
+
+		for(src in srcs){
+			imgNum++;
+		}
+		for(src in srcs ){
+			images[src] = new Image();
+			images[src].onload = function(){
+				//判断是否所有的图片都预加载完成
+				if (++count >= imgNum)
+				{
+					callback(images);
+				}
+			}
+			images[src].src = srcs[src];
+		}
+	}
+	var block,wall,box,ball,man;
+	imgPreload(oImgs,function(images){
+		//console.log(images.block);
+		block = images.block;
+		wall = images.wall;
+		box1 = images.box1;
+		ball = images.ball;
+	    man  =images.man;
+	});
+
+
+function InitMap(){
+		for (var i=0;i<16 ;i++ )
+		{
+			for (var j=0;j<16 ;j++ )
+			{
+				cxt.drawImage(block,w*j,h*i,w,h);
+			}
+		}
+	}
+
+function DrawMap(){
+		for (var i=0;i<map.length ;i++ )
+		{
+			for (var j=0;j<map[i].length ;j++ )
+			{
+				var pic = block;
+				switch (map[i][j])
+				{
+				case 1:
+					pic = wall;
+					break;
+				case 2:
+					pic = ball;
+					break;
+				case 3:
+					pic = box;
+					break;
+				case 4:
+					pic = curMan;
+					
+					perPosition.x = i;
+					perPosition.y = j;
+					break;
+				
+				}
+				
+				cxt.drawImage(pic,w*j-(pic.width-w)/2,h*i-(pic.height-h),pic.width,pic.height)
+			}
+		}
+	}
+
+
+function Point(x,y){
+		this.x = x;
+		this.y = y;
+	}
+var perPosition = new Point(5,5);
+
+function go(dir){
+		var p1,p2;
+		switch (dir)
+		{
+		case "up":
+			
+			
+			p1 = new Point(perPosition.x-1,perPosition.y);
+			p2 = new Point(perPosition.x-2,perPosition.y);
+			break;
+		case "down":
+			
+			p1 = new Point(perPosition.x+1,perPosition.y);
+			p2 = new Point(perPosition.x+2,perPosition.y);
+			break;
+		case "left":
+			
+			p1 = new Point(perPosition.x,perPosition.y-1);
+			p2 = new Point(perPosition.x,perPosition.y-2);
+			break;
+		case "right":
+			
+			p1 = new Point(perPosition.x,perPosition.y+1);
+			p2 = new Point(perPosition.x,perPosition.y+2);
+			break;
+		}
+
+if (checkFinish())
+		{
+			alert(" you win");
+			
+		}
+
+
+	function doKeyDown(event){
+		switch (event.keyCode)
+		{
+		case 37:
+			go("left");
+			break;
+		case 38:
+			go("up");
+			break;
+		case 39:
+			go("right");
+			break;
+		case 40:
+			go("down");
+			break;
+		}
+
+	}
+
+
+</script>
+
+</body>
+</html>
