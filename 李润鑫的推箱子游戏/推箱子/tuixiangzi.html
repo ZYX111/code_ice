@@ -29,6 +29,7 @@
                  };
                  temp1=0;
                  temp2=0;
+                 temp3=0;
         var c=document.getElementById("mycanvas");
         var ctx=c.getContext("2d");
         var img_qinag=document.getElementById("qiang");
@@ -68,6 +69,11 @@
                     temp1=mapdata[person.x][person.y+1];
                     mapdata[person.x][person.y+1]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
+                    if(temp3!=0)
+                    {
+                        mapdata[person.x][person.y+1]=temp3;
+                        temp3=0;
+                    }
                     showmap();
                 }
                 //在下面添加碰撞时的操作
@@ -103,6 +109,11 @@
                     mapdata[person.x+1][person.y]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    if(temp3!=0)
+                    {
+                        mapdata[person.x][person.y]=temp3;
+                        temp3=0;
+                    }
                 }
                 //在下面添加碰撞时的操作
                 else if(mapdata[person.x][person.y]==1)//人碰着墙的时候
@@ -117,8 +128,12 @@
                 {
                     person.x=person.x+1;
                 }
-                else if(mapdata[person.x-1][person.y]==3&&mapdata[person.x][person.y]!=3)//箱子的上边是完成地点的时候,且人的上边不是完成点
+                else if(mapdata[person.x-1][person.y]==3)//箱子的上边是完成地点的时候,且人的上边不是完成点
                 {
+                    if(mapdata[person.x][person.y]==3||mapdata[person.x][person.y]==6)
+                    {
+                        temp3=3;
+                    }
                     mapdata[person.x-1][person.y]=6;
                     mapdata[person.x][person.y]=2;
                     temp1=mapdata[person.x+1][person.y];//人移动----------
