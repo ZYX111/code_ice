@@ -203,30 +203,38 @@ var fun2=function(){//刷新数据
            
         }
     }
+    
     ctx.drawImage(img_3,pace1.x*50,pace1.y*50);//画完成地点
     ctx.drawImage(img_3,pace2.x*50,pace2.y*50);
     ctx.drawImage(img_3,pace3.x*50,pace3.y*50);
     ctx.drawImage(img_2,play.x*50,play.y*50);//画人
+    var i=0;
     if((box1.x==pace1.x&&box1.y==pace1.y)||//画箱子
         (box1.x==pace2.x&&box1.y==pace2.y)||
         (box1.x==pace3.x&&box1.y==pace3.y)){
-        ctx.drawImage(img_4,box1.x*50,box1.y*50);                
+        ctx.drawImage(img_4,box1.x*50,box1.y*50);
+        i++;                
     }else{
         ctx.drawImage(img_5,box1.x*50,box1.y*50);
     }
     if((box2.x==pace1.x&&box2.y==pace1.y)||
         (box2.x==pace2.x&&box2.y==pace2.y)||
         (box2.x==pace3.x&&box2.y==pace3.y)){
-        ctx.drawImage(img_4,box2.x*50,box2.y*50);                
+        ctx.drawImage(img_4,box2.x*50,box2.y*50);
+        i++;                
     }else{
         ctx.drawImage(img_5,box2.x*50,box2.y*50);
     }
     if((box3.x==pace1.x&&box3.y==pace1.y)||
         (box3.x==pace2.x&&box3.y==pace2.y)||
         (box3.x==pace3.x&&box3.y==pace3.y)){
-        ctx.drawImage(img_4,box3.x*50,box3.y*50);                
+        ctx.drawImage(img_4,box3.x*50,box3.y*50);
+        i++;                
     }else{
         ctx.drawImage(img_5,box3.x*50,box3.y*50);
+    }
+    if(i==3){
+        document.writeln("win!!!");
     }
 }
 
