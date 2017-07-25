@@ -75,6 +75,10 @@
                 {
                     person.y=person.y+1;
                 }
+                else if(mapdata[person.x][person.y-1]==4)//箱子左边还是箱子的时候
+                {
+                    person.y=person.y+1;
+                }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x][person.y-1]!=1)//碰着箱子的时候
                 {
                     temp2=mapdata[person.x][person.y];//箱子移动---------
@@ -84,6 +88,10 @@
                     mapdata[person.x][person.y+1]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                }
+                else if(mapdata[person.x][person.y]==3&&mapdata[person.x][person.y-1]!=1)//碰着完成点的时候
+                {
+                    
                 }
             }
             if(e && e.keyCode==38)//shang
@@ -97,7 +105,11 @@
                     showmap();
                 }
                 //在下面添加碰撞时的操作
-                else if(mapdata[person.x][person.y]==1)//碰着墙的时候
+                else if(mapdata[person.x][person.y]==1)//人碰着墙的时候
+                {
+                    person.x=person.x+1;
+                }
+                else if(mapdata[person.x-1][person.y]==4||mapdata[person.x-1][person.y]==6)//箱子上边还是箱子的时候
                 {
                     person.x=person.x+1;
                 }
@@ -127,6 +139,10 @@
                 {
                     person.y=person.y-1;
                 }
+                else if(mapdata[person.x][person.y+1]==4)//箱子右边还是箱子的时候
+                {
+                    person.y=person.y-1;
+                }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x][person.y+1]!=1)//碰着箱子的时候
                 {
                     temp2=mapdata[person.x][person.y];//箱子移动---------
@@ -152,6 +168,10 @@
                 else if(mapdata[person.x][person.y]==1)//碰着墙的时候
                 {
                     person.x=person.x-1;
+                }
+                else if(mapdata[person.x+1][person.y]==4)//箱子下边还是箱子的时候
+                {
+                    person.x=person.x-1;//人不动
                 }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x+1][person.y]!=1)//碰着箱子的时候
                 {
