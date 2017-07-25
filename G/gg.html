@@ -132,17 +132,16 @@
             }
             //Flash();
             document.onkeydown = function(e) { 
-	var code = e.keyCode - 37;
-    fun1(code);
-    fun();
-    fun2();
+                var code = e.keyCode - 37;
+                move(code);
+                Flash();
 	// switch(code){ 
 	// 	case 1 : ;break;//上 
 	// 	case 2 : ;break;//右 
 	// 	case 3 : ;break;//下 
 	// 	case 0 : ;break;//左 
-	// } 
-} 
+	// }
+            }  
         </script>
     </body>
 </html>
