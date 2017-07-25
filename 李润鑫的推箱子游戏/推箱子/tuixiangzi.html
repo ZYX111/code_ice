@@ -30,6 +30,7 @@
                  temp1=0;
                  temp2=0;
                  temp3=0;
+                 
         var c=document.getElementById("mycanvas");
         var ctx=c.getContext("2d");
         var img_qinag=document.getElementById("qiang");
@@ -75,6 +76,7 @@
                         temp3=0;
                     }
                     showmap();
+                    
                 }
                 //在下面添加碰撞时的操作
                 else if(mapdata[person.x][person.y]==1)//碰着墙的时候
@@ -98,7 +100,9 @@
                     mapdata[person.x][person.y+1]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
+                youwin();
             }
             if(e && e.keyCode==38)//shang
             {
@@ -108,12 +112,13 @@
                     temp1=mapdata[person.x+1][person.y];
                     mapdata[person.x+1][person.y]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
-                    showmap();
                     if(temp3!=0)
                     {
                         mapdata[person.x][person.y]=temp3;
                         temp3=0;
                     }
+                    showmap();
+                    
                 }
                 //在下面添加碰撞时的操作
                 else if(mapdata[person.x][person.y]==1)//人碰着墙的时候
@@ -140,6 +145,7 @@
                     mapdata[person.x+1][person.y]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x-1][person.y]!=1)//碰着箱子的时候
                 {
@@ -150,7 +156,9 @@
                     mapdata[person.x+1][person.y]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
+                youwin();
             }
             if(e && e.keyCode==39)//you
             {
@@ -161,6 +169,7 @@
                     mapdata[person.x][person.y-1]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
                 //在下面添加碰撞时的操作
                 else if(mapdata[person.x][person.y]==1)//碰着墙的时候
@@ -183,6 +192,7 @@
                     mapdata[person.x][person.y-1]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x][person.y+1]!=1)//碰着箱子的时候
                 {
@@ -193,7 +203,9 @@
                     mapdata[person.x][person.y-1]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
+                youwin();
             }
             if(e && e.keyCode==40)//xia
             {
@@ -204,6 +216,7 @@
                     mapdata[person.x-1][person.y]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
                 //在下面添加碰撞时的操作
                 else if(mapdata[person.x][person.y]==1)//碰着墙的时候
@@ -227,8 +240,27 @@
                     mapdata[person.x-1][person.y]=mapdata[person.x][person.y];
                     mapdata[person.x][person.y]=temp1;
                     showmap();
+                    
                 }
+                youwin();
             }
+            
+        }
+        function youwin()
+        {
+            var count=0;
+            for(var i=0;i<9;i++)
+                for(var j=0;j<9;j++)
+                {
+                    if(mapdata[i][j]==6)
+                    {
+                        count=count+1;
+                    }
+                    if(count==3)
+                    {
+                        alert("you win!");
+                    }
+                }
         }
         
     </script>
