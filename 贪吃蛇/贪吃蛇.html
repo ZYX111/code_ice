@@ -1,0 +1,113 @@
+<!DOCTYPE HTML> 
+<style type="text/css">
+html,body{text-align:center;}
+</style>
+<html> 
+ <body> 
+  <canvas id="myCanvas" width="400" height="400" style="border:1px solid #c3c3c3;"></canvas> 
+  <!-- canvas标签，html5新增标签，通过创建画布，在画布上创建任何想要的形状 -->
+  <!-- 具体介绍http://www.mamicode.com/info-detail-915112.html -->
+<script type="text/javascript"> 
+ 
+var c=document.getElementById("myCanvas"); //将画布取对象
+var time = 200 ; //蛇的速度 
+var cxt=c.getContext("2d");
+
+//getContext(),访问绘图功能必要的API,当前唯一的合法传值是"2d"，2d指定了二维绘图，并且导致这个方法返回一个CanvasRenderingContext2D对象对象具体属性及方法
+//CanvasRenderingContext2D对象http://www.w3school.com.cn/jsref/dom_obj_canvasrenderingcontext2d.asp
+
+//API是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。
+
+var x = y = 8;//蛇头坐标 
+var a = 0; //食物坐标 
+var t = 20; //蛇身长 
+var map = [];//记录蛇身的每个位置，存放方向为蛇头的后一个蛇身单位在数组尾，蛇尾在数组头  
+var size = 8; //蛇身单元大小 
+var direction = 2; // 1 向上 2 向右 0 左 3下 
+
+/*interval = */window.setInterval(set_game_speed, time); 
+// 移动蛇,每过time个毫秒，执行一次set_game_speed方法
+//setInterval()方法http://www.runoob.com/jsref/met-win-setinterval.html
+
+function set_game_speed(){ // 移动蛇，根据direction确定方向，进而计算下一步蛇头的位置 
+	switch(direction){ 
+		case 1:y = y-size;break; 
+		case 2:x = x+size;break; 
+		case 0:x = x-size;break; 
+		case 3:y = y+size;break; 
+	} 
+
+	if(x>400 || y>400 || x<0 || y<0){//判断蛇头是否出界 
+		alert("你挂了，继续努力吧!失败原因：碰壁了.....");
+		window.location.reload();//刷新页面 
+		//reload()方法 http://www.cnblogs.com/tearer/archive/2013/03/16/2963438.html
+	} 
+
+	for(var i=0;i<map.length;i++){ 
+		if( parseInt(map[i].x)==x && parseInt(map[i].y)==y){
+			//判断是否撞到自身，判断方法：当蛇头的坐标x，y与某一段蛇身的x，y相等时，即为相撞
+			alert("你挂了，继续努力吧！失败原因：撞到自己了.....");
+			window.location.reload();	
+		} 
+	} 
+
+	//下面这个if语句很重要，尝试将它整个注释掉，看看有什么改变
+	if (map.length>t) { //保持蛇身长度不变 
+		var cl = map.shift(); //删除数组中的第一个元素，即最后一个蛇身单元的值
+		//shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+		//http://www.w3school.com.cn/jsref/jsref_shift.asp
+
+		cxt.clearRect(cl['x'], cl['y'], size, size);//清空最后一个蛇身单元所在的矩形的颜色
+		//clearRect() 方法删除一个画布的矩形区域。 
+		//http://www.w3school.com.cn/jsref/met_canvasrenderingcontext2d_clearrect.asp
+	};
+
+	map.push({'x':x,'y':y}); //将移动后的蛇头坐标添加到原数组尾部
+	//push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度
+	//http://www.w3school.com.cn/jsref/jsref_push.asp
+
+	cxt.fillStyle = "#006699";//内部填充颜色 
+	cxt.strokeStyle = "#006699";//边框颜色 
+	cxt.fillRect(x, y, size, size);//绘制矩形 
+	//cxt为CanvasRenderingContext2D对象
+	//CanvasRenderingContext2D对象http://www.w3school.com.cn/jsref/dom_obj_canvasrenderingcontext2d.asp
+
+	if((a*8)==x && (b*8)==y){ //吃食物 
+		rand_frog();//放置食物
+		t++; //蛇身长加一
+	} 
+	document.getElementById('txt').value=t;
+} 
+document.onkeydown = function(e) { 
+	//该方法用来改变蛇方向，onkedown为键盘事件
+	//键盘事件http://www.imooc.com/learn/138，4-4及4-5节 
+
+	var code = e.keyCode - 37;
+	//keyCode是键盘上按键对应的键码，对照表如下 
+	//http://www.t086.com/article/4315
+
+	switch(code){ 
+		case 1 : direction = 1;break;//上 
+		case 2 : direction = 2;break;//右 
+		case 3 : direction = 3;break;//下 
+		case 0 : direction = 0;break;//左 
+	} 
+} 
+// 随机放置食物 
+function rand_frog(){ 
+	a = Math.ceil(Math.random()*50); 
+	b = Math.ceil(Math.random()*50); 
+	//ceil() 方法可对一个数进行上舍入。
+	//http://www.w3school.com.cn/jsref/jsref_ceil.asp
+	
+	cxt.fillStyle = "#000000";//内部填充颜色 
+	cxt.strokeStyle = "#000000";//边框颜色 
+	cxt.fillRect(a*8, b*8, 8, 8);//绘制矩形 
+} 
+// 随机放置食物 
+rand_frog(); 
+  </script> 
+ 蛇长度: 
+<input type="text" name="playernum" id='txt' />
+ </body> 
+</html> 
