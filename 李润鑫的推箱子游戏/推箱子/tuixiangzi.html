@@ -75,7 +75,11 @@
                 {
                     person.y=person.y+1;
                 }
-                else if(mapdata[person.x][person.y-1]==4)//箱子左边还是箱子的时候
+                else if(mapdata[person.x][person.y-1]==4||mapdata[person.x][person.y-1]==6)//箱子左边还是箱子的时候
+                {
+                    person.y=person.y+1;
+                }
+                else if(mapdata[person.x][person.y-1]==1)//箱子左边是墙的时候
                 {
                     person.y=person.y+1;
                 }
@@ -113,6 +117,10 @@
                 {
                     person.x=person.x+1;
                 }
+                else if(mapdata[person.x-1][person.y]==1)//箱子上边是墙的时候
+                {
+                    person.x=person.x+1;
+                }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x-1][person.y]!=1)//碰着箱子的时候
                 {
                     temp2=mapdata[person.x][person.y];//箱子移动---------
@@ -139,7 +147,11 @@
                 {
                     person.y=person.y-1;
                 }
-                else if(mapdata[person.x][person.y+1]==4)//箱子右边还是箱子的时候
+                else if(mapdata[person.x][person.y+1]==4||mapdata[person.x][person.y+1]==6)//箱子右边还是箱子的时候
+                {
+                    person.y=person.y-1;
+                }
+                else if(mapdata[person.x][person.y+1]==1)//箱子右边是墙的时候
                 {
                     person.y=person.y-1;
                 }
@@ -169,9 +181,13 @@
                 {
                     person.x=person.x-1;
                 }
-                else if(mapdata[person.x+1][person.y]==4)//箱子下边还是箱子的时候
+                else if(mapdata[person.x+1][person.y]==4||mapdata[person.x+1][person.y]==6)//箱子下边还是箱子的时候
                 {
                     person.x=person.x-1;//人不动
+                }
+                else if(mapdata[person.x+1][person.y]==1)//箱子下面是墙的时候
+                {
+                    person.x=person.x-1;
                 }
                 else if(mapdata[person.x][person.y]==4&&mapdata[person.x+1][person.y]!=1)//碰着箱子的时候
                 {
