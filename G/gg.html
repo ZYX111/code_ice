@@ -123,7 +123,6 @@
                             peo.y=peo.y-1;
                         }
                     }
-                    judge();
                 }
             }
             function judge(){
@@ -136,12 +135,22 @@
                 if(map[5][7]==0){
                      map[5][7]=3;
                 }
+                if(map[3][7]==2){
+                    map[3][7]=4;
+                }
+                if(map[4][7]==2){
+                    map[4][7]=4;
+                }   
+                if(map[5][7]==2){
+                     map[5][7]=4;
+                }
                 map[peo.x][peo.y]=9;
             }
             //Flash();
             document.onkeydown = function(e) { 
                 var code = e.keyCode - 37;
                 move(code);
+                judge();
                 Flash();
 	// switch(code){ 
 	// 	case 1 : ;break;//上 
