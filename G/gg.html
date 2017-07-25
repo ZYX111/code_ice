@@ -62,7 +62,7 @@
             function move(a){
                 if(a==1){
                     if(map[peo.x-1][peo.y]==2||map[peo.x-1][peo.y]==4){
-                        if(map[peo.x-2][peo.y]!=1&&map[peo.x-2][peo.y]!=2){
+                        if(map[peo.x-2][peo.y]!=1&&map[peo.x-2][peo.y]!=2&&map[peo.x-2][peo.y]!=4){
                             map[peo.x-2][peo.y]=2;
                             map[peo.x-1][peo.y]=0;
                             map[peo.x][peo.y]=0;
@@ -78,7 +78,7 @@
                 }
                 else if(a==2){
                     if(map[peo.x][peo.y+1]==2||map[peo.x][peo.y+1]==4){
-                        if(map[peo.x][peo.y+2]!=1&&map[peo.x][peo.y+2]!=2){
+                        if(map[peo.x][peo.y+2]!=1&&map[peo.x][peo.y+2]!=2&&map[peo.x][peo.y+2]!=4){
                             map[peo.x][peo.y+2]=2;
                             map[peo.x][peo.y+1]=0;
                             map[peo.x][peo.y]=0;
@@ -94,7 +94,7 @@
                 }
                 else if(a==3){
                     if(map[peo.x+1][peo.y]==2||map[peo.x+1][peo.y]==4){
-                        if(map[peo.x+2][peo.y]!=1&&map[peo.x+2][peo.y]!=2){
+                        if(map[peo.x+2][peo.y]!=1&&map[peo.x+2][peo.y]!=2&&map[peo.x+2][peo.y]!=4){
                             map[peo.x+2][peo.y]=2;
                             map[peo.x+1][peo.y]=0;
                             map[peo.x][peo.y]=0;
@@ -110,7 +110,7 @@
                 }
                 else if(a==0){
                     if(map[peo.x][peo.y-1]==2||map[peo.x][peo.y-1]==4){
-                        if(map[peo.x][peo.y-2]!=1&&map[peo.x][peo.y-2]!=2){
+                        if(map[peo.x][peo.y-2]!=1&&map[peo.x][peo.y-2]!=2&&map[peo.x][peo.y-2]!=4){
                             map[peo.x][peo.y-2]=2;
                             map[peo.x][peo.y-1]=0;
                             map[peo.x][peo.y]=0;
