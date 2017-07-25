@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>推箱子zyx</title>
+</head>
+<body>
+<canvas id="myCanvas" width="450" height="450">
+您的浏览器不支持 HTML5 canvas 标签。
+</canvas>
+<script>
+//变量信息
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+var img_1 = new Image();
+img_1.src="墙.png";
+var img_2 = new Image();
+img_2.src="人.png";
+var img_3 = new Image();
+img_3.src="完成地点.png";
+var img_4 = new Image();
+img_4.src="完成的箱子.png";
+var img_5 = new Image();
+img_5.src="箱子.png";
+var img_6 = new Image();
+img_6.src="空.png";
+
+//数据
+var map_data=[[1,1,1,1,1,0,0,0,0],
+              [1,0,0,0,1,0,0,0,0],
+              [1,0,0,0,1,0,1,1,1],
+              [1,0,0,0,1,0,1,0,1],
+              [1,1,1,0,1,1,1,0,1],
+              [0,1,1,0,0,0,0,0,1],
+              [0,1,0,0,0,1,0,0,1],
+              [0,1,0,0,0,1,1,1,1],
+              [0,1,1,1,1,1,0,0,0]];
+var pace1={x:7,
+          y:3};
+var pace2={x:7,
+          y:4};
+var pace3={x:7,
+          y:5};
+var play={
+    x:3,
+    y:1,
+    dir:1,//方向上下左右对应，1，3，0，2
+    x1:3,
+    y1:1
+};
+var box1={
+    x:2,
+    y:2,
+    x1:2,
+    y1:2
+};
+var box2={
+    x:2,
+    y:3,
+    x1:2,
+    y1:3
+};
+var box3={
+    x:7,
+    y:3,
+    x1:7,
+    y1:3
+};
+//页面加载
+window.onload = function()
+{
+    
+    for(var i=0;i<9;i++){
+        for(var j=0;j<9;j++){
+            switch(map_data[j][i]){
+                case  1 :ctx.drawImage(img_1,i*50,j*50);break;
+                case  0 :ctx.drawImage(img_6,i*50,j*50);break;
+            }
+           
+        }
+    }
+    fun2();
+}
+//逻辑层
+var fun=function(){//判断当前状态
+    if (box1.x==play.x1&&box1.y==play.y1){
+        if(play.dir==1){//上
+            box1.x1=box1.x;
+            box1.y1=box1.y-1;
+        }
+        if(play.dir==2){//右
+            box1.x1=box1.x+1;
+            box1.y1=box1.y;
+        }
+        if(play.dir==3){//下
+            box1.x1=box1.x;
+            box1.y1=box1.y+1;
+        }
+        if(play.dir==0){//左
+            box1.x1=box1.x-1;
+            box1.y1=box1.y;
+        }
+    }
+    if (box2.x==play.x1&&box2.y==play.y1){
+        if(play.dir==1){//上
+            box2.x1=box2.x;
+            box2.y1=box2.y-1;
+        }
+        if(play.dir==2){//右
+            box2.x1=box2.x+1;
+            box2.y1=box2.y;
+        }
+        if(play.dir==3){//下
+            box2.x1=box2.x;
+            box2.y1=box2.y+1;
+        }
+        if(play.dir==0){//左
+            box2.x1=box2.x-1;
+            box2.y1=box2.y;
+        }
+    }
+    if (box3.x==play.x1&&box3.y==play.y1){
+        if(play.dir==1){//上
+            box3.x1=box3.x;
+            box3.y1=box3.y-1;
+        }
+        if(play.dir==2){//右
+            box3.x1=box3.x+1;
+            box3.y1=box3.y;
+        }
+        if(play.dir==3){//下
+            box3.x1=box3.x;
+            box3.y1=box3.y+1;
+        }
+        if(play.dir==0){//左
+            box3.x1=box3.x-1;
+            box3.y1=box3.y;
+        }
+    }
+    if(map_data[play.y1][play.x1]==1){
+            box1.x1=box1.x;//失败退回
+            box1.y1=box1.y;
+            box2.x1=box2.x;
+            box2.y1=box2.y;
+            box3.x1=box3.x;
+            box3.y1=box3.y;
+            play.x1=play.x;
+            play.y1=play.y;
+        return;
+    }
+    if(map_data[box1.y1][box1.x1]==1||map_data[box2.y1][box2.x1]==1||map_data[box3.y1][box3.x1]==1||(box1.x1==box2.x1&&box1.y1==box2.y1)||(box2.x1==box3.x1&&box2.y1==box3.y1)||(box3.x1==box1.x1&&box3.y1==box1.y1)){
+            box1.x1=box1.x;//失败退回
+            box1.y1=box1.y;
+            box2.x1=box2.x;
+            box2.y1=box2.y;
+            box3.x1=box3.x;
+            box3.y1=box3.y;
+            play.x1=play.x;
+            play.y1=play.y;
+            return;
+        }else{
+            box1.x=box1.x1;//进位
+            box1.y=box1.y1;
+            box2.x=box2.x1;
+            box2.y=box2.y1;
+            box3.x=box3.x1;
+            box3.y=box3.y1;
+
+            play.x=play.x1;
+            play.y=play.y1;
+            return;
+    }
+};
+var fun1=function(a){//玩家移动
+    if(a==1){//上
+        play.x1=play.x;
+        play.y1=play.y-1;
+        play.dir=1;
+    }
+    if(a==2){//右
+        play.x1=play.x+1;
+        play.y1=play.y;
+        play.dir=2;
+    }
+    if(a==3){//下
+        play.x1=play.x;
+        play.y1=play.y+1;
+        play.dir=3;
+    }
+    if(a==0){//左
+        play.x1=play.x-1;
+        play.y1=play.y;
+        play.dir=0;
+    }
+}
+var fun2=function(){//刷新数据
+    for(var i=0;i<9;i++){
+        for(var j=0;j<9;j++){
+            switch(map_data[j][i]){
+                case  1 :ctx.drawImage(img_1,i*50,j*50);break;
+                case  0 :ctx.drawImage(img_6,i*50,j*50);break;
+            }
+           
+        }
+    }
+    ctx.drawImage(img_3,pace1.x*50,pace1.y*50);//画完成地点
+    ctx.drawImage(img_3,pace2.x*50,pace2.y*50);
+    ctx.drawImage(img_3,pace3.x*50,pace3.y*50);
+    ctx.drawImage(img_2,play.x*50,play.y*50);//画人
+    if((box1.x==pace1.x&&box1.y==pace1.y)||//画箱子
+        (box1.x==pace2.x&&box1.y==pace2.y)||
+        (box1.x==pace3.x&&box1.y==pace3.y)){
+        ctx.drawImage(img_4,box1.x*50,box1.y*50);                
+    }else{
+        ctx.drawImage(img_5,box1.x*50,box1.y*50);
+    }
+    if((box2.x==pace1.x&&box2.y==pace1.y)||
+        (box2.x==pace2.x&&box2.y==pace2.y)||
+        (box2.x==pace3.x&&box2.y==pace3.y)){
+        ctx.drawImage(img_4,box2.x*50,box2.y*50);                
+    }else{
+        ctx.drawImage(img_5,box2.x*50,box2.y*50);
+    }
+    if((box3.x==pace1.x&&box3.y==pace1.y)||
+        (box3.x==pace2.x&&box3.y==pace2.y)||
+        (box3.x==pace3.x&&box3.y==pace3.y)){
+        ctx.drawImage(img_4,box3.x*50,box3.y*50);                
+    }else{
+        ctx.drawImage(img_5,box3.x*50,box3.y*50);
+    }
+}
+
+document.onkeydown = function(e) { 
+	var code = e.keyCode - 37;
+    fun1(code);
+    fun();
+    fun2();
+	// switch(code){ 
+	// 	case 1 : ;break;//上 
+	// 	case 2 : ;break;//右 
+	// 	case 3 : ;break;//下 
+	// 	case 0 : ;break;//左 
+	// } 
+} 
+</script>
+
+</body>
+</html>
