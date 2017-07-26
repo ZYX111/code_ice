@@ -159,14 +159,49 @@
                 }
             }
             var ai=function(){
+                var map=[[1,1,1,1,1,0,0,0,0],
+                     [1,0,0,9,1,0,0,0,0],
+                     [1,0,2,0,1,0,1,1,1],
+                     [1,0,2,0,1,0,1,4,1],
+                     [1,1,1,0,1,1,1,3,1],
+                     [0,1,1,0,0,0,0,3,1],
+                     [0,1,0,0,0,1,0,0,1],
+                     [0,1,0,0,0,1,1,1,1],
+                     [0,1,1,1,1,1,0,0,0]];//0→空,1→墙,2→箱子,3→点,4→箱子在点上,9→人
+                var peo={
+                    x:1,
+                    y:3
+                };
                 var pushPointArr;//装“推点”的数组
+                var key;//答案
                 function checkPushPoint(){
-                    //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据
+                    //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据,如果没有推点运行gameOver()函数
                 }
                 function ifRun(a){
-                    //a传入的是一个xy值，判断以玩家现在的位置是否能走到该点，如果能返回一个字符串记录如何走到的键位顺序，如果不能运行gameOver()函数
+                    //a传入的是一个xy值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数，如果不能运行gameOver()函数
                 }
-                
+                function gameOver(){
+
+                }
+                function Win(){
+
+                }
+                function ifWin(){
+
+                }
+
+                function ifPush(){
+                    paceX=peo.x;
+                    paceY=peo.y;
+                    for(var a=0;a<4;a++){
+                        move(a);
+                        if(paceX==peo.x||paceY==peo.y){
+                            
+                        }else{
+                            gameOver();
+                        }
+                    }
+                }
             }  
         </script>
     </body>
