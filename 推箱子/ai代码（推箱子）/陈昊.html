@@ -194,6 +194,7 @@
                         }
                     }
                     Object.defineProperty(pushPointArr,"length",{value:count});//添加推点总个数
+                    var jsonarry=JSON.stringify(pushPointArr);
                 }
                 function ifRun(a){
                     //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数，如果不能运行gameOver()函数
