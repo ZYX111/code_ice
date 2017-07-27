@@ -167,6 +167,7 @@
                 function checkPushPoint(){
                     //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据,如果没有推点运行gameOver()函数
                 for(var i=0;i<9;i++)
+                {
                     for(var j=0;j<9;j++)
                     {
                         if(map[i][j]==2&&map[i][j]==4)//确认箱子的位置
@@ -193,8 +194,9 @@
                             }
                         }
                     }
+                }
                     Object.defineProperty(pushPointArr,"length",{value:count});//添加推点总个数
-                    var jsonarry=JSON.stringify(pushPointArr);
+                    var jsonarry=JSON.stringify(pushPointArr);//转换为json对象
                 }
                 function ifRun(a){
                     //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数，如果不能运行gameOver()函数
