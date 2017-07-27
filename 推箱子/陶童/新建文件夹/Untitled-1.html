@@ -167,6 +167,113 @@ var state=[
               alert("恭喜你胜利了！！！");
          }     
      }
+     var count=0;
+      var ai=function(){
+                var pushPointArr={
+                    length:0,
+                };//装“推点”的数组
+                var key;//答案
+                function checkPushPoint(){
+                    //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据,如果没有推点运行gameOver()函数
+                    for(var i=0;i<9;i++)
+                    {
+                        for(var j=0;j<9;j++)
+                        {
+                            if(map[i][j]==2&&map[i][j]==4)//确认箱子的位置
+                            {
+                                if(map[i-1][j]==0)//添加推点---------------------
+                                {
+                                    count+=1;
+                                    Object.defineProperty(pushPointArr,count,{value:{x:i-1,y:j}});
+                                }
+                                if(map[i+1][j]==0)
+                                {
+                                    count+=1;
+                                    Object.defineProperty(pushPointArr,count,{value:{x:i+1,y:j}});
+                                }
+                                if(map[i][j-1]==0)
+                                {
+                                    count+=1;
+                                    Object.defineProperty(pushPointArr,count,{value:{x:i,y:j-1}});
+                                }
+                                if(map[i][j+1]==0)
+                                {
+                                    count+=1;
+                                    Object.defineProperty(pushPointArr,count,{value:{x:i,y:j+1}});
+                                }
+                            }
+                        }
+                    }
+                    Object.defineProperty(pushPointArr,"length",{value:count});//添加推点总个数
+                    //var jsonarry=JSON.stringify(pushPointArr);//转换为json对象
+                }
+                function ifRun(a,b,c,d){
+                    //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数
+                    if(struct.x+1==value.x&&struct.y==value.y){
+                        key="down";
+                        documnet.writeln("key");
+                        ifPush();
+                    }
+                    else if(struct.x-1==value.x&&struct.y==value.y){
+                        key="up";
+                        documnet.writeln("key");
+                        ifPush();
+                    }
+                     else if(struct.x==value.x&&struct.y+1==value.y){
+                        key="right";
+                        documnet.writeln("key");
+                        ifPush();
+                    }
+                    else if(struct.x==value.x&&struct.y-1==value.y){
+                        key="left";
+                        documnet.writeln("key");
+                        ifPush();
+                    }
+                    else{
+                        gameover();
+                    }
+                    
+                }
+                function gameover(){
+                    alert("失败");
+                    <button type="button" value="重新加载游戏" onclick="reloadPage()"></button>
+                }
+                function Win(){
+
+                }
+                function ifWin(){//判断达成条件
+
+                }
+                function ifPush(a,b,c,d){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
+                    // paceX=peo.x;
+                    // paceY=peo.y;
+                    // for(var a=0;a<4;a++){
+                    //     move(a);
+                    //     judge();
+                    //     if(paceX==peo.x||paceY==peo.y){
+                    //         gameOver();
+                    //     }else{
+                    //         main();
+                    //     }
+                    // }
+                }
+                function main(P_map,P_peo,key){
+                    var pushPointArr={
+                        length:0,
+                    };//装“推点”的数组
+                    checkPushPoint();
+                    for(var i=0;i<pushPointArr.length;i++){
+                        ifRun(pushPointArr.i,P_map,P_peo,key);
+                    }
+                }
+            }  
+        </script>
+    </body>
+</html>
+</script>
+    <body>
+        </html>
+
 </script>
     <body>
         </html>
