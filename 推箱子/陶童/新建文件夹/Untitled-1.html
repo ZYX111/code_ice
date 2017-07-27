@@ -62,9 +62,9 @@ var state=[
           if(dir==1){//向上
               if(state[struct.x-1][struct.y]==5||state[struct.x-1][struct.y]==4){
                   if(state[struct.x-2][struct.y]!=1&&state[struct.x-2][struct.y]!=5&&state[struct.x-2][struct.y]!=4){
-                      state[struct.x-2][struct.y]==5;
-                      state[struct.x-1][struct.y]==0;
-                      state[struct.x][struct.y]==0;
+                      state[struct.x-2][struct.y]=5;
+                      state[struct.x-1][struct.y]=0;
+                      state[struct.x][struct.y]=0;
                       struct.x=struct.x-1;
                   }
               }
@@ -78,9 +78,9 @@ var state=[
           if(dir==3){//向下
               if(state[struct.x+1][struct.y]==5||state[struct.x+1][struct.y]==4){
                   if(state[struct.x+2][struct.y]!=1&&state[struct.x+2][struct.y]!=5&&state[struct.x+2][struct.y]!=4){
-                      state[struct.x+2][struct.y]==5;
-                      state[struct.x+1][struct.y]==0;
-                      state[struct.x][struct.y]==0;
+                      state[struct.x+2][struct.y]=5;
+                      state[struct.x+1][struct.y]=0;
+                      state[struct.x][struct.y]=0;
                       struct.x=struct.x+1;
                   }
               }
@@ -94,9 +94,9 @@ var state=[
           if(dir==2){//向右
               if(state[struct.x][struct.y+1]==5||state[struct.x][struct.y+1]==4){
                   if(state[struct.x][struct.y+2]!=1&&state[struct.x][struct.y+2]!=5&&state[struct.x][struct.y+2]!=4){
-                      state[struct.x][struct.y+2]==5;
-                      state[struct.x][struct.y+1]==0;
-                      state[struct.x][struct.y]==0;
+                      state[struct.x][struct.y+2]=5;
+                      state[struct.x][struct.y+1]=0;
+                      state[struct.x][struct.y]=0;
                       struct.y=struct.y+1;
                   }
               }
@@ -110,9 +110,9 @@ var state=[
           if(dir==0){//向左
               if(state[struct.x][struct.y-1]==5||state[struct.x][struct.y-1]==4){
                   if(state[struct.x][struct.y-2]!=1&&state[struct.x][struct.y-2]!=5&&state[struct.x][struct.y-2]!=4){
-                      state[struct.x][struct.y-2]==5;
-                      state[struct.x][struct.y-1]==0;
-                      state[struct.x][struct.y]==0;
+                      state[struct.x][struct.y-2]=5;
+                      state[struct.x][struct.y-1]=0;
+                      state[struct.x][struct.y]=0;
                       struct.y=struct.y-1;
                   }
               }
