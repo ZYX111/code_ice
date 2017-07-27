@@ -181,17 +181,7 @@
                                 {
                                     count+=1;
                                     Object.defineProperty(pushPointArr,count,{value:{x:i+1,y:j}});
-                                }
-                                if(map[i][j-1]==0)
-                                {
-                                    count+=1;
-                                    Object.defineProperty(pushPointArr,count,{value:{x:i,y:j-1}});
-                                }
-                                if(map[i][j+1]==0)
-                                {
-                                    count+=1;
-                                    Object.defineProperty(pushPointArr,count,{value:{x:i,y:j+1}});
-                                }
+                
                             }
                         }
                     }
