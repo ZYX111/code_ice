@@ -198,7 +198,76 @@
                     Object.defineProperty(pushPointArr,"length",{value:count});//添加推点总个数
                     //var jsonarry=JSON.stringify(pushPointArr);//转换为json对象
                 }
-                function ifRun(a,b,c,d){
+                function ifRun(a/*peo（人的坐标）*/,b/*终点坐标*/){
+                    var myArray=new Array();
+                    var myDir=new Array();
+                    var g_Peo={
+                        x,
+                        y,
+                        d//方向上右下左对应，1，2，3，0
+                        };
+                        g_Peo.d=0;
+                        g_Peo.x=a.x;
+                        g_Peo.y=a.y;
+                        myArray.push(g_Peo);
+                        for(;;){
+                            while(g_Peo.d<4){
+                                if(g_Peo.d==0){
+                                    if(map[g_Peo.x][g_Peo.y-1]==0||map[g_Peo.x][g_Peo.y-1]==3){
+                                        g_Peo.y--;
+                                        myArray.push(g_Peo);
+                                        myDir.push(g_Peo.d);
+                                        if(g_Peo.x==b.x&&g_Peo.y==b.y){
+                                            return myDir;
+                                        }
+                                    }
+                                    else{
+                                        g_Peo.d++;
+                                    }
+                                }
+                                else if(d==1){
+                                    if(map[g_Peo.x-1][g_Peo.y]==0||map[g_Peo.x-1][g_Peo.y]==3){
+                                        g_Peo.x--;
+                                        myArray.push(g_Peo);
+                                        myDir.push(g_Peo.d);
+                                        if(g_Peo.x==b.x&&g_Peo.y==b.y){
+                                            return myDir;
+                                        }
+                                    }
+                                    else{
+                                        g_Peo.d++;
+                                    }
+                                }
+                                else if(d==2){
+                                    if(map[g_Peo.x+1][g_Peo.y]==0||map[g_Peo.x+1][g_Peo.y]==3){
+                                        g_Peo.x++;
+                                        myArray.push(g_Peo);
+                                        myDir.push(g_Peo.d);
+                                        if(g_Peo.x==b.x&&g_Peo.y==b.y){
+                                            return myDir;
+                                        }
+                                    }
+                                    else{
+                                        g_Peo.d++;
+                                    }
+                                }
+                                else if(d==3){
+                                    if(map[g_Peo.x][g_Peo.y+1]==0||map[g_Peo.x][g_Peo.y+1]==3){
+                                        g_Peo.y++;
+                                        myArray.push(g_Peo);
+                                        myDir.push(g_Peo.d);
+                                        if(g_Peo.x==b.x&&g_Peo.y==b.y){
+                                            return myDir;
+                                        }
+                                    }
+                                    else{
+                                        g_Peo.d++;
+                                    }
+                                }
+                            }
+                            myArray.pop();
+                            myDir.pop();
+                        }
                     //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数
                 }
                 function Win(){
