@@ -1,0 +1,96 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: tank - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Release/tank.res" /d "NDEBUG" /d "_AFXDLL" "H:\光盘内容\其它相关\Vc\Tank\tank.rc"" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP5356.TMP" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/tank.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"H:\光盘内容\其它相关\Vc\Tank\BeginDlg.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\Bullet.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\DirectSound.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\Egg.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\Explode.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\FireBullet.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\Game.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\ICEBullet.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\LaserBullet.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\MIDI.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\MyButton.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\NormalBullet.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\Picture.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\tank.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\Tank1.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\tankDlg.cpp"
+"H:\光盘内容\其它相关\Vc\Tank\TankMap.cpp"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP5356.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP5357.TMP" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/tank.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"H:\光盘内容\其它相关\Vc\Tank\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\WINDOWS\TEMP\RSP5357.TMP" 
+Creating temporary file "C:\WINDOWS\TEMP\RSP5358.TMP" with contents
+[
+ddraw.lib winmm.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/tank.pdb" /machine:I386 /out:"Release/tank.exe" 
+".\Release\BeginDlg.obj"
+".\Release\Bullet.obj"
+".\Release\DirectSound.obj"
+".\Release\Egg.obj"
+".\Release\Explode.obj"
+".\Release\FireBullet.obj"
+".\Release\Game.obj"
+".\Release\ICEBullet.obj"
+".\Release\LaserBullet.obj"
+".\Release\MIDI.obj"
+".\Release\MyButton.obj"
+".\Release\NormalBullet.obj"
+".\Release\Picture.obj"
+".\Release\StdAfx.obj"
+".\Release\tank.obj"
+".\Release\Tank1.obj"
+".\Release\tankDlg.obj"
+".\Release\TankMap.obj"
+".\Release\tank.res"
+]
+Creating command line "link.exe @C:\WINDOWS\TEMP\RSP5358.TMP"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+linking with Microsoft's DirectSound library ...
+linking with multimedia library
+Compiling...
+BeginDlg.cpp
+Bullet.cpp
+DirectSound.cpp
+Egg.cpp
+Explode.cpp
+FireBullet.cpp
+Game.cpp
+H:\光盘内容\其它相关\Vc\Tank\Game.cpp(1184) : warning C4305: '-=' : truncation from 'const double' to 'float'
+ICEBullet.cpp
+LaserBullet.cpp
+MIDI.cpp
+MyButton.cpp
+NormalBullet.cpp
+Picture.cpp
+tank.cpp
+Tank1.cpp
+tankDlg.cpp
+TankMap.cpp
+Generating Code...
+Linking...
+
+
+
+<h3>Results</h3>
+tank.exe - 0 error(s), 1 warning(s)
+</pre>
+</body>
+</html>
