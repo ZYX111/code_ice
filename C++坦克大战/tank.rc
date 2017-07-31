@@ -1,0 +1,275 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\tank.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\tank.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 166, 93
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 tank"
+FONT 16, "隶书", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,32,6,20,20
+    LTEXT           "tank 1.0 版",IDC_STATIC,57,5,56,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2002",IDC_STATIC,57,16,83,8
+    DEFPUSHBUTTON   "确定",IDOK,128,80,31,9,WS_GROUP
+    CTEXT           "作者：袁绍明  张 奇  陈 宇",IDC_STATIC,18,32,129,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,20,28,
+                    125,1,WS_EX_STATICEDGE
+    CTEXT           "清华大学－软件学院",IDC_STATIC,36,60,95,8
+    CTEXT           "江北隠侠工作室",IDC_STATIC,7,80,62,9,SS_SUNKEN
+    CTEXT           "xiaoboy@eyou.com\ny-sh-m@yeah.net",IDC_STATIC,24,42,119,
+                    16
+    CTEXT           "www.thss.tsinghua.edu.cn",IDC_STATIC,29,70,109,8,
+                    SS_CENTERIMAGE
+END
+
+IDD_TANK_DIALOG DIALOGEX 0, 0, 411, 246
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_CLIENTEDGE | WS_EX_APPWINDOW
+CAPTION "Tank--测试版"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,83,225,50,14,NOT WS_VISIBLE
+    PUSHBUTTON      "取消",IDCANCEL,179,225,50,14,NOT WS_VISIBLE
+END
+
+IDD_DIALOG_BEGIN DIALOGEX 0, 0, 167, 212
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE
+EXSTYLE WS_EX_CLIENTEDGE
+FONT 10, "System"
+BEGIN
+    CONTROL         "进入游戏",IDOK,"Button",BS_OWNERDRAW | BS_BITMAP | 
+                    WS_TABSTOP,13,175,55,14
+    CONTROL         "退出游戏",IDCANCEL,"Button",BS_OWNERDRAW | BS_BITMAP | 
+                    WS_TABSTOP,110,174,50,14
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "tank Microsoft 基础类应用程序\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "tank\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2002\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "tank.EXE\0"
+            VALUE "ProductName", "tank 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 159
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 89
+    END
+
+    IDD_TANK_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 404
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 239
+    END
+
+    IDD_DIALOG_BEGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 160
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 205
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TREE                BITMAP  DISCARDABLE     "res\\tree.bmp"
+IDB_STONE               BITMAP  DISCARDABLE     "res\\stone.bmp"
+IDB_ICE                 BITMAP  DISCARDABLE     "res\\ice.bmp"
+IDB_STEEL               BITMAP  DISCARDABLE     "res\\steel.bmp"
+IDB_WATER               BITMAP  DISCARDABLE     "res\\water.bmp"
+IDB_OK                  BITMAP  DISCARDABLE     "res\\OK.bmp"
+IDB_CANCEL              BITMAP  DISCARDABLE     "res\\CANCEL.bmp"
+IDB_SOIL                BITMAP  DISCARDABLE     "res\\soil.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// WAVE
+//
+
+IDR_DIE                 WAVE    DISCARDABLE     "res\\CONTACT.WAV"
+IDR_SHOOT               WAVE    DISCARDABLE     "res\\Shoot.wav"
+IDR_BANG                WAVE    DISCARDABLE     "res\\Bang.wav"
+IDR_EGG                 WAVE    DISCARDABLE     "res\\Egg.wav"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_HAND                CURSOR  DISCARDABLE     "res\\grab.cur"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// MIDI
+//
+
+IDR_MIDIBKMUSIC         MIDI    DISCARDABLE     "res\\bkmusic.mid"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 tank(&A)..."
+    IDS_STRING001           "     五十多年前，敌人的坦克部队残忍地碾平了我们的小村"
+    IDS_STRING002           "庄。只有少数英雄幸免遇难，这场灾难成了心中永远的痛。"
+    IDS_STRING003           "今天，无耻的敌人再次发动了袭击，作为英雄后人，你和"
+    IDS_STRING004           "你的朋友们决定誓死保卫家园.........................."
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\tank.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
