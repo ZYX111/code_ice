@@ -34,7 +34,6 @@
                 x:1,
                 y:3
             };
-            count=0;
             window.onload = function(){
                 for(var i=0;i<9;i++){
                     for(var j=0;j<9;j++){
@@ -45,7 +44,6 @@
                         }
                     }
                 Flash();
-                ai();
             }
             function Flash(){
                 for(var i=0;i<9;i++){
@@ -166,6 +164,7 @@
                 };//装“推点”的数组
                 var key;//答案
                 function checkPushPoint(){
+                    var count=0;
                     //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据,如果没有推点运行gameOver()函数
                     for(var i=0;i<9;i++)
                     {
@@ -200,6 +199,9 @@
                     //var jsonarry=JSON.stringify(pushPointArr);//转换为json对象
                 }
                 function ifRun(a/*peo（人的坐标）*/,b/*终点坐标*/){
+                    if(map[b.x][b.y]!=0&&map[b,x][b.y]!=3){
+                        return null;
+                    }
                     var myArray=new Array();
                     var myDir=new Array();
                     var g_Peo={
@@ -226,7 +228,7 @@
                                         g_Peo.d++;
                                     }
                                 }
-                                else if(d==1){
+                                else if(g_Peo.d==1){
                                     if(map[g_Peo.x-1][g_Peo.y]==0||map[g_Peo.x-1][g_Peo.y]==3){
                                         g_Peo.x--;
                                         myArray.push(g_Peo);
@@ -239,7 +241,7 @@
                                         g_Peo.d++;
                                     }
                                 }
-                                else if(d==2){
+                                else if(g_Peo.d==2){
                                     if(map[g_Peo.x+1][g_Peo.y]==0||map[g_Peo.x+1][g_Peo.y]==3){
                                         g_Peo.x++;
                                         myArray.push(g_Peo);
@@ -252,7 +254,7 @@
                                         g_Peo.d++;
                                     }
                                 }
-                                else if(d==3){
+                                else if(g_Peo.d==3){
                                     if(map[g_Peo.x][g_Peo.y+1]==0||map[g_Peo.x][g_Peo.y+1]==3){
                                         g_Peo.y++;
                                         myArray.push(g_Peo);
@@ -342,25 +344,65 @@
                                 }
                             }
                         }
-
-                        } 
+                    } 
                 }
 
                 function ifWin(){//判断达成条件
 
                 }
-                function ifPush(a,b,c,d){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
-                    // paceX=peo.x;
-                    // paceY=peo.y;
-                    // for(var a=0;a<4;a++){
-                    //     move(a);
-                    //     judge();
-                    //     if(paceX==peo.x||paceY==peo.y){
-                    //         gameOver();
-                    //     }else{
-                    //         main();
-                    //     }
-                    // }
+                function ifPush(a/*人的坐标*/,b/*地图数据*/,key){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
+                    var d=0;
+                    while(d<4){
+                        if(b[a.x-1][a.y]==2||b[a.x-1][a.y]==4){
+                            if(b[a.x-2][a.y]!=1&&b[a.x-2][a.y]!=2&&b[a.x-2][a.y]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x-2][a.y]=2;
+                                mm[a.x-1][a.y]=9;
+                                mm[a.x][a.y]=0;
+                                cc.x=a.x-1;
+                                key.push(0);
+                                main(mm,cc,key);
+                            }
+                        }
+                        if(b[a.x][a.y-1]==2||b[a.x][a.y-1]==4){
+                            if(b[a.x][a.y-2]!=1&&b[a.x][a.y-2]!=2&&b[a.x][a.y-2]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x][a.y-2]=2;
+                                mm[a.x][a.y-1]=9;
+                                mm[a.x][a.y]=0;
+                                cc.y=a.y-1;
+                                key.push(1);
+                                main(mm,cc,key);
+                            }
+                        }
+                        if(b[a.x+1][a.y]==2||b[a.x+1][a.y]==4){
+                            if(b[a.x+2][a.y]!=1&&b[a.x+2][a.y]!=2&&b[a.x+2][a.y]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x+2][a.y]=2;
+                                mm[a.x+1][a.y]=9;
+                                mm[a.x][a.y]=0;
+                                cc.x=a.x+1;
+                                key.push(2);
+                                main(mm,cc,key);
+                            }
+                        }
+                        if(b[a.x][a.y+1]==2||b[a.x][a.y+1]==4){
+                            if(b[a.x][a.y+2]!=1&&b[a.x][a.y+2]!=2&&b[a.x][a.y+2]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x][a.y+2]=2;
+                                mm[a.x][a.y+1]=9;
+                                mm[a.x][a.y]=0;
+                                cc.y=a.y+1;
+                                key.push(3);
+                                main(mm,cc,key);
+                            }
+                        }
+                       
+                    }
                 }
                 function main(P_map,P_peo,key){
                     var pushPointArr={
