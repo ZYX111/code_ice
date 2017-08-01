@@ -352,18 +352,59 @@
                 function ifWin(){//判断达成条件
 
                 }
-                function ifPush(a,b,c,d){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
-                    // paceX=peo.x;
-                    // paceY=peo.y;
-                    // for(var a=0;a<4;a++){
-                    //     move(a);
-                    //     judge();
-                    //     if(paceX==peo.x||paceY==peo.y){
-                    //         gameOver();
-                    //     }else{
-                    //         main();
-                    //     }
-                    // }
+                function ifPush(a/*人的坐标*/,b/*地图数据*/,key){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
+                    var d=0;
+                    while(d<4){
+                        if(b[a.x-1][a.y]==2||b[a.x-1][a.y]==4){
+                            if(b[a.x-2][a.y]!=1&&b[a.x-2][a.y]!=2&&b[a.x-2][a.y]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x-2][a.y]=2;
+                                mm[a.x-1][a.y]=9;
+                                mm[a.x][a.y]=0;
+                                cc.x=a.x-1;
+                                key.push(0);
+                                main(mm,cc,key);
+                            }
+                        }
+                        if(b[a.x][a.y-1]==2||b[a.x][a.y-1]==4){
+                            if(b[a.x][a.y-2]!=1&&b[a.x][a.y-2]!=2&&b[a.x][a.y-2]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x][a.y-2]=2;
+                                mm[a.x][a.y-1]=9;
+                                mm[a.x][a.y]=0;
+                                cc.y=a.y-1;
+                                key.push(1);
+                                main(mm,cc,key);
+                            }
+                        }
+                        if(b[a.x+1][a.y]==2||b[a.x+1][a.y]==4){
+                            if(b[a.x+2][a.y]!=1&&b[a.x+2][a.y]!=2&&b[a.x+2][a.y]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x+2][a.y]=2;
+                                mm[a.x+1][a.y]=9;
+                                mm[a.x][a.y]=0;
+                                cc.x=a.x+1;
+                                key.push(2);
+                                main(mm,cc,key);
+                            }
+                        }
+                        if(b[a.x][a.y+1]==2||b[a.x][a.y+1]==4){
+                            if(b[a.x][a.y+2]!=1&&b[a.x][a.y+2]!=2&&b[a.x][a.y+2]!=4){
+                                mm=b;
+                                cc=a;
+                                mm[a.x][a.y+2]=2;
+                                mm[a.x][a.y+1]=9;
+                                mm[a.x][a.y]=0;
+                                cc.y=a.y+1;
+                                key.push(3);
+                                main(mm,cc,key);
+                            }
+                        }
+                       
+                    }
                 }
                 function main(P_map,P_peo,key){
                     var pushPointArr={
