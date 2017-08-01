@@ -360,6 +360,7 @@
                                 mm[a.x-1][a.y]=9;
                                 mm[a.x][a.y]=0;
                                 cc.x=a.x-1;
+                                key.push(0);
                                 main(mm,cc,key);
                             }
                         }
@@ -371,6 +372,7 @@
                                 mm[a.x][a.y-1]=9;
                                 mm[a.x][a.y]=0;
                                 cc.y=a.y-1;
+                                key.push(1);
                                 main(mm,cc,key);
                             }
                         }
@@ -382,6 +384,7 @@
                                 mm[a.x+1][a.y]=9;
                                 mm[a.x][a.y]=0;
                                 cc.x=a.x+1;
+                                key.push(2);
                                 main(mm,cc,key);
                             }
                         }
@@ -393,6 +396,7 @@
                                 mm[a.x][a.y+1]=9;
                                 mm[a.x][a.y]=0;
                                 cc.y=a.y+1;
+                                key.push(3);
                                 main(mm,cc,key);
                             }
                         }
