@@ -34,7 +34,6 @@
                 x:1,
                 y:3
             };
-            count=0;
             window.onload = function(){
                 for(var i=0;i<9;i++){
                     for(var j=0;j<9;j++){
@@ -45,7 +44,6 @@
                         }
                     }
                 Flash();
-                ai();
             }
             function Flash(){
                 for(var i=0;i<9;i++){
@@ -345,8 +343,7 @@
                                 }
                             }
                         }
-
-                        } 
+                    } 
                 }
 
                 function ifWin(){//判断达成条件
