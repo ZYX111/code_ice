@@ -35,16 +35,64 @@
                 y:3
             };
             window.onload = function(){
-                for(var i=0;i<9;i++){
-                    for(var j=0;j<9;j++){
-                        switch(map[i][j]){
-                            case  1 :ctx.drawImage(img_1,j*50,i*50);break;
-                            case  0 :ctx.drawImage(img_0,j*50,i*50);break;
-                            }
+                AIpush("0003221233332330012321012223210000111003212333233001232101222");
+            }
+            function AIpush(key) {
+
+                var i = 0
+                var fun = function () {
+                    i++;
+                    if (key[i] == 1) {
+                        move(1);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
                         }
                     }
-                Flash();
+                    else if (key[i] == 2) {
+                        move(2);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 3) {
+                        move(3);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 0) {
+                        move(0);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                }
+                window.setInterval(fun, 500);
+                //for (; i < key.length; i++) {
+                    
+                //}
             }
+
             function Flash(){
                 for(var i=0;i<9;i++){
                     for(var j=0;j<9;j++){
@@ -275,52 +323,6 @@
                 }
                 function Win(){
 
-                }
-                function AIpush(key) {
-                        //var step  = key.split(",");
-                    for (var i = 0; i < key.length; i++)
-                    {
-                        if (key[i] == 1) {
-                            move(1);
-                            judge();
-                            Flash();
-                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
-                                alert("Lady Luck is smiling!");
-                                alert("START ANEW");
-                                location.reload();
-                            }
-                        }
-                        else if (key[i] == 2) {
-                            move(2);
-                            judge();
-                            Flash();
-                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
-                                alert("Lady Luck is smiling!");
-                                alert("START ANEW");
-                                location.reload();                            
-                            }
-                        }
-                        else if (key[i] == 3) {
-                            move(3);
-                            judge();
-                            Flash();
-                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
-                                alert("Lady Luck is smiling!");
-                                alert("START ANEW");
-                                location.reload();
-                            }
-                        }
-                        else if (key[i] == 0) {
-                            move(0);
-                            judge();
-                            Flash();
-                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
-                                alert("Lady Luck is smiling!");
-                                alert("START ANEW");
-                                location.reload();
-                            }
-                        }
-                    } 
                 }
 
                 function ifWin(){//判断达成条件
