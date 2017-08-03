@@ -335,6 +335,52 @@
                        
                     }
                 }
+                function AIpush(key) {
+                        //var step  = key.split(",");
+                   for (var i = 0; i < key.length; i++)
+                     {
+                        if (key[i] == 1) {
+                            move(1);
+                            judge();
+                            Flash();
+                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
+                                alert("Lady Luck is smiling!");
+                                alert("START ANEW");
+                                location.reload();
+                            }
+                        }
+                        else if (key[i] == 2) {
+                            move(2);
+                            judge();
+                            Flash();
+                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
+                                alert("Lady Luck is smiling!");
+                                alert("START ANEW");
+                                location.reload();                            
+                            }
+                        }
+                        else if (key[i] == 3) {
+                            move(3);
+                            judge();
+                            Flash();
+                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
+                                alert("Lady Luck is smiling!");
+                                alert("START ANEW");
+                                location.reload();
+                            }
+                        }
+                        else if (key[i] == 0) {
+                            move(0);
+                            judge();
+                            Flash();
+                            if(map[3][7]==4&&map[4][7]==4&&map[5][7]==4){
+                                alert("Lady Luck is smiling!");
+                                alert("START ANEW");
+                                location.reload();
+                            }
+                        }
+                    } 
+                }
                 function main(P_map,P_peo,key){
                     var pushPointArr={
                         length:0,
