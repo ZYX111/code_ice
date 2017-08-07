@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>推箱子zyx</title>
+</head>
+<body>
+<canvas id="myCanvas" width="450" height="450">
+您的浏览器不支持 HTML5 canvas 标签。
+</canvas>
+<script>
+//变量信息
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+var img_1 = new Image();
+img_1.src="墙.png";
+var img_2 = new Image();    
+img_2.src="坦克.png";//分三个等级
+var img_3 = new Image();       
+img_3.src="完成地点.png";
+var img_4 = new Image();
+img_4.src="完成的箱子.png";
+var img_5 = new Image();
+img_5.src="箱子.png";
+var img_6 = new Image();
+img_6.src="空.png";
+
+//数据
+var map_data=[[1,1,1,1,1,0,0,0,0],
+              [1,0,0,0,1,0,0,0,0],
+              [1,0,0,0,1,0,1,1,1],
+              [1,0,0,0,1,0,1,0,1],
+              [1,1,1,0,1,1,1,0,1],
+              [0,1,1,0,0,0,0,0,1],
+              [0,1,0,0,0,1,0,0,1],
+              [0,1,0,0,0,1,1,1,1],
+              [0,1,1,1,1,1,0,0,0]];
+
+var makeTank=function(a,b,c,d,e,f){
+    return {
+        x:a,
+        y:b,
+        shell:c,  //子弹类型
+        tankClass:d,  //坦克类型
+        tankSpeed:e,  //坦克速度
+        antSpeed:f  //子弹速度
+    }
+} 
+var makeAnt=function(a,b,c,d){
+    return {
+        x:a,
+        y:b,
+        shell:c,  //子弹类型
+        antSpeed:d
+    }
+} 
+
+//页面加载
+window.onload = function()
+{
+    
+}
+//逻辑层
+
+document.onkeydown = function(e) {
+    ifRun(e);//判断是否能走
+    
+    flash();刷新位置
+
+} 
+</script>
+</body>
+</html>
