@@ -1,4 +1,4 @@
- var c=document.getElementById("myCanvas");
+var c=document.getElementById("myCanvas");
             var ctx=c.getContext("2d");
             var img_1 = new Image();
             img_1.src="墙.png";

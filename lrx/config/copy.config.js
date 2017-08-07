@@ -22,8 +22,8 @@ module.exports = {
     src: ['{{ROOT}}/node_modules/sw-toolbox/sw-toolbox.js'],
     dest: '{{BUILD}}'
   },
-  copycode:{
-      src:['{{SRC}}/lib/code.js'],
-      dest:'{{BUILD}}'
+  copyfill:{
+    src:['{{SRC}}/lib/code.js'],
+    dest:'{{BUILD}}'
   }
 }
