@@ -5,10 +5,11 @@
         <title>11122</title>
     </head>
     <body>
-        <p id="demo" onclick="aa();">5</p>
+        <p id="demo" onclick="move(2,2,3,2);">5</p>
         <script>
-            var map=[[1,1,1,1,1,0,0,0,0],
-                     [1,0,0,9,1,0,0,0,0],
+            function move(x1/*1箱子的x*/,y1/*1箱子的y*/,x2,y2){
+                var map=[[1,1,1,1,1,0,0,0,0],
+                     [1,0,0,0,1,0,0,0,0],
                      [1,0,2,0,1,0,1,1,1],
                      [1,0,2,0,1,0,1,4,1],
                      [1,1,1,0,1,1,1,3,1],
@@ -16,11 +17,10 @@
                      [0,1,0,0,0,1,0,0,1],
                      [0,1,0,0,0,1,1,1,1],
                      [0,1,1,1,1,1,0,0,0]];
-            function move(x1/*1箱子的x*/,y1/*1箱子的y*/,x2,y2){
                 var poi=new Array();
                 var dir=[{x:0,y:-1},{x:-1,y:0},{x:0,y:+1},{x:1,y:0}];
                 for(var i=0;i<9;i++){
-                    for(var j=0;i<9;j++){
+                    for(var j=0;j<9;j++){
                         if(map[i][j]==3){
                             poi.push(i);
                             poi.push(j);
@@ -35,6 +35,15 @@
                 var y_z=new Array();
                 for(var i=0;i<poi.length/2;i++){
                     if(F(x1,y1,0,poi[2*i],poi[2*i+1])==ture){
+                 var map=[[1,1,1,1,1,0,0,0,0],
+                          [1,0,0,0,1,0,0,0,0],
+                          [1,0,2,0,1,0,1,1,1],
+                          [1,0,2,0,1,0,1,4,1],
+                          [1,1,1,0,1,1,1,3,1],
+                          [0,1,1,0,0,0,0,3,1],
+                          [0,1,0,0,0,1,0,0,1],
+                          [0,1,0,0,0,1,1,1,1],
+                          [0,1,1,1,1,1,0,0,0]];
                         if(F(x2,y2,0,poi[(2*i+2)%4],poi[(2*i+3)%4])==ture){
                             break;
                         }
@@ -62,10 +71,11 @@
                         y=y_z.pop();
                         d=key.pop();
                         while(d<4){
-                            if((map[x+dir[d].x][y+dir[d].y]==0||map[x+dir[d].x][y+dir[d].y]==3)&&(map[x-dir[d].x][y-dir[d].y]==0||map[x-dir[d].x][y-dir[d].y]==3)){
+                            if((map[x+dir[d].x][y+dir[d].y]==0||map[x+dir[d].x][y+dir[d].y]==3)&&(map[x-dir[d].x][y-dir[d].y]==0||map[x-dir[d].x][y-dir[d].y]==3||map[x-dir[d].x][y-dir[d].y]==-1)){
                                 x_z.push(x);
                                 y_z.push(y);
                                 key.push(d);
+                                map[x][y]==-1;
                                 x=x+dir[d].x;
                                 y=y+dir[d].y;
                                 if(x==a&&y==b){
@@ -81,6 +91,7 @@
                         }
                     }
                 }
+                document.getElementById("demo").innerHTML=key.toString();
             }
         </script>
     </body>
