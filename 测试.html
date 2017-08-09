@@ -34,7 +34,8 @@
                 var x_z=new Array();
                 var y_z=new Array();
                 for(var i=0;i<poi.length/2;i++){
-                    if(F(x1,y1,0,poi[2*i],poi[2*i+1])==ture){
+                    if(F(x1,y1,0,poi[2*i],poi[2*i+1])==true){
+                        //document.getElementById("demo").innerHTML=key.toString();
                  var map=[[1,1,1,1,1,0,0,0,0],
                           [1,0,0,0,1,0,0,0,0],
                           [1,0,2,0,1,0,1,1,1],
@@ -44,7 +45,7 @@
                           [0,1,0,0,0,1,0,0,1],
                           [0,1,0,0,0,1,1,1,1],
                           [0,1,1,1,1,1,0,0,0]];
-                        if(F(x2,y2,0,poi[(2*i+2)%4],poi[(2*i+3)%4])==ture){
+                        if(F(x2,y2,0,poi[(2*i+2)%4],poi[(2*i+3)%4])==true){
                             break;
                         }
                         else{
@@ -75,11 +76,11 @@
                                 x_z.push(x);
                                 y_z.push(y);
                                 key.push(d);
-                                map[x][y]==-1;
+                                map[x][y]=-1;
                                 x=x+dir[d].x;
                                 y=y+dir[d].y;
                                 if(x==a&&y==b){
-                                    return ture;
+                                    return true;
                                 }
                                 else{
                                     d=0;
@@ -87,6 +88,9 @@
                             }
                             else{
                                 d++;
+                                if(d==4){
+                                    map[x][y]=-1;
+                                }
                             }
                         }
                     }
