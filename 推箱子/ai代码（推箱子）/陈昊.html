@@ -162,24 +162,24 @@
                 var box1={x:2,y:2};
                 var box2={x:3,y:2};
                 var aa=0;
-                var box=new Array[box1,box2];
+                var box=[box1,box2];
                 for(var i=0;i<str.length;i++){
                     if(str[i]=='s'){
                         aa=1;
                     }else if(str[i]=0){
-                        key+=ifrun(ren,{x:box[aa],y:box[aa]+1},box1.x,box1.y,box2.x,box2.y);
+                        key+=ifrun1(ren,{x:box[aa],y:box[aa]+1},box1.x,box1.y,box2.x,box2.y);
                         ren=box[aa];
                         box[aa]={x:box[aa],y:box[aa]-1};
                     }else if(str[i]=1){
-                        key+=ifrun(ren,{x:box[aa]+1,y:box[aa]},box1.x,box1.y,box2.x,box2.y);
+                        key+=ifrun1(ren,{x:box[aa]+1,y:box[aa]},box1.x,box1.y,box2.x,box2.y);
                         ren=box[aa];
                         box[aa]={x:box[aa]-1,y:box[aa]};
                     }else if(str[i]=0){
-                        key+=ifrun(ren,{x:box[aa],y:box[aa]-1},box1.x,box1.y,box2.x,box2.y);
+                        key+=ifrun1(ren,{x:box[aa],y:box[aa]-1},box1.x,box1.y,box2.x,box2.y);
                         ren=box[aa];
                         box[aa]={x:box[aa],y:box[aa]+1};
                     }else if(str[i]=0){
-                        key+=ifrun(ren,{x:box[aa]-1,y:box[aa]},box1.x,box1.y,box2.x,box2.y);
+                        key+=ifrun1(ren,{x:box[aa]-1,y:box[aa]},box1.x,box1.y,box2.x,box2.y);
                         ren=box[aa];
                         box[aa]={x:box[aa]+1,y:box[aa]};
                     }
@@ -228,7 +228,7 @@
                         }
                         fun(a.x,a.y,0);
                         //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数
-                        document.getElementById("demo").innerHTML=key.toString();
+                        
                     }
                 } 
                 function movebox(x1/*1箱子的x*/,y1/*1箱子的y*/,x2,y2){
