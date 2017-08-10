@@ -35,7 +35,7 @@
                 y:3
             };
             window.onload = function(){
-                AI();
+                AIpush(AI());
             }
             function Flash(){
                 for(var i=0;i<9;i++){
@@ -154,9 +154,16 @@
 
 
             //AI代码
-
+            var ss=AI();
+            for(var i=0;i<ss.length;i++){
+                if(ss[i]==','){
+                    break;
+                }else{
+                    ss[i]
+                }
+            }
             function AI(){
-                var key;//答案
+                var key1=new String();//答案
                 var str=movebox(2,2,3,2);
                 var ren={x:1,y:3};
                 var box1={x:2,y:2};
@@ -167,28 +174,28 @@
                     if(str[i]=='s'){
                         aa=1;
                     }else if(str[i]==0){
-                        key+=ifrun1(ren,{x:box[aa].x,y:box[aa].y+1},box1.x,box1.y,box2.x,box2.y);
-                        key+='0';
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y+1},box1.x,box1.y,box2.x,box2.y));
+                        key1=key1.concat(',0');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x,y:box[aa].y-1};
                     }else if(str[i]==1){
-                        key+=ifrun1(ren,{x:box[aa].x+1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y);
-                        key+='1';
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x+1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y));
+                        key1=key1.concat(',1');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x-1,y:box[aa].y};
                     }else if(str[i]==2){
-                        key+=ifrun1(ren,{x:box[aa].x,y:box[aa].y-1},box1.x,box1.y,box2.x,box2.y);
-                        key+='2';
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y-1},box1.x,box1.y,box2.x,box2.y));
+                        key1=key1.concat(',2');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x,y:box[aa].y+1};
                     }else if(str[i]==3){
-                        key+=ifrun1(ren,{x:box[aa].x-1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y);
-                        key+='3';
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x-1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y));
+                        key1=key1.concat(',3');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x+1,y:box[aa].y};
                     }
                 }
-                return key;
+                return key1;
 
                 //自设函数
                 function ifrun1(a,b,c,d,e,f){
@@ -327,6 +334,68 @@
                     }
                 }
             }
+            function AIpush(key) {
+                var key=new String();
+                for(var i=0;i<ss.length;i++){
+                    if(ss[i]==','){
+                        continue;
+                    }else{
+                        key=key.concat(ss[i]);
+                    }
+                }
+                var i = 0
+                var fun = function () {
+                    i++;
+                    if (key[i] == 1) {
+                        move(1);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 2) {
+                        move(2);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 3) {
+                        move(3);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 0) {
+                        move(0);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                }
+                window.setInterval(fun, 500);
+                //for (; i < key.length; i++) {
+                    
+                //}
+            } 
             // var ai=function(){
                
             //     function checkPushPoint(){
