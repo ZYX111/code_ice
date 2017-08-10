@@ -33,9 +33,10 @@
                 var key=new Array();
                 var x_z=new Array();
                 var y_z=new Array();
+                key.push('one'/*one*/);
                 for(var i=0;i<poi.length/2;i++){
                     if(F(x1,y1,0,poi[2*i],poi[2*i+1])==true){
-                        key.push('s');
+                        key.push('two'/*two*/);
                         //document.getElementById("demo").innerHTML=key.toString();
                     var map=[[1,1,1,1,1,0,0,0,0],
                           [1,0,0,0,1,0,0,0,0],
@@ -50,7 +51,7 @@
                             break;
                         }
                         else{
-                            for(var i=0;i<key.length;i++){
+                            for(var i=1;i<key.length;i++){
                                 key.pop();
                                 x_z.pop();
                                 y_z.pop();
@@ -59,7 +60,7 @@
                     }
                 }
                 if(key.length!=0){
-                    //document.getElementById("demo").innerHTML=key.toString();
+                    document.getElementById("demo").innerHTML=key.toString();
                     return key;
                 }
                 else{
