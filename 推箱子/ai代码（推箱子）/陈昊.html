@@ -166,22 +166,26 @@
                 for(var i=0;i<str.length;i++){
                     if(str[i]=='s'){
                         aa=1;
-                    }else if(str[i]=0){
-                        key+=ifrun1(ren,{x:box[aa],y:box[aa]+1},box1.x,box1.y,box2.x,box2.y);
-                        ren=box[aa];
-                        box[aa]={x:box[aa],y:box[aa]-1};
-                    }else if(str[i]=1){
-                        key+=ifrun1(ren,{x:box[aa]+1,y:box[aa]},box1.x,box1.y,box2.x,box2.y);
-                        ren=box[aa];
-                        box[aa]={x:box[aa]-1,y:box[aa]};
-                    }else if(str[i]=0){
-                        key+=ifrun1(ren,{x:box[aa],y:box[aa]-1},box1.x,box1.y,box2.x,box2.y);
-                        ren=box[aa];
-                        box[aa]={x:box[aa],y:box[aa]+1};
-                    }else if(str[i]=0){
-                        key+=ifrun1(ren,{x:box[aa]-1,y:box[aa]},box1.x,box1.y,box2.x,box2.y);
-                        ren=box[aa];
-                        box[aa]={x:box[aa]+1,y:box[aa]};
+                    }else if(str[i]==0){
+                        key+=ifrun1(ren,{x:box[aa].x,y:box[aa].y+1},box1.x,box1.y,box2.x,box2.y);
+                        key+='0';
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x,y:box[aa].y-1};
+                    }else if(str[i]==1){
+                        key+=ifrun1(ren,{x:box[aa].x+1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y);
+                        key+='1';
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x-1,y:box[aa].y};
+                    }else if(str[i]==2){
+                        key+=ifrun1(ren,{x:box[aa].x,y:box[aa].y-1},box1.x,box1.y,box2.x,box2.y);
+                        key+='2';
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x,y:box[aa].y+1};
+                    }else if(str[i]==3){
+                        key+=ifrun1(ren,{x:box[aa].x-1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y);
+                        key+='3';
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x+1,y:box[aa].y};
                     }
                 }
                 return key;
