@@ -174,23 +174,23 @@
                     if(str[i]=='s'){
                         aa=1;
                     }else if(str[i]==0){
-                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y+1},box1.x,box1.y,box2.x,box2.y));
-                        key1=key1.concat(',0');
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y+1},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('0');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x,y:box[aa].y-1};
                     }else if(str[i]==1){
-                        key1=key1.concat(ifrun1(ren,{x:box[aa].x+1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y));
-                        key1=key1.concat(',1');
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x+1,y:box[aa].y},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('1');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x-1,y:box[aa].y};
                     }else if(str[i]==2){
-                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y-1},box1.x,box1.y,box2.x,box2.y));
-                        key1=key1.concat(',2');
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y-1},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('2');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x,y:box[aa].y+1};
                     }else if(str[i]==3){
-                        key1=key1.concat(ifrun1(ren,{x:box[aa].x-1,y:box[aa].y},box1.x,box1.y,box2.x,box2.y));
-                        key1=key1.concat(',3');
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x-1,y:box[aa].y},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('3');
                         ren={x:box[aa].x,y:box[aa].y};
                         box[aa]={x:box[aa].x+1,y:box[aa].y};
                     }
@@ -345,7 +345,7 @@
                 }
                 var i = 0
                 var fun = function () {
-                    i++;
+                    
                     if (key[i] == 1) {
                         move(1);
                         judge();
@@ -390,6 +390,7 @@
                             location.reload();
                         }
                     }
+                    i++;
                 }
                 window.setInterval(fun, 500);
                 //for (; i < key.length; i++) {
