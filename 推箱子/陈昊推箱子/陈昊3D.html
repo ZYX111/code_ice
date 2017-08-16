@@ -6,74 +6,89 @@
     </head>
     <body>
         <script>
-            var map=new Array();
+            
             var Map_x=3;
-            var Map_y=3;
-            var Map_z=3;
+            var Map_y=2;
+            var Map_z=2;
             var point_num=1;
-            for(var i=0;i<Map_x;i++){
-                map.push(new Array);
-                for(var j=0;j<Map_y;j++){
-                    map[i].push(new Array);
-                    for(var q=0;q<Map_z;q++){
-                        map[i][j].push(1);
+            var point=[{x:2,y:0,z:0}];
+            var box=[{x:1,y:0,Z:0}]
+            var peo={x:2,y:1,z:0};
+            dir=[{x:-1,y:0,z:0},{x:0,y:-1,z:0},{x:+1,y:0,z:0},{x:0,y:+1,z:0},{x:0,y:0,z:1},{x:0,y:0,z:-1}]//全局
+            var map=new Array();//全局
+            /* 1墙9人3完成地点4完成箱子2箱子0空 */
+            window.onload = function(){
+                startFun();
+                move(4);
+            }
+            function startFun(){
+                
+                for(var i=0;i<Map_x+2;i++){
+                    map.push(new Array);
+                    for(var j=0;j<Map_y+2;j++){
+                        map[i].push(new Array);
+                        for(var q=0;q<Map_z+2;q++){
+                            if(i==0||j==0||q==0||i==Map_x+1||j==Map_y+1||q==Map_z+1){
+                                map[i][j].push(1);
+                            }else{
+                                map[i][j].push(0);
+                            }
+                        }
                     }
                 }
+                for(var i=0;i<point_num;i++){
+                    map[point[i].x+1][point[i].y+1][point[i].z+1]=3;
+                }
+                for(var i=0;i<point_num;i++){
+                    map[box[i].x+1][box[i].y+1][box[i].z+1]=2;
+                }
+                map[peo.x+1][peo.y+1][peo.z+1]=9;
+                return map;
             }
-            var peo={
-                x:1,
-                y:1,
-                z:1
-            };
-            var point=new array();
-            for(var i=0;i<point_num;i++){
-                point.push({x:1,y:1,z:1});//改
-            }
-            window.onload = function(){
-            }
-            var img_1 = new Image();
-            img_1.src="墙.png";
-            var img_9 = new Image();
-            img_9.src="人.png";
-            var img_3 = new Image();
-            img_3.src="完成地点.png";
-            var img_4 = new Image();
-            img_4.src="完成的箱子.png";
-            var img_2 = new Image();
-            img_2.src="箱子.png";
-            var img_0 = new Image();
-            img_0.src="空.png";
-            dir=[{x:-1,y:0,z:0},{x:0,y:-1,z:0},{x:+1,y:0,z:0},{x:0,y:+1,z:0},{x:0,y:0,z:1},{x:0,y:0,z:-1}]
+            //按键
             function move(a/*0左,1前,2右,3后,4上,5下*/){
-                if(map[peo.x+dir[a].x][peo.y+dir[a].y][peo.z+dir[a].z]==2||map[peo.x+dir[a].x][peo.y+dir[a].y][peo.z+dir[a].z]==4){
-                    if(map[peo.x+dir[a].x*2][peo.y+dir[a].y*2][peo.z+dir[a].z*2]!=1&&map[peo.x+dir[a].x*2][peo.y+dir[a].y*2][peo.z+dir[a].z*2]!=2&&map[peo.x+dir[a].x*2][peo.y+dir[a].y*2][peo.z+dir[a].z*2]!=4){
-                        map[peo.x+dir[a].x*2][peo.y+dir[a].y*2][peo.z+dir[a].z*2]=2;
-                        map[peo.x+dir[a].x][peo.y+dir[a].y][peo.z+dir[a].z]=0;
-                        map[peo.x][peo.y][peo.z]=0;
+                if(map[peo.x+1+dir[a].x][peo.y+1+dir[a].y][peo.z+1+dir[a].z]==2||map[peo.x+1+dir[a].x][peo.y+1+dir[a].y][peo.z+1+dir[a].z]==4){
+                    if(map[peo.x+1+dir[a].x*2][peo.y+1+dir[a].y*2][peo.z+1+dir[a].z*2]!=1&&map[peo.x+1+dir[a].x*2][peo.y+1+dir[a].y*2][peo.z+1+dir[a].z*2]!=2&&map[peo.x+1+dir[a].x*2][peo.y+1+dir[a].y*2][peo.z+1+dir[a].z*2]!=4){
+                        map[peo.x+1+dir[a].x*2][peo.y+1+dir[a].y*2][peo.z+1+dir[a].z*2]=2;
+                        map[peo.x+1+dir[a].x][peo.y+1+dir[a].y][peo.z+1+dir[a].z]=0;
+                        map[peo.x+1][peo.y+1][peo.z+1]=0;
                         peo.x=peo.x+dir[a].x;
                         peo.y=peo.y+dir[a].y;
                         peo.z=peo.z+dir[a].z;
                     }
                 }
                 else{
-                    if(map[peo.x+dir[a].x][peo.y+dir[a].y][peo.z+dir[a].z]!=1){
-                        map[peo.x][peo.y][peo.z]=0;
+                    if(map[peo.x+1+dir[a].x][peo.y+1+dir[a].y][peo.z+1+dir[a].z]!=1){
+                        map[peo.x+1][peo.y+1][peo.z+1]=0;
                         peo.x=peo.x+dir[a].x;
                         peo.y=peo.y+dir[a].y;
                         peo.z=peo.z+dir[a].z;
                     }
                 }
+                judge();
+                ifwin();
             }
             function judge(){
                 for(var i=0;i<point_num;i++){
-                    if(map[point[i].x][point[i].y][point[i].z]==0){
-                        map[map[point[i].x][point[i].y][point[i].z]]=3;
+                    if(map[point[i].x+1][point[i].y+1][point[i].z+1]==0){
+                        map[point[i].x+1][point[i].y+1][point[i].z+1]=3;
                     }
-                    if(map[point[i].x][point[i].y][point[i].z]==2){
-                        map[map[point[i].x][point[i].y][point[i].z]]=4;
+                    if(map[point[i].x+1][point[i].y+1][point[i].z+1]==2){
+                        map[point[i].x+1][point[i].y+1][point[i].z+1]=4;
                     }
                 }
-                map[peo.x][peo.y][peo.z]=9;
+                map[peo.x+1][peo.y+1][peo.z+1]=9;
+            }
+            function ifwin(){
+                var n=0;
+                for(var i=0;i<point_num;i++){
+                    if(map[point[i].x+1][point[i].y+1][point[i].z+1]==4){
+                        n++;
+                    }
+                }
+                if(n==point_num){
+                    alert("Lady Luck is smiling!");//改
+                }
             }
         </script>
     </body>
