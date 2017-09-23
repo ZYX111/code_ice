@@ -13,6 +13,7 @@ var canvas = document.getElementById("tankMap");
 var cxt = canvas.getContext("2d");
 
 var w = 60,h = 60;//w为宽，h为高
+<<<<<<< HEAD
 //坦克：xy坐标，导弹等级，装甲等级,方向
 //导弹：导弹等级，xy坐标，方向
 //墙：xy坐标
@@ -21,6 +22,10 @@ var w = 60,h = 60;//w为宽，h为高
 //方法:void 导弹发射（），void 升级装甲（），void 升级导弹（），void 放置装甲（），void 放置导弹（），刷新（），车移动（）
 //全局:地图【【】】，墙【】，导弹升级包【】，装甲升级包【】，子弹【】
 var MAP=[
+=======
+
+var MAP=[//
+>>>>>>> 4d0ba2a65e732f976b4065b2f845401e356bffb3
 	[0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,1,1,1,1,1,0,0,0,0,0,0],
 	[0,1,0,0,0,1,0,0,0,0,0,0],
@@ -34,37 +39,17 @@ var MAP=[
 	[0,0,0,0,0,0,0,0,0,0,0,0]		
 ]; 
 
-function tank(x,y,direct){//定义一个tank类
-	this.x=x;//x坐标
-	this.y=y;//y坐标
-	this.speed=3;//移动速度（每次移动的像素点数）
-	this.direct=direct;//方向
-	this.moveUp=function(){
-		this.y-=this.speed;
-	}
-	this.moveDown=function(){
-		this.y+=this.speed;
-	}
-	this.moveRight=function(){
-		this.x+=this.speed;
-	}
-	this.moveLeft=function(){
-		this.x-=this.speed;
-	}
-}
-
-var curTank = new tank(180,180,0);
-	
-var oImgs={
+var oImgs={//建立图片数组，便于预加载
 		"down" : "image/enemy3D.png",
 		"left" : "image/enemy3L.png",
 		"right" : "image/enemy3R.png",
 		"up" : "image/enemy3U.png",  
 		"wall" : "image/walls.png",
-		"road" : "image/GroundGravel_Sand.png"
+		"road" : "image/GroundGravel_Sand.png",
+		"bullet" : "image/enemymissile.png"
 }
 
-function imgPreload(srcs,callback){
+function imgPreload(srcs,callback){//图片预加载函数
 	var count = 0,imgNum = 0,images = {};
 
 	for(src in srcs){
@@ -84,7 +69,7 @@ function imgPreload(srcs,callback){
 	}
 }   
 
-var down,left,right,up,wall,road;
+var down,left,right,up,wall,road,bullet;//定义图片对象
 
 imgPreload(oImgs,function(images){
 		//console.log(images.road);
@@ -94,8 +79,43 @@ imgPreload(oImgs,function(images){
 		up = images.up;
 		wall = images.wall;
 		road = images.road;
+		bullet = images.bullet;
 		init();
-});  
+}); 
+
+function Tank(x,y,direct){//定义一个Tank类
+	this.x=x;//x坐标
+	this.y=y;//y坐标
+	this.speed=3;//移动速度（每次移动的像素点数）
+	this.direct=direct;//方向
+	this.moveUp=function(){
+		this.y-=this.speed;
+	}
+	this.moveDown=function(){
+		this.y+=this.speed;
+	}
+	this.moveRight=function(){
+		this.x+=this.speed;
+	}
+	this.moveLeft=function(){
+		this.x-=this.speed;
+	}
+	this.shot=function(){
+		
+	}
+}
+
+function Wall(x,y){//建立Wall类
+	this.x=x;
+	this.y=y;
+	this.draw=function(i, j){
+		cxt.drawImage(wall,w*i,h*j,w,h);
+	}
+}
+
+var curTank = new Tank(180,180,0);//初始化坦克
+	
+var wallGroup=new Array();//创建墙的数组
 
 function init(){
 		InitMap();//初始化地板
@@ -108,7 +128,8 @@ function InitMap(){
 		for(var j=0;j<13;j++)
 		{
 			if(MAP[i][j] == 1){
-				cxt.drawImage(wall,w*i,h*j,w,h);
+				wallGroup[i+j]=new Wall(i,j);
+				wallGroup[i+j].draw(i,j);
 			}else if(MAP[i][j] == 0){
 				cxt.drawImage(road,w*i,h*j,w,h);
 			}
@@ -149,6 +170,7 @@ function move(event){
 		case 37:curTank.moveLeft();curTank.direct=3; break;
 		case 40:curTank.moveDown();curTank.direct=2; break;
 		case 39:curTank.moveRight();curTank.direct=1; break; 
+		case 32:curTank.shot();break;
 	}
 	InitMap();
 	drawTank(curTank);
