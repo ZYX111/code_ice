@@ -35,15 +35,7 @@
                 y:3
             };
             window.onload = function(){
-                for(var i=0;i<9;i++){
-                    for(var j=0;j<9;j++){
-                        switch(map[i][j]){
-                            case  1 :ctx.drawImage(img_1,j*50,i*50);break;
-                            case  0 :ctx.drawImage(img_0,j*50,i*50);break;
-                            }
-                        }
-                    }
-                Flash();
+                AIpush(AI());
             }
             function Flash(){
                 for(var i=0;i<9;i++){
@@ -158,50 +150,157 @@
                     location.reload();
                 }
             }
-            var ai=function(){
-                var pushPointArr={
-                    length:0,
-                };//装“推点”的数组
-                var key;//答案
-                function checkPushPoint(map){
-                    var count=0;
-                    //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据,如果没有推点运行gameOver()函数
-                    for(var i=0;i<9;i++)
-                    {
-                        for(var j=0;j<9;j++)
-                        {
-                            if(map[i][j]==2||map[i][j]==4)//确认箱子的位置
-                            {
-                                if(map[i-1][j]==0)//添加推点---------------------
-                                {
-                                    count+=1;
-                                    Object.defineProperty(pushPointArr,count,{value:{x:i-1,y:j}});
+
+
+
+            //AI代码
+            var ss=AI();
+            for(var i=0;i<ss.length;i++){
+                if(ss[i]==','){
+                    break;
+                }else{
+                    ss[i]
+                }
+            }
+            function AI(){
+                var key1=new String();//答案
+                var str=movebox(2,2,3,2);
+                var ren={x:1,y:3};
+                var box1={x:2,y:2};
+                var box2={x:3,y:2};
+                var aa=0;
+                var box=[box1,box2];
+                for(var i=0;i<str.length;i++){
+                    if(str[i]=='s'){
+                        aa=1;
+                    }else if(str[i]==0){
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y+1},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('0');
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x,y:box[aa].y-1};
+                    }else if(str[i]==1){
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x+1,y:box[aa].y},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('1');
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x-1,y:box[aa].y};
+                    }else if(str[i]==2){
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x,y:box[aa].y-1},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('2');
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x,y:box[aa].y+1};
+                    }else if(str[i]==3){
+                        key1=key1.concat(ifrun1(ren,{x:box[aa].x-1,y:box[aa].y},box[0].x,box[0].y,box[1].x,box[1].y));
+                        key1=key1.concat('3');
+                        ren={x:box[aa].x,y:box[aa].y};
+                        box[aa]={x:box[aa].x+1,y:box[aa].y};
+                    }
+                }
+                return key1;
+
+                //自设函数
+                function ifrun1(a,b,c,d,e,f){
+                    var key=new Array();
+                    var i=0;
+                    ifRun2(a,b,c,d,e,f);
+                    key.shift();
+                    return key.toString();
+                    function ifRun2(a/*peo（人的坐标）*/,b/*终点坐标*/,c,d,e,f){
+                        var map1=[[1,1,1,1,1,0,0,0,0],
+                                [1,0,0,0,1,0,0,0,0],
+                                [1,0,0,0,1,0,1,1,1],
+                                [1,0,0,0,1,0,1,4,1],
+                                [1,1,1,0,1,1,1,3,1],
+                                [0,1,1,0,0,0,0,3,1],
+                                [0,1,0,0,0,1,0,0,1],
+                                [0,1,0,0,0,1,1,1,1],
+                                [0,1,1,1,1,1,0,0,0]];//0→空,1→墙,2→箱子,3→点,4→箱子在点上,9→人
+                        map1[c][d]=1;
+                        map1[e][f]=1;
+                        var dir=[{x:0,y:-1},{x:-1,y:0},{x:0,y:1},{x:1,y:0}];
+                        
+                        function fun(x,y,w) {
+                            
+                            if (map1[x][y] == 0||map1[x][y] == 3) {
+                                key.push(w);
+                                if(b.x==x&&b.y==y){
+                                    i=1
+                                    return;
                                 }
-                                if(map[i+1][j]==0)
-                                {
-                                    count+=1;
-                                    Object.defineProperty(pushPointArr,count,{value:{x:i+1,y:j}});
+                                map1[x][y] = -1;
+                                for (var d = 0; d < 4; d++) {
+                                    fun(x + dir[d].x, y + dir[d].y,d);
+                                    if(i==1){
+                                        return;
+                                    }
                                 }
-                                if(map[i][j-1]==0)
-                                {
-                                    count+=1;
-                                    Object.defineProperty(pushPointArr,count,{value:{x:i,y:j-1}});
-                                }
-                                if(map[i][j+1]==0)
-                                {
-                                    count+=1;
-                                    Object.defineProperty(pushPointArr,count,{value:{x:i,y:j+1}});
+                                key.pop();
+                                map1[x][y] = 0;
+                            }
+                        }
+                        fun(a.x,a.y,0);
+                        //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数
+                        
+                    }
+                } 
+                function movebox(x1/*1箱子的x*/,y1/*1箱子的y*/,x2,y2){
+                    var map=[[1,1,1,1,1,0,0,0,0],
+                        [1,0,0,0,1,0,0,0,0],
+                        [1,0,2,0,1,0,1,1,1],
+                        [1,0,2,0,1,0,1,4,1],
+                        [1,1,1,0,1,1,1,3,1],
+                        [0,1,1,0,0,0,0,3,1],
+                        [0,1,0,0,0,1,0,0,1],
+                        [0,1,0,0,0,1,1,1,1],
+                        [0,1,1,1,1,1,0,0,0]];
+                    var poi=new Array();
+                    var dir=[{x:0,y:-1},{x:-1,y:0},{x:0,y:+1},{x:1,y:0}];
+                    for(var i=0;i<9;i++){
+                        for(var j=0;j<9;j++){
+                            if(map[i][j]==3){
+                                poi.push(i);
+                                poi.push(j);
+                            }
+                        }
+                    }
+                    if(poi.length==0){
+                        return false;
+                    }
+                    var key=new Array();
+                    var x_z=new Array();
+                    var y_z=new Array();
+                    for(var i=0;i<poi.length/2;i++){
+                        if(F(x1,y1,0,poi[2*i],poi[2*i+1])==true){
+                            key.push('s');
+                            //document.getElementById("demo").innerHTML=key.toString();
+                        var map=[[1,1,1,1,1,0,0,0,0],
+                            [1,0,0,0,1,0,0,0,0],
+                            [1,0,2,0,1,0,1,1,1],
+                            [1,0,2,0,1,0,1,4,1],
+                            [1,1,1,0,1,1,1,3,1],
+                            [0,1,1,0,0,0,0,3,1],
+                            [0,1,0,0,0,1,0,0,1],
+                            [0,1,0,0,0,1,1,1,1],
+                            [0,1,1,1,1,1,0,0,0]];
+                            if(F(x2,y2,0,poi[(2*i+2)%4],poi[(2*i+3)%4])==true){
+                                break;
+                            }
+                            else{
+                                for(var i=0;i<key.length;i++){
+                                    key.pop();
+                                    x_z.pop();
+                                    y_z.pop();
                                 }
                             }
                         }
                     }
-                    Object.defineProperty(pushPointArr,"length",{value:count});//添加推点总个数
-                    //var jsonarry=JSON.stringify(pushPointArr);//转换为json对象
-                }
-                function ifRun(a/*peo（人的坐标）*/,b/*终点坐标*/){
-                    if((map[b.x+1][b.y]!=0||map[b,x+1][b.y]!=3)&&(map[b.x-1][b.y]!=0||map[b,x-1][b.y]!=3)&&(map[b.x][b.y+1]!=0||map[b,x][b.y+1]!=3)&&(map[b.x][b.y-1]!=0||map[b,x][b.y-1]!=3)){
+                    if(key.length!=0){
+                        //document.getElementById("demo").innerHTML=key.toString();
+                        return key;
+                    }
+                    else{
                         return null;
                     }
+<<<<<<< HEAD
                     var map1=[[1,1,1,1,1,0,0,0,0],
                               [1,0,0,0,1,0,0,0,0],
                               [1,0,2,0,1,0,1,1,1],
@@ -228,148 +327,447 @@
                     }
                     fun(a.x,a.y,0);
                     //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数
+=======
+                    function F(x,y,d,a,b){
+                        x_z.push(x);
+                        y_z.push(y);
+                        key.push(d);
+                        for(;;){
+                            x=x_z.pop();
+                            y=y_z.pop();
+                            d=key.pop();
+                            while(d<4){
+                                if((map[x+dir[d].x][y+dir[d].y]==0||map[x+dir[d].x][y+dir[d].y]==3)&&(map[x-dir[d].x][y-dir[d].y]==0||map[x-dir[d].x][y-dir[d].y]==3||map[x-dir[d].x][y-dir[d].y]==-1)){
+                                    x_z.push(x);
+                                    y_z.push(y);
+                                    key.push(d);
+                                    map[x][y]=-1;
+                                    x=x+dir[d].x;
+                                    y=y+dir[d].y;
+                                    if(x==a&&y==b){
+                                        return true;
+                                    }
+                                    else{
+                                        d=0;
+                                    }
+                                }
+                                else{
+                                    d++;
+                                    if(d==4){
+                                        map[x][y]=-1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+>>>>>>> 56dbe853e37691c93c8eac6c9ce51d648da6cd18
                 }
-                function Win(){
+            }
+            function AIpush(key) {
+                var key=new String();
+                for(var i=0;i<ss.length;i++){
+                    if(ss[i]==','){
+                        continue;
+                    }else{
+                        key=key.concat(ss[i]);
+                    }
+                }
+                var i = 0
+                var fun = function () {
+                    
+                    if (key[i] == 1) {
+                        move(1);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 2) {
+                        move(2);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 3) {
+                        move(3);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    else if (key[i] == 0) {
+                        move(0);
+                        judge();
+                        
+                        Flash();
+                        if (map[3][7] == 4 && map[4][7] == 4 && map[5][7] == 4) {
+                            alert("Lady Luck is smiling!");
+                            alert("START ANEW");
+                            location.reload();
+                        }
+                    }
+                    i++;
+                }
+                window.setInterval(fun, 500);
+                //for (; i < key.length; i++) {
+                    
+                //}
+            } 
+            // var ai=function(){
+               
+            //     function checkPushPoint(){
+            //         var count=0;
+            //         //这段代码写出当前map数据箱子周围的点，然后把｛x：，y：｝这样的json数据记录到数组中，记得每次开始初始化数据,如果没有推点运行gameOver()函数
+            //         for(var i=0;i<9;i++)
+            //         {
+            //             for(var j=0;j<9;j++)
+            //             {
+            //                 if(map[i][j]==2||map[i][j]==4)//确认箱子的位置
+            //                 {
+            //                     if(map[i-1][j]==0)//添加推点---------------------
+            //                     {
+            //                         count+=1;
+            //                         Object.defineProperty(pushPointArr,count,{value:{x:i-1,y:j}});
+            //                     }
+            //                     if(map[i+1][j]==0)
+            //                     {
+            //                         count+=1;
+            //                         Object.defineProperty(pushPointArr,count,{value:{x:i+1,y:j}});
+            //                     }
+            //                     if(map[i][j-1]==0)
+            //                     {
+            //                         count+=1;
+            //                         Object.defineProperty(pushPointArr,count,{value:{x:i,y:j-1}});
+            //                     }
+            //                     if(map[i][j+1]==0)
+            //                     {
+            //                         count+=1;
+            //                         Object.defineProperty(pushPointArr,count,{value:{x:i,y:j+1}});
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //         Object.defineProperty(pushPointArr,"length",{value:count});//添加推点总个数
+            //         //var jsonarry=JSON.stringify(pushPointArr);//转换为json对象
+            //     }
+            //     function ifRun(a/*peo（人的坐标）*/,b/*终点坐标*/){
+            //         if((map[b.x+1][b.y]!=0||map[b,x+1][b.y]!=3)&&(map[b.x-1][b.y]!=0||map[b,x-1][b.y]!=3)&&(map[b.x][b.y+1]!=0||map[b,x][b.y+1]!=3)&&(map[b.x][b.y-1]!=0||map[b,x][b.y-1]!=3)){
+            //             return null;
+            //         }
+            //         var myArray=new Array();
+            //         var myDir=new Array();
+            //         var g_Peo={
+            //             x,
+            //             y,
+            //             d//方向上右下左对应，1，2，3，0
+            //             };
+            //             g_Peo.d=0;
+            //             g_Peo.x=a.x;
+            //             g_Peo.y=a.y;
+            //             myArray.push(g_Peo);
+            //             for(;;){
+            //                 while(g_Peo.d<4){
+            //                     if(g_Peo.d==0){
+            //                         if(map[g_Peo.x][g_Peo.y-1]==0||map[g_Peo.x][g_Peo.y-1]==3){
+            //                             g_Peo.y--;
+            //                             myArray.push(g_Peo);
+            //                             myDir.push(g_Peo.d);
+            //                             if(g_Peo.x==b.x&&g_Peo.y==b.y){
+            //                                 return myDir;
+            //                             }
+            //                         }
+            //                         else{
+            //                             g_Peo.d++;
+            //                         }
+            //                     }
+            //                     else if(g_Peo.d==1){
+            //                         if(map[g_Peo.x-1][g_Peo.y]==0||map[g_Peo.x-1][g_Peo.y]==3){
+            //                             g_Peo.x--;
+            //                             myArray.push(g_Peo);
+            //                             myDir.push(g_Peo.d);
+            //                             if(g_Peo.x==b.x&&g_Peo.y==b.y){
+            //                                 return myDir;
+            //                             }
+            //                         }
+            //                         else{
+            //                             g_Peo.d++;
+            //                         }
+            //                     }
+            //                     else if(g_Peo.d==2){
+            //                         if(map[g_Peo.x+1][g_Peo.y]==0||map[g_Peo.x+1][g_Peo.y]==3){
+            //                             g_Peo.x++;
+            //                             myArray.push(g_Peo);
+            //                             myDir.push(g_Peo.d);
+            //                             if(g_Peo.x==b.x&&g_Peo.y==b.y){
+            //                                 return myDir;
+            //                             }
+            //                         }
+            //                         else{
+            //                             g_Peo.d++;
+            //                         }
+            //                     }
+            //                     else if(g_Peo.d==3){
+            //                         if(map[g_Peo.x][g_Peo.y+1]==0||map[g_Peo.x][g_Peo.y+1]==3){
+            //                             g_Peo.y++;
+            //                             myArray.push(g_Peo);
+            //                             myDir.push(g_Peo.d);
+            //                             if(g_Peo.x==b.x&&g_Peo.y==b.y){
+            //                                 return myDir;
+            //                             }
+            //                         }
+            //                         else{
+            //                             g_Peo.d++;
+            //                         }
+            //                     }
+            //                 }
+            //                 myArray.pop();
+            //                 myDir.pop();
+            //             }
+            //         //a传入的是一个{x,y}值，判断以玩家现在的位置是否能走到该点，如果能记录如何走到的键位顺序到key中并运行ifPush()函数
+            //     }
+            //     function movebox(x1/*1箱子的x*/,y1/*1箱子的y*/,x2,y2){
+            //         var map=[[1,1,1,1,1,0,0,0,0],
+            //             [1,0,0,0,1,0,0,0,0],
+            //             [1,0,2,0,1,0,1,1,1],
+            //             [1,0,2,0,1,0,1,4,1],
+            //             [1,1,1,0,1,1,1,3,1],
+            //             [0,1,1,0,0,0,0,3,1],
+            //             [0,1,0,0,0,1,0,0,1],
+            //             [0,1,0,0,0,1,1,1,1],
+            //             [0,1,1,1,1,1,0,0,0]];
+            //         var poi=new Array();
+            //         var dir=[{x:0,y:-1},{x:-1,y:0},{x:0,y:+1},{x:1,y:0}];
+            //         for(var i=0;i<9;i++){
+            //             for(var j=0;j<9;j++){
+            //                 if(map[i][j]==3){
+            //                     poi.push(i);
+            //                     poi.push(j);
+            //                 }
+            //             }
+            //         }
+            //         if(poi.length==0){
+            //             return false;
+            //         }
+            //         var key=new Array();
+            //         var x_z=new Array();
+            //         var y_z=new Array();
+            //         for(var i=0;i<poi.length/2;i++){
+            //             if(F(x1,y1,0,poi[2*i],poi[2*i+1])==true){
+            //                 key.push('s');
+            //                 //document.getElementById("demo").innerHTML=key.toString();
+            //             var map=[[1,1,1,1,1,0,0,0,0],
+            //                 [1,0,0,0,1,0,0,0,0],
+            //                 [1,0,2,0,1,0,1,1,1],
+            //                 [1,0,2,0,1,0,1,4,1],
+            //                 [1,1,1,0,1,1,1,3,1],
+            //                 [0,1,1,0,0,0,0,3,1],
+            //                 [0,1,0,0,0,1,0,0,1],
+            //                 [0,1,0,0,0,1,1,1,1],
+            //                 [0,1,1,1,1,1,0,0,0]];
+            //                 if(F(x2,y2,0,poi[(2*i+2)%4],poi[(2*i+3)%4])==true){
+            //                     break;
+            //                 }
+            //                 else{
+            //                     for(var i=0;i<key.length;i++){
+            //                         key.pop();
+            //                         x_z.pop();
+            //                         y_z.pop();
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //         if(key.length!=0){
+            //             //document.getElementById("demo").innerHTML=key.toString();
+            //             return key;
+            //         }
+            //         else{
+            //             return null;
+            //         }
+            //         function F(x,y,d,a,b){
+            //             x_z.push(x);
+            //             y_z.push(y);
+            //             key.push(d);
+            //             for(;;){
+            //                 x=x_z.pop();
+            //                 y=y_z.pop();
+            //                 d=key.pop();
+            //                 while(d<4){
+            //                     if((map[x+dir[d].x][y+dir[d].y]==0||map[x+dir[d].x][y+dir[d].y]==3)&&(map[x-dir[d].x][y-dir[d].y]==0||map[x-dir[d].x][y-dir[d].y]==3||map[x-dir[d].x][y-dir[d].y]==-1)){
+            //                         x_z.push(x);
+            //                         y_z.push(y);
+            //                         key.push(d);
+            //                         map[x][y]=-1;
+            //                         x=x+dir[d].x;
+            //                         y=y+dir[d].y;
+            //                         if(x==a&&y==b){
+            //                             return true;
+            //                         }
+            //                         else{
+            //                             d=0;
+            //                         }
+            //                     }
+            //                     else{
+            //                         d++;
+            //                         if(d==4){
+            //                             map[x][y]=-1;
+            //                         }
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
 
-                }
-                function AIpush(key) {
-                    var step  = key.split(",");
-                    for (var i = 0; i < step.length; i++)
-                    {
-                        if (step[i] == 1) {
-                            if (map[peo.x - 1][peo.y] == 2 || map[peo.x - 1][peo.y] == 4) {
-                                if (map[peo.x - 2][peo.y] != 1 && map[peo.x - 2][peo.y] != 2 && map[peo.x - 2][peo.y] != 4) {
-                                    map[peo.x - 2][peo.y] = 2;
-                                    map[peo.x - 1][peo.y] = 0;
-                                    map[peo.x][peo.y] = 0;
-                                    peo.x = peo.x - 1;
-                                }
-                            }
-                            else {
-                                if (map[peo.x - 1][peo.y] != 1) {
-                                    map[peo.x][peo.y] = 0;
-                                    peo.x = peo.x - 1;
-                                }
-                            }
-                        }
-                        else if (step[i] == 2) {
-                            if (map[peo.x][peo.y + 1] == 2 || map[peo.x][peo.y + 1] == 4) {
-                                if (map[peo.x][peo.y + 2] != 1 && map[peo.x][peo.y + 2] != 2 && map[peo.x][peo.y + 2] != 4) {
-                                    map[peo.x][peo.y + 2] = 2;
-                                    map[peo.x][peo.y + 1] = 0;
-                                    map[peo.x][peo.y] = 0;
-                                    peo.y = peo.y + 1;
-                                }
-                            }
-                            else {
-                                if (map[peo.x][peo.y + 1] != 1) {
-                                    map[peo.x][peo.y] = 0;
-                                    peo.y = peo.y + 1;
-                                }
-                            }
-                        }
-                        else if (step[i] == 3) {
-                            if (map[peo.x + 1][peo.y] == 2 || map[peo.x + 1][peo.y] == 4) {
-                                if (map[peo.x + 2][peo.y] != 1 && map[peo.x + 2][peo.y] != 2 && map[peo.x + 2][peo.y] != 4) {
-                                    map[peo.x + 2][peo.y] = 2;
-                                    map[peo.x + 1][peo.y] = 0;
-                                    map[peo.x][peo.y] = 0;
-                                    peo.x = peo.x + 1;
-                                }
-                            }
-                            else {
-                                if (map[peo.x + 1][peo.y] != 1) {
-                                    map[peo.x][peo.y] = 0;
-                                    peo.x = peo.x + 1;
-                                }
-                            }
-                        }
-                        else if (step[i] == 0) {
-                            if (map[peo.x][peo.y - 1] == 2 || map[peo.x][peo.y - 1] == 4) {
-                                if (map[peo.x][peo.y - 2] != 1 && map[peo.x][peo.y - 2] != 2 && map[peo.x][peo.y - 2] != 4) {
-                                    map[peo.x][peo.y - 2] = 2;
-                                    map[peo.x][peo.y - 1] = 0;
-                                    map[peo.x][peo.y] = 0;
-                                    peo.y = peo.y - 1;
-                                }
-                            }
-                            else {
-                                if (map[peo.x][peo.y - 1] != 1) {
-                                    map[peo.x][peo.y] = 0;
-                                    peo.y = peo.y - 1;
-                                }
-                            }
-                        }
-                    } 
-                }
+            //     function AIpush(key) {
+            //         var step  = key.split(",");
+            //         for (var i = 0; i < step.length; i++)
+            //         {
+            //             if (step[i] == 1) {
+            //                 if (map[peo.x - 1][peo.y] == 2 || map[peo.x - 1][peo.y] == 4) {
+            //                     if (map[peo.x - 2][peo.y] != 1 && map[peo.x - 2][peo.y] != 2 && map[peo.x - 2][peo.y] != 4) {
+            //                         map[peo.x - 2][peo.y] = 2;
+            //                         map[peo.x - 1][peo.y] = 0;
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.x = peo.x - 1;
+            //                     }
+            //                 }
+            //                 else {
+            //                     if (map[peo.x - 1][peo.y] != 1) {
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.x = peo.x - 1;
+            //                     }
+            //                 }
+            //             }
+            //             else if (step[i] == 2) {
+            //                 if (map[peo.x][peo.y + 1] == 2 || map[peo.x][peo.y + 1] == 4) {
+            //                     if (map[peo.x][peo.y + 2] != 1 && map[peo.x][peo.y + 2] != 2 && map[peo.x][peo.y + 2] != 4) {
+            //                         map[peo.x][peo.y + 2] = 2;
+            //                         map[peo.x][peo.y + 1] = 0;
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.y = peo.y + 1;
+            //                     }
+            //                 }
+            //                 else {
+            //                     if (map[peo.x][peo.y + 1] != 1) {
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.y = peo.y + 1;
+            //                     }
+            //                 }
+            //             }
+            //             else if (step[i] == 3) {
+            //                 if (map[peo.x + 1][peo.y] == 2 || map[peo.x + 1][peo.y] == 4) {
+            //                     if (map[peo.x + 2][peo.y] != 1 && map[peo.x + 2][peo.y] != 2 && map[peo.x + 2][peo.y] != 4) {
+            //                         map[peo.x + 2][peo.y] = 2;
+            //                         map[peo.x + 1][peo.y] = 0;
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.x = peo.x + 1;
+            //                     }
+            //                 }
+            //                 else {
+            //                     if (map[peo.x + 1][peo.y] != 1) {
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.x = peo.x + 1;
+            //                     }
+            //                 }
+            //             }
+            //             else if (step[i] == 0) {
+            //                 if (map[peo.x][peo.y - 1] == 2 || map[peo.x][peo.y - 1] == 4) {
+            //                     if (map[peo.x][peo.y - 2] != 1 && map[peo.x][peo.y - 2] != 2 && map[peo.x][peo.y - 2] != 4) {
+            //                         map[peo.x][peo.y - 2] = 2;
+            //                         map[peo.x][peo.y - 1] = 0;
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.y = peo.y - 1;
+            //                     }
+            //                 }
+            //                 else {
+            //                     if (map[peo.x][peo.y - 1] != 1) {
+            //                         map[peo.x][peo.y] = 0;
+            //                         peo.y = peo.y - 1;
+            //                     }
+            //                 }
+            //             }
+            //         } 
+            //     }
 
-                function ifWin(){//判断达成条件
+            //     function ifWin(){//判断达成条件
 
-                }
-                function ifPush(a/*人的坐标*/,b/*地图数据*/,key){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
-                    var d=0;
-                    while(d<4){
-                        if(b[a.x-1][a.y]==2||b[a.x-1][a.y]==4){
-                            if(b[a.x-2][a.y]!=1&&b[a.x-2][a.y]!=2&&b[a.x-2][a.y]!=4){
-                                mm=b;
-                                cc=a;
-                                mm[a.x-2][a.y]=2;
-                                mm[a.x-1][a.y]=9;
-                                mm[a.x][a.y]=0;
-                                cc.x=a.x-1;
-                                key.push(0);
-                                main(mm,cc,key);
-                            }
-                        }
-                        if(b[a.x][a.y-1]==2||b[a.x][a.y-1]==4){
-                            if(b[a.x][a.y-2]!=1&&b[a.x][a.y-2]!=2&&b[a.x][a.y-2]!=4){
-                                mm=b;
-                                cc=a;
-                                mm[a.x][a.y-2]=2;
-                                mm[a.x][a.y-1]=9;
-                                mm[a.x][a.y]=0;
-                                cc.y=a.y-1;
-                                key.push(1);
-                                main(mm,cc,key);
-                            }
-                        }
-                        if(b[a.x+1][a.y]==2||b[a.x+1][a.y]==4){
-                            if(b[a.x+2][a.y]!=1&&b[a.x+2][a.y]!=2&&b[a.x+2][a.y]!=4){
-                                mm=b;
-                                cc=a;
-                                mm[a.x+2][a.y]=2;
-                                mm[a.x+1][a.y]=9;
-                                mm[a.x][a.y]=0;
-                                cc.x=a.x+1;
-                                key.push(2);
-                                main(mm,cc,key);
-                            }
-                        }
-                        if(b[a.x][a.y+1]==2||b[a.x][a.y+1]==4){
-                            if(b[a.x][a.y+2]!=1&&b[a.x][a.y+2]!=2&&b[a.x][a.y+2]!=4){
-                                mm=b;
-                                cc=a;
-                                mm[a.x][a.y+2]=2;
-                                mm[a.x][a.y+1]=9;
-                                mm[a.x][a.y]=0;
-                                cc.y=a.y+1;
-                                key.push(3);
-                                main(mm,cc,key);
-                            }
-                        }
+            //     }
+            //     function ifPush(a/*人的坐标*/,b/*地图数据*/,key){//判断上下左右的箱子，再判断该箱子能否推，如果能则记录移动数据到key并改变P_peo，P_map的位置并传到main函数里,如果不能则什么都不执行
+            //         var d=0;
+            //         while(d<4){
+            //             if(b[a.x-1][a.y]==2||b[a.x-1][a.y]==4){
+            //                 if(b[a.x-2][a.y]!=1&&b[a.x-2][a.y]!=2&&b[a.x-2][a.y]!=4){
+            //                     mm=b;
+            //                     cc=a;
+            //                     mm[a.x-2][a.y]=2;
+            //                     mm[a.x-1][a.y]=9;
+            //                     mm[a.x][a.y]=0;
+            //                     cc.x=a.x-1;
+            //                     key.push(0);
+            //                     main(mm,cc,key);
+            //                 }
+            //             }
+            //             if(b[a.x][a.y-1]==2||b[a.x][a.y-1]==4){
+            //                 if(b[a.x][a.y-2]!=1&&b[a.x][a.y-2]!=2&&b[a.x][a.y-2]!=4){
+            //                     mm=b;
+            //                     cc=a;
+            //                     mm[a.x][a.y-2]=2;
+            //                     mm[a.x][a.y-1]=9;
+            //                     mm[a.x][a.y]=0;
+            //                     cc.y=a.y-1;
+            //                     key.push(1);
+            //                     main(mm,cc,key);
+            //                 }
+            //             }
+            //             if(b[a.x+1][a.y]==2||b[a.x+1][a.y]==4){
+            //                 if(b[a.x+2][a.y]!=1&&b[a.x+2][a.y]!=2&&b[a.x+2][a.y]!=4){
+            //                     mm=b;
+            //                     cc=a;
+            //                     mm[a.x+2][a.y]=2;
+            //                     mm[a.x+1][a.y]=9;
+            //                     mm[a.x][a.y]=0;
+            //                     cc.x=a.x+1;
+            //                     key.push(2);
+            //                     main(mm,cc,key);
+            //                 }
+            //             }
+            //             if(b[a.x][a.y+1]==2||b[a.x][a.y+1]==4){
+            //                 if(b[a.x][a.y+2]!=1&&b[a.x][a.y+2]!=2&&b[a.x][a.y+2]!=4){
+            //                     mm=b;
+            //                     cc=a;
+            //                     mm[a.x][a.y+2]=2;
+            //                     mm[a.x][a.y+1]=9;
+            //                     mm[a.x][a.y]=0;
+            //                     cc.y=a.y+1;
+            //                     key.push(3);
+            //                     main(mm,cc,key);
+            //                 }
+            //             }
                        
-                    }
-                }
-                function main(P_map,P_peo,key){
-                    var pushPointArr={
-                        length:0,
-                    };//装“推点”的数组
-                    checkPushPoint();
-                    for(var i=0;i<pushPointArr.length;i++){
-                        ifRun(pushPointArr.i,P_map,P_peo,key);
-                    }
-                }
-            }  
+            //         }
+            //     }
+            //     function main(P_map,P_peo,key){
+            //         var pushPointArr={
+            //             length:0,
+            //         };//装“推点”的数组
+            //         checkPushPoint();
+            //         for(var i=0;i<pushPointArr.length;i++){
+            //             ifRun(pushPointArr.i,P_map,P_peo,key);
+            //         }
+            //     }
+            // }  
         </script>
     </body>
 </html>
