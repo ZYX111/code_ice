@@ -1,103 +1,25 @@
-<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>11122</title>
+        <title>测试</title>
     </head>
     <body>
-        <p id="demo" onclick="move(2,2,3,2);">5</p>
+        <p id="gg" onclick="fun()">1</p>
         <script>
-            function move(x1/*1箱子的x*/,y1/*1箱子的y*/,x2,y2){
-                var map=[[1,1,1,1,1,0,0,0,0],
-                     [1,0,0,0,1,0,0,0,0],
-                     [1,0,2,0,1,0,1,1,1],
-                     [1,0,2,0,1,0,1,4,1],
-                     [1,1,1,0,1,1,1,3,1],
-                     [0,1,1,0,0,0,0,3,1],
-                     [0,1,0,0,0,1,0,0,1],
-                     [0,1,0,0,0,1,1,1,1],
-                     [0,1,1,1,1,1,0,0,0]];
-                var poi=new Array();
-                var dir=[{x:0,y:-1},{x:-1,y:0},{x:0,y:+1},{x:1,y:0}];
-                for(var i=0;i<9;i++){
-                    for(var j=0;j<9;j++){
-                        if(map[i][j]==3){
-                            poi.push(i);
-                            poi.push(j);
-                        }
-                    }
+            var map=[[[1,2,3],[4,5,6]],
+                     [[7,8,9],[11,12,13]]];
+            var x=-1,y=0,z=0;
+            function fun(){
+                x++;
+                if(x==3){
+                    x=0;
+                    y++;
                 }
-                if(poi.length==0){
-                    return false;
+                if(y==2){
+                    y=0;
+                    z++
                 }
-                var key=new Array();
-                var x_z=new Array();
-                var y_z=new Array();
-                key.push('one'/*one*/);
-                for(var i=0;i<poi.length/2;i++){
-                    if(F(x1,y1,0,poi[2*i],poi[2*i+1])==true){
-                        key.push('two'/*two*/);
-                        //document.getElementById("demo").innerHTML=key.toString();
-                    var map=[[1,1,1,1,1,0,0,0,0],
-                          [1,0,0,0,1,0,0,0,0],
-                          [1,0,2,0,1,0,1,1,1],
-                          [1,0,2,0,1,0,1,4,1],
-                          [1,1,1,0,1,1,1,3,1],
-                          [0,1,1,0,0,0,0,3,1],
-                          [0,1,0,0,0,1,0,0,1],
-                          [0,1,0,0,0,1,1,1,1],
-                          [0,1,1,1,1,1,0,0,0]];
-                        if(F(x2,y2,0,poi[(2*i+2)%4],poi[(2*i+3)%4])==true){
-                            break;
-                        }
-                        else{
-                            for(var i=1;i<key.length;i++){
-                                key.pop();
-                                x_z.pop();
-                                y_z.pop();
-                            }
-                        }
-                    }
-                }
-                if(key.length!=0){
-                    document.getElementById("demo").innerHTML=key.toString();
-                    return key;
-                }
-                else{
-                    return null;
-                }
-                function F(x,y,d,a,b){
-                    x_z.push(x);
-                    y_z.push(y);
-                    key.push(d);
-                    for(;;){
-                        x=x_z.pop();
-                        y=y_z.pop();
-                        d=key.pop();
-                        while(d<4){
-                            if((map[x+dir[d].x][y+dir[d].y]==0||map[x+dir[d].x][y+dir[d].y]==3)&&(map[x-dir[d].x][y-dir[d].y]==0||map[x-dir[d].x][y-dir[d].y]==3||map[x-dir[d].x][y-dir[d].y]==-1)){
-                                x_z.push(x);
-                                y_z.push(y);
-                                key.push(d);
-                                map[x][y]=-1;
-                                x=x+dir[d].x;
-                                y=y+dir[d].y;
-                                if(x==a&&y==b){
-                                    return true;
-                                }
-                                else{
-                                    d=0;
-                                }
-                            }
-                            else{
-                                d++;
-                                if(d==4){
-                                    map[x][y]=-1;
-                                }
-                            }
-                        }
-                    }
-                }
+                document.getElementById("gg").innerHTML=map[z][y][x];
             }
         </script>
     </body>
