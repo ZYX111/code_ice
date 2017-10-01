@@ -9,19 +9,23 @@
 </canvas>
 <script type="text/javascript">
 
+//坦克：xy坐标,子弹等级,装甲等级,方向
+//子弹：子弹等级,xy坐标,方向
+//墙：xy坐标
+//导弹升级包：x,y
+//装甲升级包：x,y
+//方法:void shut(),void incArmo(),void incBullet(),creatArmo(),creatBullet(),fresh(),move()
+//全局:地图【【】】,墙【】，导弹升级包【】，装甲升级包【】，子弹【】
+
 var canvas = document.getElementById("tankMap");
 var cxt = canvas.getContext("2d");
 
-var w = 60,h = 60;//w为宽，h为高
-//坦克：xy坐标，导弹等级，装甲等级,方向
-//导弹：导弹等级，xy坐标，方向
-//墙：xy坐标
-//导弹升级包：xy
-//装甲升级包：xy
-//方法:void 导弹发射（），void 升级装甲（），void 升级导弹（），void 放置装甲（），void 放置导弹（），刷新（），车移动（）
-//全局:地图【【】】，墙【】，导弹升级包【】，装甲升级包【】，子弹【】
+var w = 60,h = 60;//w为墙(地面)宽，h为墙(地面)高
+var tw = 48,th = 48;//tw为坦克宽，th为坦克高
 
-var MAP=[//
+var k = 0;//墙组长度
+
+var MAP = [//地图数据
 	[0,0,0,0,0,0,0,0,0,0,0,0],
 	[0,1,1,1,1,1,0,0,0,0,0,0],
 	[0,1,0,0,0,1,0,0,0,0,0,0],
@@ -35,11 +39,11 @@ var MAP=[//
 	[0,0,0,0,0,0,0,0,0,0,0,0]		
 ]; 
 
-var oImgs={//建立图片数组，便于预加载
-		"down" : "image/enemy3D.png",
-		"left" : "image/enemy3L.png",
-		"right" : "image/enemy3R.png",
-		"up" : "image/enemy3U.png",  
+var oImgs = {//建立图片数组，便于预加载
+		"down" : "image/Icon-mdpi-down.png",
+		"left" : "image/Icon-mdpi-left.png",
+		"right" : "image/Icon-mdpi-right.png",
+		"up" : "image/Icon-mdpi-up.png",  
 		"wall" : "image/walls.png",
 		"road" : "image/GroundGravel_Sand.png",
 		"bullet" : "image/enemymissile.png"
@@ -79,55 +83,80 @@ imgPreload(oImgs,function(images){
 		init();
 }); 
 
-function Tank(x,y,direct){//定义一个Tank类
+//定义Tank类
+//属性：横坐标x，纵坐标y，移动速度speed,方向direct
+//方法：上移moveUp()，右移moveRight()，
+//	   下移moveDown()，左移moveLeft()，子弹发射shot()
+function Tank(x,y,direct){
 	this.x=x;//x坐标
 	this.y=y;//y坐标
 	this.speed=3;//移动速度（每次移动的像素点数）
 	this.direct=direct;//方向
-	this.moveUp=function(){
-		this.y-=this.speed;
+	this.moveUp=function(isOk){//上移
+		//console.log(isOk)
+		if(isOk){
+			this.y-=this.speed;
+		}
 	}
-	this.moveDown=function(){
-		this.y+=this.speed;
+	this.moveRight=function(isOk){//右移
+		if(isOk){
+			this.x+=this.speed;
+		}
 	}
-	this.moveRight=function(){
-		this.x+=this.speed;
+	this.moveDown=function(isOk){//下移
+		if(isOk){
+			this.y+=this.speed;
+		}
 	}
-	this.moveLeft=function(){
-		this.x-=this.speed;
+	this.moveLeft=function(isOk){//左移
+		if(isOk){
+			this.x-=this.speed;
+		}
 	}
-	this.shot=function(){
+	this.shot=function(){//子弹发射
 		
 	}
 }
 
-function Wall(x,y){//建立Wall类
-	this.x=x;
-	this.y=y;
+//定义Wall类
+//属性：横坐标x，纵坐标y
+//方法：绘制墙draw()
+function Wall(i,j){
+	this.x=w*j;
+	this.y=h*i;
 	this.draw=function(i, j){
-		cxt.drawImage(wall,w*i,h*j,w,h);
+		cxt.drawImage(wall,w*j,h*i,w,h);
 	}
+	//console.log(i,j);
 }
 
-var curTank = new Tank(180,180,0);//初始化坦克
-	
-var wallGroup=new Array();//创建墙的数组
+//初始化坦克
+var curTank = new Tank(180,180,0);
+//创建墙的数组	
+var wallGroup=new Array();
 
 function init(){
-		InitMap();//初始化地板
-		drawTank(curTank);
+	//初始化地图
+	InitMap();
+	//绘制坦克
+	drawTank(curTank);
 }
 
-function InitMap(){
+function InitMap(){//初始化地图
+	k=0;
 	for(var i=0;i<11;i++)
 	{
 		for(var j=0;j<13;j++)
 		{
 			if(MAP[i][j] == 1){
-				wallGroup[i+j]=new Wall(i,j);
-				wallGroup[i+j].draw(i,j);
+				//创建墙的对象，并将其放入墙组中，便于碰撞检测
+				wallGroup[k]=new Wall(i,j);
+				//绘制墙
+				wallGroup[k].draw(i,j);
+				k++;
 			}else if(MAP[i][j] == 0){
-				cxt.drawImage(road,w*i,h*j,w,h);
+				//打印道路
+				cxt.drawImage(road,w*j,h*i,w,h);
 			}
 		}
 	}
@@ -137,24 +166,24 @@ function InitMap(){
 //绘制坦克封装成函数。
 //参数里面传入的是tank对象
 function drawTank(tank){
-	//设置颜色
+	//设置方向
 	switch(tank.direct){
 		case 0:
 		case 2:
-		if(tank.direct==0){
-			cxt.drawImage(up,tank.x,tank.y,w,h);
+		if(tank.direct==0){//上
+			cxt.drawImage(up,tank.x,tank.y,tw,th);
 		}
 		else if(tank.direct==2){	
-			cxt.drawImage(down,tank.x,tank.y,w,h);
+			cxt.drawImage(down,tank.x,tank.y,tw,th);
 		}
 		break;
 		case 1:
 		case 3:
 		if(tank.direct==1){
-			cxt.drawImage(left,tank.x,tank.y,w,h);
+			cxt.drawImage(right,tank.x,tank.y,tw,th);
 		}
 		else if(tank.direct==3){
-			cxt.drawImage(right,tank.x,tank.y,w,h);
+			cxt.drawImage(left,tank.x,tank.y,tw,th);
 		}
 		break;
 	}
@@ -162,27 +191,82 @@ function drawTank(tank){
 
 function move(event){
 	switch(event.keyCode){
-		case 38:curTank.moveUp();curTank.direct=0; break;
-		case 37:curTank.moveLeft();curTank.direct=3; break;
-		case 40:curTank.moveDown();curTank.direct=2; break;
-		case 39:curTank.moveRight();curTank.direct=1; break; 
+		case 38:curTank.direct=0;curTank.moveUp(isMoveOk(curTank)); break;//上
+		case 39:curTank.direct=1;curTank.moveRight(isMoveOk(curTank)); break; //右
+		case 40:curTank.direct=2;curTank.moveDown(isMoveOk(curTank)); break;//下
+		case 37:curTank.direct=3;curTank.moveLeft(isMoveOk(curTank)); break;//左
 		case 32:curTank.shot();break;
 	}
 	InitMap();
 	drawTank(curTank);
 }	
-</script>
-<!-- function 判断撞墙(){
-	for（）{
-		遍历墙数组元素i；
-		if(i的xy成员变量与坦克xy，比较){
-			.....
-		}else{
-			......
-		}
-	}
-} -->
 
+//碰撞检测：坦克与墙，坦克与敌人，坦克与边界
+//1、坦克与墙：判定坦克顶点的(x,y)是否在墙的范围内。
+//方法：首先判断当前方向，选取当前方向上坦克最前方的两点(若当前方向为上，则选取坦克最上方的两点，进行判断)，分别判断这两点是否在墙的范围内
+//2、坦克与敌人：与墙的判断类似
+//3、坦克与边界：因为坦克不会超出墙外，所以可以不判断这一点，若敌人为随机生成，则后续添加这一检测
+function isMoveOk(curTank){
+	var t;
+	if(curTank.direct==0){//上
+		for(t=0;t<k;t++){
+			//console.log(curTank.direct);
+			if(curTank.y>wallGroup[t].y&&curTank.y<=(wallGroup[t].y+h)&&curTank.x>wallGroup[t].x&&curTank.x<(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else if(curTank.y>wallGroup[t].y&&curTank.y<=(wallGroup[t].y+h)&&(curTank.x+tw)>wallGroup[t].x&&(curTank.x+tw)<(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else{
+				// console.log("x",curTank.x,"y",curTank.y,"w.x",wallGroup[t].x,"w.y",wallGroup[t].y);
+				continue;
+			}
+		}
+	}else if(curTank.direct==1){//右
+		for(t=0;t<k;t++){
+			//console.log(curTank.direct);
+			if((curTank.y+th)>wallGroup[t].y&&(curTank.y+th)<(wallGroup[t].y+h)&&(curTank.x+tw)>=wallGroup[t].x&&(curTank.x+tw)<(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else if(curTank.y>wallGroup[t].y&&curTank.y<(wallGroup[t].y+h)&&(curTank.x+tw)>=wallGroup[t].x&&(curTank.x+tw)<(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else{
+				// console.log("x",curTank.x,"y",curTank.y,"w.x",wallGroup[t].x,"w.y",wallGroup[t].y);
+				continue;
+			}
+		}
+	}else if(curTank.direct==2){//下
+		for(t=0;t<k;t++){
+			//console.log(curTank.direct);
+			if((curTank.y+th)>=wallGroup[t].y&&(curTank.y+th)<(wallGroup[t].y+h)&&curTank.x>wallGroup[t].x&&curTank.x<(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else if((curTank.y+th)>=wallGroup[t].y&&(curTank.y+th)<(wallGroup[t].y+h)&&(curTank.x+tw)>wallGroup[t].x&&(curTank.x+tw)<(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else{
+				// console.log("x",curTank.x,"y",curTank.y,"w.x",wallGroup[t].x,"w.y",wallGroup[t].y);
+				continue;
+			}
+		}
+	}else if(curTank.direct==3){//左
+		for(t=0;t<k;t++){
+			//console.log(curTank.direct);
+			if(curTank.y>wallGroup[t].y&&curTank.y<(wallGroup[t].y+h)&&curTank.x>wallGroup[t].x&&curTank.x<=(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else if((curTank.y+th)>wallGroup[t].y&&(curTank.y+th)<(wallGroup[t].y+h)&&curTank.x>wallGroup[t].x&&curTank.x<=(wallGroup[t].x+w)){
+				// console.log(t);
+				return false;
+			}else{
+				// console.log("x",curTank.x,"y",curTank.y,"w.x",wallGroup[t].x,"w.y",wallGroup[t].y);
+				continue;
+			}
+		}
+	}return true;
+}
+</script>
 
 </body>
 </html>
