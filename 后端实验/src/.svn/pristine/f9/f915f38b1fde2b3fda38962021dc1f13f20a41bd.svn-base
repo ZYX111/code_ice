@@ -1,0 +1,95 @@
+import { NgModule, ErrorHandler } from '@angular/core';
+import { HttpModule }    from '@angular/http';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { DatePipe } from '@angular/common';
+
+import { MyApp } from './app.component';
+import { TabsPage } from '../pages/tabs/tabs';
+
+import { HomePage } from '../pages/home/home';
+import { WorkListPage } from '../pages/home/workList/workList';
+import { CheckWorkPage } from '../pages/home/checkWork/checkWork';
+import { CheckRoundRiskPage } from '../pages/home/checkRoundRisk/checkRoundRisk';
+import { FindProblemPage } from '../pages/home/findProblem/findProblem';
+import { FindRiskPage } from '../pages/home/findRisk/findRisk';
+import { AddRiskPage } from '../pages/home/addRisk/addRisk';
+import { RiskDetailPage } from '../pages/home/riskDetail/riskDetail';
+import { AddProblemPage } from '../pages/home/addProblem/addProblem';
+import { MyTaskPage } from '../pages/user/mytask/mytask';
+import { MyTaskDetailPage } from '../pages/user/mytaskDetail/mytaskDetail';
+import { TaskPage } from '../pages/home/task/list/list';
+import { TaskDetailPage } from '../pages/home/task/detail/detail';
+import { DynTaskPage } from '../pages/home/dyntask/list/list';
+import { DynTaskDetailPage } from '../pages/home/dyntask/detail/detail';
+
+import { PersonPage } from '../pages/person/person';
+import { IllegalPage } from '../pages/illegal/illegal';
+import { JobstandardPage } from '../pages/jobstandard/jobstandard';
+
+import { MessagePage } from '../pages/message/message';
+
+import { MapPage } from '../pages/map/map';
+
+import { UserPage } from '../pages/user/user';
+
+import { DataService } from '../services/data.service';
+
+@NgModule({
+    declarations: [
+        MyApp,
+        TabsPage,
+        HomePage,
+        MessagePage,
+        MapPage,
+        UserPage,
+        WorkListPage,
+        CheckWorkPage,
+        CheckRoundRiskPage,
+        FindProblemPage,
+        FindRiskPage,
+        AddRiskPage,
+        AddProblemPage,
+        RiskDetailPage,
+        MyTaskPage,
+        MyTaskDetailPage,
+        PersonPage,
+        IllegalPage,
+        DynTaskPage,
+        DynTaskDetailPage,
+        TaskPage,
+        TaskDetailPage,
+        JobstandardPage
+    ],
+    imports: [
+      	HttpModule,
+        IonicModule.forRoot(MyApp)
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        TabsPage,
+        HomePage,
+        MessagePage,
+        MapPage,
+        UserPage,
+        WorkListPage,
+        CheckWorkPage,
+        CheckRoundRiskPage,
+        FindProblemPage,
+        FindRiskPage,
+        AddRiskPage,
+        AddProblemPage,
+        RiskDetailPage,
+        MyTaskPage,
+        MyTaskDetailPage,
+        PersonPage,
+        IllegalPage,
+        DynTaskPage,
+        DynTaskDetailPage,
+        TaskPage,
+        TaskDetailPage,
+        JobstandardPage
+    ],
+    providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, DataService, DatePipe]
+})
+export class AppModule {}

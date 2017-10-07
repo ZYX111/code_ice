@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>我的</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="my_box" style="background: url(assets/img/my_box.jpg) center center no-repeat;">
+                <!-- <img src="assets/img/photo.png"> -->
+        <ion-icon name="contact" md="ios-contact" item-left style="font-size: 7em;color: #fff;"></ion-icon>
+        <div class="my_info">
+            <ul>
+                <li>检查人<span>王某</span></li>
+                <li>职务<span>科长</span></li>
+                <li>时间<span>{{ currentDate | date:"yyyy/MM/dd" }}</span></li>
+            </ul>
+        </div>
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-icon name="apps" item-left></ion-icon>
+                我的任务
+            <ion-icon name="arrow-forward" md="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+        <ion-item>
+            <ion-icon name="lock" item-left></ion-icon>
+                我的权限
+            <ion-icon name="arrow-forward" md="ios-arrow-forward" item-right></ion-icon>
+        </ion-item>
+    </ion-list>
+    <div padding>
+        <button ion-button full (click)="logout()">退出登录</button>
+    </div>
+</ion-content>

@@ -1,0 +1,9 @@
+<ion-tabs>
+	<ion-tab [root]="tab1Root" tabTitle="主页" tabIcon="home"></ion-tab>
+<<<<<<< .mine	<ion-tab [root]="tab2Root" tabTitle="消息提醒" tabIcon="volume-up" tabBadge="14" tabBadgeStyle="danger"></ion-tab>
+	<ion-tab [root]="tab3Root" tabTitle="量化工作" tabIcon="paper"></ion-tab>
+	<ion-tab [root]="tab4Root" tabTitle="用户信息" tabIcon="contact"></ion-tab>
+=======	<ion-tab [root]="tab2Root" tabTitle="消息提醒" tabIcon="volume-up" tabBadge="{{taskcount}}" tabBadgeStyle="danger"></ion-tab>
+	<ion-tab [root]="tab3Root" tabTitle="量化工作" tabIcon="paper"></ion-tab>
+	<ion-tab [root]="tab4Root" tabTitle="用户信息" tabIcon="contact"></ion-tab>
+>>>>>>> .theirs</ion-tabs>

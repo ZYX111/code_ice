@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>主页</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="Carousel tutorial-page" style="height: 180px;" >  
+        <ion-slides [options]="mySlideOptions">
+            <ion-slide *ngFor="let slide of slides">
+                <img [src]="slide.image" class="slide-image"/>
+            </ion-slide>
+        </ion-slides>
+    </div>  
+    <ion-row class="button-box">
+        <ion-col width-25>
+            <button ion-button color="dark" outline icon-only (click)="itemTapped($event, 1)">
+                <ion-icon name="folder"></ion-icon>
+            </button>
+            <div class="btn-title">现场检查</div>
+        </ion-col>
+        <ion-col width-25>
+            <button ion-button color="dark" outline icon-only (click)="showGbtc()">
+                <ion-icon name="folder"></ion-icon>
+            </button>
+            <div class="btn-title">干部添乘</div>
+        </ion-col>
+    </ion-row>
+    <ion-row class="button-box">
+         <ion-col width-25>
+            <button ion-button color="dark" outline icon-only (click)="showTask()">
+                <ion-icon name="flag"></ion-icon>
+            </button>
+            <div class="btn-title">量化任务</div>
+        </ion-col>
+        <ion-col width-25>
+            <button ion-button color="dark" outline icon-only (click)="showDynTask()">
+                <ion-icon name="flag"></ion-icon>
+            </button>
+            <div class="btn-title">动态工作</div>
+        </ion-col>
+        <ion-col width-25>
+            <button ion-button color="dark" outline icon-only (click)="showSupervise()">
+                <ion-icon name="flag"></ion-icon>
+            </button>
+            <div class="btn-title">督办工作</div>
+        </ion-col>
+   </ion-row>
+</ion-content>

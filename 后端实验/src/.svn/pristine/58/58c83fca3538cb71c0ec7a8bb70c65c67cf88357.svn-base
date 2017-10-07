@@ -1,0 +1,34 @@
+import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
+
+@Injectable()
+export class DataService {
+	private headers = new Headers({'Content-Type': 'application/json'});
+	constructor(private http: Http) {
+	}
+	getDatas(sql: string){
+		return this.http.post('http://localhost:8080/map/dataService/getDatas.do',JSON.stringify({sql: sql}), {headers: this.headers})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+	}
+	saveData(tablename: string, keyname: string, data: Object){
+		return this.http.post('http://localhost:8080/map/dataService/saveData.do',JSON.stringify({
+			tablename: tablename,
+			keyname: keyname,
+			data: data
+		}), {headers: this.headers})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+	}
+	private handleError(error: any): Promise<any> {
+	  	console.error('An error occurred', error); // for demo purposes only
+  		return Promise.reject(error.message || error);
+	}
+	getUserid(): string{
+		return '14';
+	}
+}

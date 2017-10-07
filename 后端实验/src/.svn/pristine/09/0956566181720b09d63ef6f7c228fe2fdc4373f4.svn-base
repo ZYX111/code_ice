@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+
+import { NavController, NavParams } from 'ionic-angular';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'addProblem.html'
+})
+export class AddProblemPage{
+
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    }
+
+    
+}

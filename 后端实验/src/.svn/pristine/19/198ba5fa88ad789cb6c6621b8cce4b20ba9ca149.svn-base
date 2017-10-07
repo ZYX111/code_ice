@@ -1,0 +1,51 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>主页</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="Carousel tutorial-page" style="height: 200px;" >  
+        <ion-slides [options]="mySlideOptions">
+            <ion-slide *ngFor="let slide of slides">
+                <img [src]="slide.image" class="slide-image"/>
+            </ion-slide>
+        </ion-slides>
+    </div>  
+    <div class="horizontal-btn-box btn-style-home">
+        <div class="button-bar bar-light">
+            <a class="button" href="#/tab/message">
+                <i class="icon ion-volume-high button-block"></i>
+                <span class="icon-title">消息</span>
+            </a>
+            <a class="button" href="#/tab/facts">
+                <i class="icon ion-email button-block"></i>
+                <span class="icon-title">邮件</span>
+            </a>
+            <a class="button" href="#/tab/facts">
+                <i class="icon ion-flag button-block"></i>
+                <span class="icon-title">风险地图</span>
+            </a>
+            <a class="button" href="#/tab/facts">
+                <i class="icon ion-gear-a button-block"></i>
+                <span class="icon-title">人员分布</span>
+            </a>
+        </div>
+    </div>
+    <div class="horizontal-btn-box btn-style-self">
+        <div class="button-bar bar-positive">
+            <a ion-button color="light" (click)="itemTapped($event, 1)">
+                我的工作
+            </a>
+            <a ion-button (click)="itemTapped($event, 2)">
+                我的工作
+            </a>
+            <a ion-button color="secondary" (click)="itemTapped($event, 3)">
+                问题一览
+            </a>
+            <a ion-button color="danger" (click)="itemTapped($event, 4)">
+                <i class="icon ion-flag button-block"></i>
+                风险地图
+            </a>
+        </div>
+    </div>
+</ion-content>

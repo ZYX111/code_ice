@@ -1,0 +1,14 @@
+<ion-content padding class="loginBG v-middle" style="background: url(assets/img/loginBG.png) repeat-y"> 
+    <ion-list inset class="list-box">
+        <ion-item>
+            <ion-label>用户名</ion-label>
+            <ion-input type="text" [(ngModel)]="loginid"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>密码</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <button ion-button full class="loginBtn login_Btn" (click)="login()">登 陆</button>  
+        <button ion-button full class="loginBtn login_For">忘记密码</button>  
+    </ion-list> 
+</ion-content>  

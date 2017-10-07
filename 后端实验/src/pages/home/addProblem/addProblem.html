@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>发现问题</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label class="label">检查日期：{{checktime}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查人：{{checker}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">职务：{{post}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">责任部门：{{ orgname }}</ion-label>
+            <button ion-button icon-only clear item-right (click)="openOrg()">
+              <ion-icon name="arrow-dropdown" ></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label>责任人：{{ personname }}</ion-label>
+            <button ion-button icon-only clear item-right (click)="openPerson()">
+              <ion-icon name="arrow-dropdown" ></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label>是否新职</ion-label>
+            <ion-checkbox checked="false"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">问题描述：</ion-label>
+            <ion-input type="text" [(ngModel)]="description"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>风险图片</ion-label>
+            <button ion-button icon-only clear item-right (click)="takePicture()">
+              <ion-icon name="camera" ></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+    <div class="Carousel tutorial-page" style="height: 240px;" >  
+        <ion-slides>
+            <ion-slide *ngFor="let slide of slides">
+                <img [src]="slide.image" class="slide-image" style="width: 100%;" />
+            </ion-slide>
+        </ion-slides>
+    </div>  
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+    <ion-buttons right>
+        <button ion-button start (click)="cancel()">
+            <ion-icon name="close"></ion-icon>
+            取消
+        </button>
+        <button ion-button (click)="save()">
+            <ion-icon name="checkmark"></ion-icon>
+            确定
+        </button>
+    </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

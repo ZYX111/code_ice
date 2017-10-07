@@ -1,0 +1,74 @@
+import { Component } from '@angular/core';
+import { BarcodeScanner } from 'ionic-native';
+import { NavController } from 'ionic-angular';
+
+import { MyTaskPage } from './mytask/mytask';
+import { DataService } from '../../services/data.service'
+
+@Component({
+  selector: 'page-about',
+  templateUrl: 'user.html',
+  providers: [DataService]
+})
+export class UserPage {
+<<<<<<< .mine  name: string;
+  postname: string;
+=======  name: string;
+  postname: string;
+  now: string;
+>>>>>>> .theirs
+<<<<<<< .mine  constructor(public navCtrl: NavController, private dataService: DataService) {
+      this.name = this.dataService.getLocalData('userdata', 'name');
+      this.postname = this.dataService.getLocalData('userdata', 'postname');
+  }
+=======  constructor(public navCtrl: NavController, private dataService: DataService) {
+      this.name = this.dataService.getLocalData('userdata', 'name');
+      this.postname = this.dataService.getLocalData('userdata', 'postname');
+      this.now = this.dataService.now();
+  }
+>>>>>>> .theirs
+<<<<<<< .mine  logout(){
+  
+=======  logout(){
+      window.close();
+>>>>>>> .theirs  }
+
+<<<<<<< .mine  register(){
+  	//select a.*,p.name postname from fw_user a left join fw_post_user pu on pu.userid=a.id left join fw_post p on p.id=pu.postid where a.id=23
+  	BarcodeScanner.scan().then((barcodeData) => {
+  	  	this.dataService.getData(barcodeData.text)
+          .then(item => {
+          	let userData = item.data;
+            this.dataService.setLocalData('userdata', userData);
+          	this.name = userData.name;
+          	this.postname = userData.postname;
+          });
+
+      }, (err) => {
+  	    // An error occurred
+  	});
+  }
+  showTasks(){
+    this.navCtrl.push(MyTaskPage);
+  }
+
+=======  register(){
+  	//let sql = 'select a.*,p.name postname from fw_user a left join fw_post_user pu on pu.userid=a.id left join fw_post p on p.id=pu.postid where a.id=20'; //barcodeData.text
+  	BarcodeScanner.scan().then((barcodeData) => {
+  	  	this.dataService.getData(barcodeData.text)
+          .then(item => {
+          	let userData = item.data;
+            this.dataService.setLocalData('userdata', userData);
+          	this.name = userData.name;
+          	this.postname = userData.postname;
+          });
+
+      }, (err) => {
+  	    // An error occurred
+  	});
+  }
+  showTasks(){
+    this.navCtrl.push(MyTaskPage);
+  }
+
+>>>>>>> .theirs}

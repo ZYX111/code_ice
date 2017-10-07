@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="risk" checked>
+        周边风险
+      </ion-segment-button>
+      <ion-segment-button value="foundrisk">
+        发现风险
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons end>
+      <button ion-button color="danger" (click)="endTask()">
+        <ion-icon name="exit"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [ngSwitch]="selectedSegment">  
+  <ion-list *ngSwitchCase="'risk'">
+    <ion-item *ngFor="let row of risks">
+      <h2 item-left (click)="showRiskDetail(row)">{{ row.categoryname }}</h2>
+      <h2 (click)="showRiskDetail(row)">{{ row.riskname }}</h2>
+      <h2 (click)="showRiskDetail(row)">{{ row.jobcategoryname }}</h2>
+      <p (click)="showRiskDetail(row)">{{ row.description }}</p>
+      <button ion-button item-right (click)="check(row)">检查</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid *ngSwitchCase="'foundrisk'">
+    <ion-row *ngFor="let row of foundRisks">
+      <ion-col width-100>{{row.description}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer [ngSwitch]="selectedSegment">
+ <ion-toolbar *ngSwitchCase="'foundrisk'">
+      <button ion-button full (click)="addRisk()">
+        添加风险记录
+      </button>
+ </ion-toolbar>
+</ion-footer>

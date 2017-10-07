@@ -1,0 +1,30 @@
+/* 表格 */
+.table {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+.table th,
+.table td {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+.table .t-align-left {
+    text-align: left;
+}
+.table th {
+    background-color: #3c8dbc;
+    color: #fff;
+    font-weight: bold;
+}
+.table td {
+    background-color: #eee;
+    color: #666; 
+}
+.table td .btn-Ctrl {
+    font-size: 14px;
+    min-width: 52px;
+    color: #fff;
+    /*border-radius: 0;*/
+}

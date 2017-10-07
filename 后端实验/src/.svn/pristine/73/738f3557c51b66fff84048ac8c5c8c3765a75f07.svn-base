@@ -1,0 +1,89 @@
+import { Injectable } from '@angular/core';
+import { Headers, Http } from '@angular/http';
+import { DatePipe } from '@angular/common';
+
+import 'rxjs/add/operator/toPromise';
+
+@Injectable()
+export class DataService {
+	private url = 'http://61.161.203.65:8080/dataproxy/route/getDatas.do';
+	//private url = 'http://10.39.239.36:8080/dataserver/dataService/getDatas.do';
+	private headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
+	constructor(private http: Http, private datePipe: DatePipe) {
+	}
+	getData(sql: string){
+		return this.http.post(`${this.url}`, JSON.stringify({
+				type: 'getData',
+				sql: sql
+			}), {headers: this.headers})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+
+	}
+	getDatas(sql: string){
+		return this.http.post(`${this.url}`, JSON.stringify({
+				type: 'getDatas',
+				sql: sql
+			}), {headers: this.headers})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+ 	}
+	saveData(tablename: string, keyname: string, data: Object){
+		return this.http.post(`${this.url}`, JSON.stringify({
+				type: 'saveData',
+				tablename: tablename,
+				keyname: keyname,
+				data: data
+			}), {headers: this.headers})
+               .toPromise()
+               .then(response => response.json())
+               .catch(this.handleError);
+	}
+	getMyTaskCount(userid){
+        return this.http.post(`${this.url}`, JSON.stringify({
+			type: 'getMyTaskCount',
+			userid: userid
+		}), {headers: this.headers})
+        	.toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
+	}
+	getMyTasks(userid){
+        return this.http.post(`${this.url}`, JSON.stringify({
+			type: 'getMyTasks',
+			userid: userid
+		}), {headers: this.headers})
+        	.toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+	}
+	private handleError(error: any): Promise<any> {
+	  	console.error('An error occurred', error); // for demo purposes only
+  		return Promise.reject(error.message || error);
+	}
+	getLocalDatas(group:string){
+	  	let str = localStorage.getItem(group);
+	  	if(str){
+	  		return JSON.parse(str);
+	  	}
+		return null;
+	}
+	getLocalData(group:string, name: string){
+	  	let str = localStorage.getItem(group);
+	  	if(str){
+	  		let data = JSON.parse(str);
+	  		if(data!=null)
+	  			return data[name];
+	  	}
+		return null;
+	}
+	setLocalData(group:string, data: any){
+		localStorage.setItem(group, data!=null?JSON.stringify(data):null);
+	}
+	now(){
+		let time = new Date();
+		return this.datePipe.transform(time, 'yyyy-MM-dd HH:mm:ss')
+	}
+}

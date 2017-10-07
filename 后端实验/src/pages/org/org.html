@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="cancel()">
+            <ion-icon name="close"></ion-icon>
+        </button>    
+        <button ion-button icon-only (click)="select()">
+            <ion-icon name="checkmark"></ion-icon>
+        </button>    
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item>
+          <ion-label>单位：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="depot" (ionChange)="getWorkshop()">
+              <ion-option value="{{ item.id }}" *ngFor="let item of depots">
+                  {{ item.name }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>部门：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="workshop">
+              <ion-option value="{{ item.id }}" *ngFor="let item of workshops">
+                  {{ item.name }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+  </ion-list>
+</ion-content>

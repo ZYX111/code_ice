@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { DataService } from '../../../services/data.service'
+
+import { CheckWorkPage } from '../checkWork/checkWork';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'workList.html'
+})
+
+export class WorkListPage{
+
+	
+    constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService) {
+  		let lon = navParams.get('lon');
+  		let lat = navParams.get('lat');
+  	}
+
+    checkWork(){
+        this.navCtrl.push(CheckWorkPage);
+    };
+
+}

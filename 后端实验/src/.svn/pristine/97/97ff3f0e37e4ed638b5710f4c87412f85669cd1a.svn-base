@@ -1,0 +1,32 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { DataService } from '../../services/data.service';
+
+@Component({
+  templateUrl: 'person.html'
+})
+export class PersonPage {
+  items: Array<Object>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private dataService: DataService) {
+  }
+
+  getItems(ev) {
+    var val = ev.target.value;
+    console.log(val);
+    if (val && val.trim() != '' && val.length>1) {
+        this.dataService.getDatas(`select a.id personid,a.hname personname,b.id orgid,b.name orgname from base_personnel a
+          left join fw_org b on b.id=a.deptid 
+          where a.spell like '${val}#'`)
+        .then(items => this.items = items);   
+    }
+  }
+
+  cancel() {
+    this.viewCtrl.dismiss();
+  }
+
+  select(item){
+  	this.viewCtrl.dismiss(item);
+  }
+}

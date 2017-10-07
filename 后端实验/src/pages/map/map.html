@@ -1,0 +1,42 @@
+<ion-header>
+  	<ion-navbar>
+		<ion-title>
+		  	风险地图
+		</ion-title>
+  	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list inset>
+		<ion-item></ion-item>
+		<ion-item>
+			<ion-label>时间：</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label>地点：</ion-label>
+			<ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label>问题分类：</ion-label>
+			<ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label>问题描述：</ion-label>
+			<ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label>现场照片：</ion-label>
+		</ion-item>
+	</ion-list>
+</ion-content>

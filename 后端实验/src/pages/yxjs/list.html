@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>运行揭示</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button color="danger" icon-only (click)="loadData()">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let item of items">
+      <ion-card-header>
+      <h2>命令号:{{item.orderid}}</h2>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>开始时间:{{item.begintime}}</h2>
+        <h2>结束时间:{{item.endtime}}</h2>
+        <p>
+          {{item.ordercontent}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

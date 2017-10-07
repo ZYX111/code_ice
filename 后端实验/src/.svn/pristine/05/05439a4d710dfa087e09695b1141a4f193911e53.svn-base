@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>随机检查</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div class="Carousel tutorial-page">  
+        <ion-segment color="primary">
+        <ion-segment-button value="{{ btn.title }}" [class.segment-activated]="btn.active" *ngFor="let btn of btns;let i = index" (click)="goToSlide(i)">
+                {{ btn.title }}
+            </ion-segment-button>
+        </ion-segment>
+       
+        <ion-slides #mySlider (ionDidChange)="onSlideChanged()" style="margin-top: 10px;">
+            <ion-slide>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>风险类别</th>
+                            <th>风险描述</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of rows;let i = index" (click)="goToSlide(i)">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ row.type }}</td>
+                            <td>{{ row.discribe }}</td>
+                            <td>
+                                <a [class.inspected]="row.inspected" (click)="addRoundRisk(i)">{{ row.inspected ? '已检查' : '检查'}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ion-slide>
+            <ion-slide>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>问题类别</th>
+                            <th>问题描述</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                <button ion-button full (click)="addProblme()">检查</button>
+            </ion-slide>
+            <ion-slide>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>风险类别</th>
+                            <th>风险描述</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+                <button ion-button full (click)="addRisk()">检查</button>
+            </ion-slide>
+        </ion-slides>
+    </div>  
+</ion-content>
+

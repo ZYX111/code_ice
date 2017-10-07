@@ -1,0 +1,36 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { DataService } from '../../../services/data.service'
+
+import { CheckWorkPage } from '../checkWork/checkWork';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'workList.html'
+})
+
+export class WorkListPage{
+    places: Array<Object>;
+    tasks: Array<Object>;
+    constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService) {
+        let curUserid = '14';
+  		let lon = 123.405383;//navParams.get('lon');
+  		let lat = 41.817243; //navParams.get('lat');
+      this.dataService.getDatas(`select id,name,GetDistance(lon, lat, ${lon}, ${lat}) dist from aqgl_base_risk where GetDistance(lon, lat, ${lon}, ${lat})<2 order by dist`)
+        .then(items => this.places = items);
+        this.dataService.getDatas(`select c.id,d.name from fw_user a
+                     left join fw_post_user b on b.userid=a.id
+                     left join aqgl_base_tasks c on c.postid=b.postid
+                     left join aqgl_dict_task d on d.id=c.taskid
+                     where a.id='${curUserid}'
+                     order by c.id`)
+        .then(items => this.tasks = items);
+
+  	}
+
+    checkWork(){
+        this.navCtrl.push(CheckWorkPage);
+    };
+
+}

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      	我的
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="my_box">
+                <!-- <img src="assets/img/photo.png"> -->
+        <ion-icon name="contact" item-left style="font-size: 7em;color: #fff;"></ion-icon>
+        <div class="my_info">
+            <ul>
+                <li>检查人<span>{{name}}</span></li>
+                <li>职务<span>{{postname}}</span></li>
+                <li>时间<span>2012/2/2</span></li>
+            </ul>
+        </div>
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-icon name="lock" item-left></ion-icon>
+                我的权限
+        </ion-item>
+        <ion-item (click)="register()">
+            <ion-icon name="leaf" item-left></ion-icon>
+                注册
+        </ion-item>    
+        <ion-item (click)="logout()">
+            <ion-icon name="exit" item-left></ion-icon>
+                退出
+        </ion-item>    
+    </ion-list>
+</ion-content>

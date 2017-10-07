@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>我的</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="my_box" style="background: url(assets/img/my_box.jpg) center center no-repeat;">
+                <!-- <img src="assets/img/photo.png"> -->
+        <ion-icon name="contact" item-left style="font-size: 7em;color: #fff;"></ion-icon>
+        <div class="my_info">
+            <ul>
+<<<<<<< .mine                <li>检查人<span>{{name}}</span></li>
+                <li>职务<span>{{postname}}</span></li>
+                <li>时间<span>2012/2/2</span></li>
+=======                <li>检查人<span>{{name}}</span></li>
+                <li>职务<span>{{postname}}</span></li>
+                <li>时间<span>{{now}}</span></li>
+>>>>>>> .theirs            </ul>
+        </div>
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-icon name="lock" item-left></ion-icon>
+                我的权限
+        </ion-item>
+<<<<<<< .mine        <ion-item (click)="register()">
+            <ion-icon name="leaf" item-left></ion-icon>
+                注册
+        </ion-item>    
+        <ion-item (click)="logout()">
+            <ion-icon name="exit" item-left></ion-icon>
+                退出
+        </ion-item>    
+=======        <ion-item (click)="register()">
+            <ion-icon name="leaf" item-left></ion-icon>
+                注册
+        </ion-item>    
+        <ion-item (click)="logout()">
+            <ion-icon name="exit" item-left></ion-icon>
+                退出
+        </ion-item>    
+
+>>>>>>> .theirs    </ion-list>
+</ion-content>
