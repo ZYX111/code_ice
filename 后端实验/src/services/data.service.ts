@@ -11,7 +11,7 @@ declare var cordova: any;
 
 @Injectable()
 export class DataService {
-	private url = 'http://61.161.203.73:8080/dataproxy/route/getDatas.do';
+	private url = 'http://61.161.203.73:8080';
 	//private url = 'http://localhost:8080/dataproxy/route/getDatas.do';
 	//private url = 'http://localhost:8080/dataserver/dataService/getDatas.do';
 	private headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
@@ -42,7 +42,7 @@ export class DataService {
         this.fileTransfer = new Transfer();
 	}
 	getData(sql: string){
-		return this.http.post(`${this.url}`, JSON.stringify({
+		return this.http.post(`${this.url}/setUp`, JSON.stringify({
 				type: 'getData',
 				sql: sql
 			}), {headers: this.headers})
