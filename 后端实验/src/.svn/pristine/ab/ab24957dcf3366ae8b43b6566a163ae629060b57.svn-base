@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>发现风险</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>时间：{{ foundtime }}</ion-label>
+        </ion-item>
+        <ion-item>
+<<<<<<< .mine            <ion-label>问题描述：</ion-label>
+            <ion-input type="text" [(ngModel)]="description"></ion-input>
+=======            <ion-label>问题描述：</ion-label>
+            <ion-textarea type="text" [(ngModel)]="description"></ion-textarea>
+>>>>>>> .theirs        </ion-item>
+        <ion-item>
+            风险图片：<ion-icon name="camera" (click)="takePicture()"></ion-icon>
+<<<<<<< .mine            <div style="margin-top: 10px;">
+                <img src="{{ imageUrl }}">
+            </div>
+=======>>>>>>> .theirs        </ion-item>
+    </ion-list>
+    <div class="Carousel tutorial-page" style="height: 240px;" >  
+        <ion-slides>
+            <ion-slide *ngFor="let slide of slides">
+                <img [src]="slide.image" class="slide-image" style="width: 100%;" />
+            </ion-slide>
+        </ion-slides>
+    </div>  
+</ion-content>
+<<<<<<< .mine<ion-footer>
+<ion-toolbar>
+    <ion-buttons right>
+        <button ion-button start (click)="cancel()">
+            <ion-icon name="checkmark"></ion-icon>
+            取消
+        </button>
+        <button ion-button (click)="save()">
+            <ion-icon name="close"></ion-icon>
+            确定
+        </button>
+    </ion-buttons>
+</ion-toolbar>
+</ion-footer>
+=======<ion-footer>
+    <ion-toolbar>
+    <ion-buttons right>
+        <button ion-button start (click)="cancel()">
+            <ion-icon name="checkmark"></ion-icon>
+            取消
+        </button>
+        <button ion-button (click)="save()">
+            <ion-icon name="close"></ion-icon>
+            确定
+        </button>
+    </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
+>>>>>>> .theirs

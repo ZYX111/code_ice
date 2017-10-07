@@ -1,0 +1,33 @@
+import { Component } from '@angular/core';
+
+import { NavController, NavParams } from 'ionic-angular';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'addProblem.html'
+})
+export class AddProblemPage{
+	
+	areaItems = [{
+        title: '地点1'
+    },{
+        title: '地点2'
+    },{
+        title: '地点3'
+    },{
+        title: '地点4'
+    }];
+
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    }
+
+    
+    cancel(){
+    	this.navCtrl.pop();
+    }
+
+    sure(){
+    	this.navCtrl.pop();
+    }
+}

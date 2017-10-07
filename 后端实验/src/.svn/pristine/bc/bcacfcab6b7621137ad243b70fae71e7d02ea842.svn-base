@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+
+import { Geolocation } from 'ionic-native';
+import { NavController, NavParams } from 'ionic-angular';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'addRisk.html'
+})
+export class AddRiskPage{
+
+    constructor(public navCtrl: NavController, public navParams: NavParams){
+	    
+	    Geolocation.getCurrentPosition().then((resp) => {
+		 	// resp.coords.latitude
+		 	// resp.coords.longitude
+		}).catch((error) => {
+		  	console.log('Error getting location', error);
+		})
+
+    }
+
+
+
+}

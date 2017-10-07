@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>主页</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="Carousel tutorial-page" style="height: 180px;" >  
+        <ion-slides [options]="mySlideOptions">
+            <ion-slide *ngFor="let slide of slides">
+                <img [src]="slide.image" class="slide-image"/>
+            </ion-slide>
+        </ion-slides>
+    </div>  
+    <div class="horizontal-btn-box btn-style-home">
+        <div class="button-bar bar-light">
+            <a class="button">
+                <ion-icon name="star"></ion-icon>
+                <span class="icon-title">消息</span>
+            </a>
+            <a class="button">
+                <ion-icon name="star"></ion-icon>
+                <span class="icon-title">邮件</span>
+            </a>
+            <a class="button">
+                <ion-icon name="star"></ion-icon>
+                <span class="icon-title">风险地图</span>
+            </a>
+            <a class="button">
+                <ion-icon name="star"></ion-icon>
+                <span class="icon-title">人员分布</span>
+            </a>
+        </div>
+    </div>
+    <div class="horizontal-btn-box btn-style-self">
+        <div class="button-box">
+            <button ion-button color="dark" outline icon-only (click)="itemTapped($event, 1)">
+                <ion-icon name="folder"></ion-icon>
+            </button>
+            <div class="btn-title">我的工作</div>
+        </div>
+        <div class="button-box">
+            <button ion-button color="dark" outline icon-only (click)="itemTapped($event, 2)">
+                <ion-icon name="flag"></ion-icon>
+            </button>
+            <div class="btn-title">我的工作</div>
+        </div>
+        <div class="button-box">
+            <button ion-button color="dark" outline icon-only (click)="itemTapped($event, 3)">
+                <ion-icon name="clipboard"></ion-icon>
+            </button>
+            <div class="btn-title">问题一览</div>
+        </div>
+        <div class="button-box">
+            <button ion-button color="dark" outline icon-only (click)="itemTapped($event, 4)">
+                <ion-icon name="map"></ion-icon>
+            </button>
+            <div class="btn-title">风险地图</div>
+        </div>
+    </div>
+</ion-content>

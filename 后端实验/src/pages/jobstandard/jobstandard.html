@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="cancel()">
+            <ion-icon name="close"></ion-icon>
+        </button>    
+        <button ion-button icon-only (click)="select()">
+            <ion-icon name="checkmark"></ion-icon>
+        </button>    
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item>
+          <ion-label>作业环节：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="joblink" (ionChange)="getJobprocedure()">
+              <ion-option value="{{ item.joblink }}" *ngFor="let item of joblinks">
+                  {{ item.joblink }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>作业过程：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="jobprocedure" (ionChange)="getJobstandard()">
+              <ion-option value="{{ item.jobprocedure }}" *ngFor="let item of jobprocedures">
+                  {{ item.jobprocedure }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>作业标准：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="jobstandard">
+              <ion-option value="{{ item.id }}" *ngFor="let item of jobstandards">
+                  {{ item.jobstandard }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+  </ion-list>
+</ion-content>

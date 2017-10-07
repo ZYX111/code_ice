@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>发现风险</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>时间：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>地点：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            风险图片：<ion-icon name="camera" (click)="takePicture()"></ion-icon>
+            <div style="margin-top: 10px;">
+                <img src="{{ imageData }}">
+            </div>
+        </ion-item>
+        <ion-item>
+            <button ion-button (click)="cancel()">取消</button>
+            <button ion-button (click)="sure()">确定</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

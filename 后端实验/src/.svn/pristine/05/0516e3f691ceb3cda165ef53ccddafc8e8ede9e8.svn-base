@@ -1,0 +1,30 @@
+import { Component } from '@angular/core';
+
+import { NavController, NavParams } from 'ionic-angular';
+import { DataService } from '../../../services/data.service'
+
+@Component({
+    templateUrl: 'checkRoundRisk.html'
+})
+export class CheckRoundRiskPage{
+    checktime: string;
+	riskbehavior: any;
+    description: string = '正常';
+    constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService) {
+        this.riskbehavior = navParams.get('riskbehavior');
+        this.checktime = this.dataService.now();
+    }  
+    cancel(){
+    	this.navCtrl.pop();
+    }
+    save(){
+        this.dataService.saveData('aqgl_data_checkitem', 'id', {
+          riskbehaviorid: this.riskbehavior.id,
+          checktime: this.checktime,
+          taskid: this.dataService.getLocalData('taskdata', 'id'),
+          description: this.description
+        }).then(result => {
+          this.navCtrl.pop();
+        })
+    }
+}

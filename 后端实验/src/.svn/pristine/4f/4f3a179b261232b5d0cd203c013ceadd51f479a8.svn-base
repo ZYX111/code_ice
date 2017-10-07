@@ -1,0 +1,20 @@
+import { Component, Pipe, PipeTransform } from '@angular/core';
+
+import { NavController } from 'ionic-angular';
+
+@Component({
+	selector: 'page-about',
+	templateUrl: 'user.html'
+})
+
+export class UserPage {
+	
+	currentDate = new Date();
+	constructor(public navCtrl: NavController) {
+
+	}
+
+	logout(){
+		// navigator.app.exitApp();
+	}
+}

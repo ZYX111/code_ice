@@ -1,0 +1,50 @@
+/*用户*/
+.my_box {
+    background: url(../images/my_box.jpg) center center no-repeat;
+    background-size: 100% 100%;
+    padding-top: 15px;
+}
+.my_phone {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border: 3px solid #fff;
+    border-radius: 90px;
+    overflow: hidden;
+}
+.my_phone img {
+    width: 100%;
+}
+.my_info {
+    color: #eee;
+    background: rgba(0,0,0,.5);
+    padding: 5px 0;
+    margin-top: 15px;
+}
+.my_info ul {
+    display: -webkit-box;
+}
+.my_info ul li {
+    text-align: center;
+    font-size: 12px;
+    width: 33.3%;
+}
+.my_info ul li span {
+    display: block;
+}
+.indent {
+    padding: 10px;
+}
+.my_list .item {
+    padding: 10px 30px;
+    font-size: 12px;
+}
+.my_list .item-icon-right .icon{
+    right: 0;
+}
+.my_list .item-icon-left .icon{
+    left: 0;
+}
+.my_list .item-icon-right .icon {
+    color: #333;
+}

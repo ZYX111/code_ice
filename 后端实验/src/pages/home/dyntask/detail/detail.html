@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>工作记录</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-60>地点</ion-col>
+      <ion-col width-20>开始时间</ion-col>
+      <ion-col width-20>结束时间</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of items">
+      <ion-col width-60>{{item.riskname}}</ion-col>
+      <ion-col width-20>{{item.checktime}}</ion-col>
+      <ion-col width-20>{{item.endtime}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

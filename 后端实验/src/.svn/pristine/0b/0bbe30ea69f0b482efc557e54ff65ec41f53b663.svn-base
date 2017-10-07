@@ -1,0 +1,112 @@
+import { Component } from '@angular/core';
+import {  ModalController, NavController, NavParams } from 'ionic-angular';
+import { DataService } from '../../../services/data.service';
+import { PersonPage } from '../../person/person';
+import { IllegalPage } from '../../illegal/illegal';
+import { JobstandardPage } from '../../jobstandard/jobstandard';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'addProblem.html'
+})
+export class AddProblemPage{
+    personid: string;
+    personname: string;
+    orgid: string;
+    orgname: string;
+    checktime: string;
+    checker: string;
+    source: string;
+    method: string;
+    riskkind: string;
+    post: string;
+    placename: string;
+    occuretime: string;
+    evaluatemode: string;
+    evaluatemodename: string;
+    evaluateresult: string = '0';
+    jobstandard: string;
+    jobstandardname: string;
+    description: string;
+    checkMethods: Array<Object>;
+    sources: Array<Object>;
+    categorys: Array<Object>;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private  dataService: DataService) {
+        this.checktime = this.dataService.now();
+        this.checker = this.dataService.getLocalData('userdata', 'name');
+        this.post = this.dataService.getLocalData('userdata', 'post');
+        this.placename = this.dataService.getLocalData('taskdata', 'riskid');
+        this.occuretime = this.dataService.now();
+        this.dataService.getDatas(`select * from aqgl_dict_checkmethod`)
+        .then(items => this.checkMethods = items);
+        this.dataService.getDatas(`select * from aqgl_dict_problemsrc`)
+        .then(items => this.sources = items);
+        this.dataService.getDatas(`select * from aqgl_dict_riskcategory`)
+        .then(items => this.categorys = items);
+    }
+
+    
+    cancel(){
+    	this.navCtrl.pop();
+    }
+
+    save(){
+        this.dataService.saveData('aqgl_data_problems', 'id', {
+            personid: this.personid,
+            orgid: this.orgid,
+            taskid: this.dataService.getLocalData('taskdata', 'id'),
+            checkerid: this.dataService.getLocalData('userdata', 'id'),
+            post: this.dataService.getLocalData('userdata', 'post'),
+            place: this.placename,
+            occuretime: this.occuretime,
+            checkmode: this.method,
+            evaluatemode: this.evaluatemode,
+            evaluateresult: this.evaluateresult,
+            riskkind: this.riskkind,
+            source: this.source,
+            checktime: this.checktime,
+            jobstandard: this.jobstandard,
+            description: this.description
+        }).then(result => {
+          this.navCtrl.pop();
+        })
+    }
+
+    openPerson() {
+        let modal = this.modalCtrl.create(PersonPage, {});
+        modal.onDidDismiss(data => {
+            if(data){
+                this.personid = data.personid;
+                this.personname = data.personname;
+                this.orgid = data.orgid;
+                this.orgname = data.orgname;
+            }
+        });
+        modal.present();
+    }
+
+    openIllegal() {
+        let modal = this.modalCtrl.create(IllegalPage, {});
+        modal.onDidDismiss(data => {
+            if(data){
+            console.log(data);
+                this.evaluatemode = data.id;
+                this.evaluatemodename = data.content;
+            }
+        });
+        modal.present();
+    }
+
+    openJobstandard() {
+        let modal = this.modalCtrl.create(JobstandardPage, {});
+        modal.onDidDismiss(data => {
+            if(data){
+            console.log(data);
+                this.jobstandard = data.id;
+                this.jobstandardname = data.content;
+            }
+        });
+        modal.present();
+    }
+}

@@ -1,0 +1,45 @@
+import { Component } from '@angular/core';
+
+import { Camera } from 'ionic-native';
+import { NavController, NavParams } from 'ionic-angular';
+import { DataService } from '../../../services/data.service'
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'addRisk.html'
+})
+export class AddRiskPage{
+    foundtime: string;
+    description: string;
+	imageUrl: any;
+    icons: string[];
+    items: Array<{title: string, note: string, icon: string}>;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService){
+        this.foundtime = this.dataService.now();
+    }
+
+    takePicture(){
+		Camera.getPicture().then((imageData) => {
+		 	this.imageUrl = 'data:image/jpeg;base64,' + imageData;
+		}, (err) => {
+		 	// Handle error
+		});
+    }
+
+    cancel(){
+    	this.navCtrl.pop();
+    }
+
+    save(){
+        this.dataService.saveData('aqgl_data_judge', 'id', {
+            taskid: this.dataService.getLocalData('taskdata', 'id'),
+            starterid: this.dataService.getLocalData('userdata', 'id'),
+            startname: this.dataService.getLocalData('userdata', 'name'),
+            startdeptid: this.dataService.getLocalData('userdata', 'orgid'),
+            description: this.description
+        }).then(result => {
+          this.navCtrl.pop();
+        })
+    }
+}

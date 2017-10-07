@@ -1,0 +1,55 @@
+import { Component } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { DataService } from '../../../services/data.service'
+
+import { CheckWorkPage } from '../checkWork/checkWork';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'workList.html',
+    providers: [DatePipe]
+})
+
+export class WorkListPage{
+    checktime: string;
+    task: string;
+    place: string;
+    lon: number;
+    lat: number;
+    places: Array<Object>;
+    tasks: Array<Object>;
+    constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService, private datePipe: DatePipe) {
+        let curUserid = this.dataService.getLocalData('userdata', 'id');
+        this.checktime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
+    	this.lon = navParams.get('lon');
+    	this.lat = navParams.get('lat');
+        this.dataService.getDatas(`select id,name,GetDistance(lon, lat, ${this.lon}, ${this.lat}) dist from aqgl_base_risk where GetDistance(lon, lat, ${this.lon}, ${this.lat})<2 order by dist`)
+          .then(items => this.places = items);
+        this.dataService.getDatas(`select c.id,d.name from fw_user a
+                     left join fw_post_user b on b.userid=a.id
+                     left join aqgl_base_tasks c on c.postid=b.postid
+                     left join aqgl_dict_task d on d.id=c.taskid
+                     where a.id='${curUserid}'
+                     order by c.id`)
+        .then(items => this.tasks = items);
+  	}
+
+    checkWork(){
+        console.log(this.task);
+        this.dataService.saveData('aqgl_data_task', 'id', {
+            checkerid: this.dataService.getLocalData('userdata', 'id'),
+            checktime: this.checktime,
+            lon: this.lon,
+            lat: this.lat,
+            taskid: this.task,
+            riskid: this.place
+        }).then(result => {
+            console.log(result);
+            this.dataService.setLocalData('taskdata', result.data);
+            this.navCtrl.push(CheckWorkPage);
+        })
+    };
+
+}

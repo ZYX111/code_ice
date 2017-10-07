@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>详细信息</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+
+  <ion-card-header>
+    {{title}}
+  </ion-card-header>
+
+  <ion-card-content>
+    <b>{{content}}</b>
+  </ion-card-content>
+
+</ion-card>
+<ion-card>
+<button ion-button full (click)="sign()">签收</button>
+</ion-card>
+</ion-content>

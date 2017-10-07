@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>创建检查项</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>工作分类</ion-label>
+            <ion-select [(ngModel)]="task"  okText="确定" cancelText="取消">
+                <ion-option *ngFor="let item of tasks" value="{{item.id}}">{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>地点</ion-label>
+            <ion-select [(ngModel)]="place" okText="确定" cancelText="取消">
+                <ion-option *ngFor="let item of places" value="{{item.id}}">{{item.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>时间：</ion-label>
+            <ion-input type="text" [(ngModel)]="checktime"></ion-input>
+        </ion-item>
+        <ion-item >
+            <button ion-button full (click)="checkWork()">开始检查</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

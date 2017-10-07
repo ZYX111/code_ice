@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>发现问题</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>责任人：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>责任部门：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查日期：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查人：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">职务：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查地点：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">发生时间：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>问题来源：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>检查方式：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>问题分类：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>考核方式：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">考核结果：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>作业环节：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>是否新职</ion-label>
+            <ion-checkbox checked="true"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+            <ion-label>风险图片：</ion-label>
+            <img src="">
+        </ion-item>
+        <ion-item>
+            <ion-label>风险描述：</ion-label>
+            <textarea></textarea>
+        </ion-item>
+        <ion-item>
+            <button ion-button (click)="cancel()">取消</button>
+            <button ion-button (click)="sure()">确定</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

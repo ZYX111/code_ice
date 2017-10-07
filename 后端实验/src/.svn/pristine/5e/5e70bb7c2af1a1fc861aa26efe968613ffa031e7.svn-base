@@ -1,0 +1,38 @@
+/* 表格 */
+.table {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+.table th,
+.table td {
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    padding: 5px;
+    font-size: 1.3rem;
+}
+.table .t-align-left {
+    text-align: left;
+}
+.table th {
+    background-color: #387ef5;
+    color: #fff;
+    font-weight: bold;
+}
+.table td {
+    background-color: #eee;
+    color: #666; 
+}
+.table td .btn-Ctrl {
+    font-size: 14px;
+    min-width: 52px;
+    color: #fff;
+    /*border-radius: 0;*/
+}
+.table a.inspected {
+    color: red;
+}
+.segment-ios .segment-button:first-of-type,
+.segment-ios .segment-button:last-of-type {
+    border-radius: 0;
+}

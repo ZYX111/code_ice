@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>我的</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="my_box" style="background: url(assets/img/my_box.jpg) center center no-repeat;">
+                <!-- <img src="assets/img/photo.png"> -->
+        <ion-icon name="contact" item-left style="font-size: 7em;color: #fff;"></ion-icon>
+        <div class="my_info">
+            <ul>
+                <li>检查人<span>{{name}}</span></li>
+                <li>职务<span>{{postname}}</span></li>
+                <li>部门<span>{{orgname}}</span></li>
+            </ul>
+        </div>
+    </div>
+    <ion-list>
+        <ion-item>
+            <ion-icon name="lock" item-left></ion-icon>
+                我的权限
+        </ion-item>
+        <ion-item (click)="register()">
+            <ion-icon name="leaf" item-left></ion-icon>
+                注册
+        </ion-item>    
+        <ion-item (click)="download('app_aqglApk')">
+            <ion-icon name="leaf" item-left></ion-icon>
+                系统更新
+        </ion-item>    
+        <ion-item (click)="download('123456')" show="false" *ngIf="isDebug">
+            <ion-icon name="leaf" item-left></ion-icon>
+                文件下载
+        </ion-item>    
+        <ion-item (click)="takePicture()" *ngIf="isDebug">
+            <ion-icon name="leaf" item-left></ion-icon>
+                拍照
+        </ion-item> 
+        <ion-item (click)="testTextToSpeech()" *ngIf="isDebug">
+            <ion-icon name="leaf" item-left></ion-icon>
+                测试文字朗读
+        </ion-item>    
+        <ion-item (click)="getSimInfo()" *ngIf="isDebug">
+            <ion-icon name="leaf" item-left></ion-icon>
+                获取手机信息
+        </ion-item>    
+        <ion-item (click)="playVoice()" *ngIf="isDebug">
+            <ion-icon name="leaf" item-left></ion-icon>
+                播放声音
+        </ion-item>    
+        <ion-item (click)="logout()">
+            <ion-icon name="exit" item-left></ion-icon>
+                退出
+        </ion-item> 
+    </ion-list>
+</ion-content>

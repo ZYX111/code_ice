@@ -1,0 +1,21 @@
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { DataService } from '../../services/data.service';
+
+@Component({
+	selector: 'page-about',
+	templateUrl: 'message.html'
+})
+export class MessagePage {
+	
+	items: Array<Object>;
+
+	constructor(public navCtrl: NavController, private dataService: DataService) {
+    	let count = this.dataService.getLocalData('userdata', 'id');
+    	this.dataService.getMyTasks(count).then(datas => this.items = datas);
+	}
+
+	itemSelected(item){
+		
+	}
+}

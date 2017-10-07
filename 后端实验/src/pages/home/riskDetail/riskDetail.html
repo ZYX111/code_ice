@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-segment [(ngModel)]="selectedSegment">
+      <ion-segment-button value="detail" checked>
+        风险描述
+      </ion-segment-button>
+      <ion-segment-button value="hist">
+        检查记录
+      </ion-segment-button>
+      <ion-segment-button value="problem">
+        两违问题
+      </ion-segment-button>
+    </ion-segment>
+    <ion-buttons end>
+      <button ion-button color="danger" icon-only>
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [ngSwitch]="selectedSegment"> 
+  <ion-card *ngSwitchCase="'detail'">
+  <ion-card-content>
+    <h2>分类</h2>
+    <p>{{riskbehavior.categoryname}}</p>
+    <h2>处所</h2>
+    <p>{{riskbehavior.riskname}}</p>    <h2>风险描述</h2>
+    <p>{{riskbehavior.description}}</p>
+  </ion-card-content>  
+  </ion-card> 
+
+  <ion-grid *ngSwitchCase="'hist'" class="grid-basic-page">
+    <ion-row>
+      <ion-col width-15>检查人</ion-col>
+      <ion-col width-70>问题描述</ion-col>
+      <ion-col width-15>检查时间</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let row of checkDatas">
+      <ion-col width-15>{{row.checkername}}</ion-col>
+      <ion-col width-70>{{row.description}}</ion-col>
+      <ion-col width-15>{{row.checktime}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngSwitchCase="'problem'" class="grid-basic-page">
+    <ion-row>
+      <ion-col width-70>问题描述</ion-col>
+      <ion-col width-15>责任人</ion-col>
+      <ion-col width-15>发生时间</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let row of problemDatas">
+      <ion-col width-70>{{row.description}}</ion-col>
+      <ion-col width-15>{{row.name}}</ion-col>
+      <ion-col width-15>{{row.occuretime}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

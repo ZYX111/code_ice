@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>发现问题</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>责任人：{{ personname }}</ion-label>
+            <button ion-button icon-only clear item-right (click)="openPerson()">
+              <ion-icon name="arrow-dropdown" ></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">责任部门：{{ orgname }}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查日期：{{checktime}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查人：{{checker}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">职务：{{post}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">检查地点：{{placename}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">发生时间：{{occuretime}}</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>问题来源：</ion-label>
+            <ion-select  okText="确定" cancelText="取消" [(ngModel)]="source">
+                <ion-option value="{{ item.name }}" *ngFor="let item of sources">
+                    {{ item.name }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>检查方式：</ion-label>
+            <ion-select  okText="确定" cancelText="取消" [(ngModel)]="method">
+                <ion-option value="{{ item.name }}" *ngFor="let item of checkMethods">
+                    {{ item.name }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>问题分类：</ion-label>
+            <ion-select  okText="确定" cancelText="取消" [(ngModel)]="riskkind">
+                <ion-option value="{{ item.name }}" *ngFor="let item of categorys">
+                    {{ item.name }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>考核方式：{{ evaluatemode }}</ion-label>
+            <button ion-button icon-only clear item-right (click)="openIllegal()">
+              <ion-icon name="arrow-dropdown" ></ion-icon>
+            </button>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">考核结果：</ion-label>
+            <ion-input type="text" [(ngModel)]="evaluateresult"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>作业环节：</ion-label>
+            <ion-select  okText="确定" cancelText="取消">
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>是否新职</ion-label>
+            <ion-checkbox checked="false"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+            <ion-label class="label">问题描述：</ion-label>
+            <ion-input type="text" [(ngModel)]="description"></ion-input>
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+    <ion-buttons right>
+        <button ion-button start (click)="cancel()">
+            <ion-icon name="checkmark"></ion-icon>
+            取消
+        </button>
+        <button ion-button (click)="save()">
+            <ion-icon name="close"></ion-icon>
+            确定
+        </button>
+    </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

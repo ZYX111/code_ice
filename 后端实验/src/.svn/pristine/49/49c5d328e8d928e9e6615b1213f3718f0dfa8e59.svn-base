@@ -1,0 +1,6 @@
+<ion-tabs>
+	<ion-tab [root]="tab1Root" tabTitle="主页" tabIcon="home"></ion-tab>
+	<ion-tab [root]="tab2Root" tabTitle="消息" tabIcon="chatbubbles" tabBadge="14" tabBadgeStyle="danger"></ion-tab>
+	<ion-tab [root]="tab3Root" tabTitle="风险地图" tabIcon="contacts"></ion-tab>
+	<ion-tab [root]="tab4Root" tabTitle="用户" tabIcon="contacts"></ion-tab>
+</ion-tabs>

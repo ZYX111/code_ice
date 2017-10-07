@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+
+import { HomePage } from '../home/home';
+import { MessagePage } from '../message/message';
+import { MyTaskPage } from '../user/mytask/mytask';
+import { UserPage } from '../user/user';
+import { DataService } from '../../services/data.service';
+
+// 组件
+@Component({
+    templateUrl: 'tabs.html'
+})
+export class TabsPage {
+    taskcount: number = 2;
+    
+    tab1Root: any = HomePage;
+    tab2Root: any = MessagePage;
+    tab3Root: any = MyTaskPage;
+    tab4Root: any = UserPage;
+
+    constructor(private dataService: DataService){
+    	let count = this.dataService.getLocalData('userdata', 'id');
+    	this.dataService.getMyTaskCount(count).then(data => this.taskcount = data);
+    }
+}

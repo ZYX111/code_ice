@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      	我的
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<div class="my_box">
+        <div class="my_phone"><img src="images/photo.png"></div>
+        <div class="my_info">
+            <ul>
+                <li>检查人<span></span></li>
+                <li>职务<span></span></li>
+                <li>时间<span></span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content ionic-pseudo my_list">
+        <div class="list">
+            <a class="item item-icon-left item-icon-right">
+                <i class="icon ion-pricetags"></i>
+                我的任务
+                <i class="icon ion-chevron-right"></i>
+            </a>
+            <a class="item item-icon-left item-icon-right">
+                <i class="icon ion-locked"></i>
+                我的权限
+                <i class="icon ion-chevron-right"></i>
+            </a>
+        </div>
+    </div>
+    <button>退出登陆</button>
+</ion-content>

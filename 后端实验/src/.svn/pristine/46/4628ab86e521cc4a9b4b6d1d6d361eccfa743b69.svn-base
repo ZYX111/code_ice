@@ -1,0 +1,73 @@
+import { Component } from '@angular/core';
+import { Slides } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { CheckRoundRiskPage } from '../checkRoundRisk/checkRoundRisk';
+import { FindProblemPage } from '../findProblem/findProblem';
+import { FindRiskPage } from '../findRisk/findRisk';
+import { AddProblemPage } from '../addProblem/addProblem';
+import { AddRiskPage } from '../addRisk/addRisk';
+
+@Component({
+    templateUrl: 'checkWork.html'
+})
+
+export class CheckWorkPage {
+
+	@ViewChild('mySlider') slider: Slides;
+	btnsTitle = ['周边风险','发现问题','发现风险'];
+
+    btns = [{
+        'title': '周边风险',
+        'active': true
+    },{
+        'title': '发现问题',
+        'active': false
+    },{
+        'title': '发现风险',
+        'active': false
+    }];
+
+	rows = [{
+        "discribe": "风险描述1",
+        "type": "风险类型1",
+        "inspected": true
+    },{
+        "discribe": "风险描述2",
+        "type": "风险类型2",
+        "inspected": false
+    },{
+        "discribe": "风险描述3",
+        "type": "风险类型3",
+        "inspected": false
+    },{
+        "discribe": "风险描述4",
+        "type": "风险类型4",
+        "inspected": false
+    }];
+
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    }
+
+    goToSlide(index){
+    	this.slider.slideTo(index, 500);
+  	};
+  
+  	onSlideChanged(){
+	    let currentIndex = this.slider.getActiveIndex();
+	};
+
+	addRoundRisk(index){
+		this.navCtrl.push(CheckRoundRiskPage);
+	}
+
+	addProblme(){
+		this.navCtrl.push(AddProblemPage);
+	}
+
+	addRisk(){
+		this.navCtrl.push(AddRiskPage);
+	}
+}

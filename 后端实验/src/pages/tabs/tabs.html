@@ -1,0 +1,8 @@
+<ion-tabs>
+	<ion-tab [root]="tab1Root" tabTitle="我的工作" tabIcon="home" show="{{isCadre}}"></ion-tab>
+	<ion-tab [root]="yxjsRoot" tabTitle="电子揭示" tabIcon="home" show="{{!isCadre}}"></ion-tab>
+	<ion-tab [root]="tab2Root" tabTitle="我的消息" tabIcon="volume-up" tabBadge="{{taskcount}}" tabBadgeStyle="danger">
+	</ion-tab>
+	<ion-tab [root]="tab3Root" tabTitle="我的查询" tabIcon="paper"></ion-tab>
+	<ion-tab [root]="tab4Root" tabTitle="我的设置" tabIcon="contact"></ion-tab>
+</ion-tabs>

@@ -1,0 +1,21 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+
+import { DataService } from '../../../services/data.service'
+@Component({
+  templateUrl: 'riskDetail.html'
+})
+export class RiskDetailPage {
+    selectedSegment: string = 'detail';
+    riskbehavior: any;
+    checkDatas: Array<Object>;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, private dataService: DataService) {
+      this.riskbehavior = navParams.get('riskbehavior');
+      this.loadCheckDatas();
+    }
+    loadCheckDatas(){
+        this.dataService.getDatas(`select u.name checkername,a.* from aqgl_data_checkitem a left join aqgl_data_task b on b.id=a.taskid left join fw_user u on u.id=b.checkerid where riskbehaviorid='${this.riskbehavior.id}' order by a.checktime desc`)
+          .then(items => this.checkDatas = items);
+    }
+}

@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>检查周边风险</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>时间：</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>地点：</ion-label>
+            <ion-select>
+                <ion-option value="nes">NES</ion-option>
+                <ion-option value="n64">Nintendo64</ion-option>
+                <ion-option value="ps">PlayStation</ion-option>
+                <ion-option value="genesis">Sega Genesis</ion-option>
+                <ion-option value="saturn">Sega Saturn</ion-option>
+                <ion-option value="snes">SNES</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>风险图片：</ion-label>
+            <img src="">
+        </ion-item>
+        <ion-item>
+            <button ion-button>取消</button>
+            <button ion-button>确定</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

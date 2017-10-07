@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>创建检查项</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list inset>
+        <ion-item>
+            <ion-label>时间：</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" pickerFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label>地点：</ion-label>
+            <ion-select>
+                <ion-option value="{{ i }}" *ngFor="let areaItem of areaItems;let i = index">
+                    {{ areaItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>问题分类：</ion-label>
+            <ion-select>
+                <ion-option value="{{ i }}" *ngFor="let quesItem of quesItems;let i = index">
+                    {{ quesItem.title }}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <button ion-button full (click)="checkWork()">检查</button>
+        </ion-item>
+    </ion-list>
+</ion-content>

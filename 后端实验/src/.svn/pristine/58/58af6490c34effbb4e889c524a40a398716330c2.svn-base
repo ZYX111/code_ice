@@ -1,0 +1,97 @@
+/*horizontal-btn-box*/
+.toolbar-title-md {
+    text-align: center;
+}
+.horizontal-btn-box {
+    display: -webkit-flex;
+    display: flex;
+}
+.horizontal-btn-box .button {
+    line-height: 23px;
+    flex: 1;
+}
+.horizontal-btn-box .button-box {
+    flex: 1;
+    -webkit-flex: 1;
+    text-align: center;
+}
+.horizontal-btn-box .button-box .button {
+    border-width: 0;
+    width: 80%;
+    background-color: #e9e9e9;
+    box-shadow: 5px 5px 5px #aaa;
+    
+}
+.horizontal-btn-box .button-box .btn-title {
+    margin-top: 5px;
+}
+
+.horizontal-btn-box .button-bar {
+    display: -webkit-flex;
+    display: flex;
+    flex: 1;
+}
+.horizontal-btn-box .button-bar > .button:before, 
+.horizontal-btn-box .button-bar > .button .icon:before {
+    line-height: 20px;
+}
+.horizontal-btn-box .tabs {
+    background-color: #fff;
+}
+.horizontal-btn-box .tabs > .tab-item {
+    color: #000;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0px 1px 1px 0;
+    box-shadow: 0 2px 5px #ddd;
+}
+.horizontal-btn-box .tabs > .tab-item:last-child {
+    border-radius: 0;
+    border-right-width: 0;
+}
+
+/* horizontal-btn-home */
+.btn-style-home {
+    box-shadow: 0 2px 5px #ddd;
+}
+.btn-style-home .button-bar > .button {
+    padding: 0 10px;
+    height: 45px;
+    line-height: 65px;
+    text-align: center;
+    vertical-align: bottom;
+    color: #333;
+    border-right: 1px solid #e7e7e7;
+}
+.btn-style-home .button-bar > .button:last-child {
+    border: none
+}
+.btn-style-home .icon {
+    position: absolute;
+    top: -45%;
+    left: 50%;
+    margin-left: -7px;
+}
+.btn-style-home .icon-title {
+    font-size: 12px;
+}
+
+/* horizontal-btn-self */
+.btn-style-self {
+    margin: 10px 0;
+}
+.btn-style-self .button-bar .button {
+    padding: 30px 10px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 3px 4px #777;
+    margin-bottom: 10px;
+}
+.btn-style-self .button-bar .button-box {
+    flex: 1;
+    -webkit-flex: 1;
+    text-align: center;
+}
+.swiper-slide img {
+    height: 100%;
+}

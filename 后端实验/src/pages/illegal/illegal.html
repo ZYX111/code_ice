@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="cancel()">
+            <ion-icon name="close"></ion-icon>
+        </button>    
+        <button ion-button icon-only (click)="select()">
+            <ion-icon name="checkmark"></ion-icon>
+        </button>    
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+      <ion-item>
+          <ion-label>问题分类：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="category" (ionChange)="selectCategory()">
+              <ion-option value="{{ item.name }}" *ngFor="let item of categorys">
+                  {{ item.name }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>适用部门：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="dept" (ionChange)="selectDept()">
+              <ion-option value="{{ item.dept }}" *ngFor="let item of orgs">
+                  {{ item.dept }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>违章内容：</ion-label>
+          <ion-select  okText="确定" cancelText="取消" [(ngModel)]="illegal">
+              <ion-option value="{{ item.id }}" *ngFor="let item of contents">
+                  {{ item.content }}
+              </ion-option>
+          </ion-select>
+      </ion-item>
+  </ion-list>
+</ion-content>

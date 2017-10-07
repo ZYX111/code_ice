@@ -1,0 +1,57 @@
+
+/*horizontal-btn-box*/
+.horizontal-btn-box .button {
+    line-height: 23px;
+    flex: 1;
+}
+.horizontal-btn-box .button-bar {
+	display: -webkit-flex;
+	display: flex;
+}
+.horizontal-btn-box .button-bar > .button:before, 
+.horizontal-btn-box .button-bar > .button .icon:before {
+    line-height: 20px;
+}
+.horizontal-btn-box .tabs {
+    background-color: #fff;
+}
+.horizontal-btn-box .tabs > .tab-item {
+    color: #000;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0px 1px 1px 0;
+    box-shadow: 0 2px 5px #ddd;
+}
+.horizontal-btn-box .tabs > .tab-item:last-child {
+    border-radius: 0;
+    border-right-width: 0;
+}
+
+/* horizontal-btn-home */
+.btn-style-home {
+    box-shadow: 0 2px 5px #ddd;
+}
+.btn-style-home .button-bar > .button {
+    padding: 0 10px;
+}
+.btn-style-home .button-bar > .button:first-child {
+    border-radius: 0;
+    border-left-width: 0;
+}
+.btn-style-home .button-bar > .button:last-child {
+    border-radius: 0;
+    border-right-width: 0;
+}
+
+/* horizontal-btn-self */
+.btn-style-self {
+    margin: 10px 0;
+}
+.btn-style-self .button-bar > .button {
+    padding: 35px 10px;
+    border-radius: 5px;
+    border: none;
+}
+.swiper-slide img {
+    height: 100%;
+}

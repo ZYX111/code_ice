@@ -1,0 +1,37 @@
+.scroll-content {
+    overflow-y: auto;
+}
+.loginBtn {
+    width: 100%;
+    color:#fff;
+    border: none;
+    border-radius: 0;
+    margin-top: 10px;
+}
+.login_Btn {
+    background: -webkit-linear-gradient(#99c73a, #6cb13e); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#99c73a, #6cb13e); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#99c73a, #6cb13e); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#99c73a, #6cb13e); /* 标准的语法 */
+}
+.login_Btn.activated {
+    background: -webkit-linear-gradient(#6cb13e, #58ae1f); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#6cb13e, #58ae1f); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#6cb13e, #58ae1f); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#6cb13e, #58ae1f); /* 标准的语法 */
+}
+.login_For {
+    background: #343640;
+    border: 1px solid #22242a;
+}
+ion-list[inset] {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 50%;
+    border-radius: 0 !important;
+    margin-top: -100px !important;
+}
+.item-md.item-block .item-inner {
+    padding: 0 16px;
+}

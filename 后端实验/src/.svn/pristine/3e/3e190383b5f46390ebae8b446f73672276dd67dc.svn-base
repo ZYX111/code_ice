@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+
+import { NavController, NavParams } from 'ionic-angular';
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'checkRoundRisk.html'
+})
+export class CheckRoundRiskPage{
+
+    constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    }
+
+    
+    cancel(){
+    	this.navCtrl.pop();
+    }
+
+    sure(){
+    	this.navCtrl.pop();
+    }
+}

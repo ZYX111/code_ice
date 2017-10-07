@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>量化任务</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-60>工作内容</ion-col>
+      <ion-col width-20>规定数量</ion-col>
+      <ion-col width-20>完成数量</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of items" (click)="showDetail(item)">
+      <ion-col width-60>{{item.name}}</ion-col>
+      <ion-col width-20>{{item.amount}}</ion-col>
+      <ion-col width-20>{{item.finished}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,47 @@
+import { Component } from '@angular/core';
+
+import { NavController, NavParams } from 'ionic-angular';
+
+import { WorkListPage } from '../home/workList/workList';
+
+@Component({
+	selector: 'page-home',
+	templateUrl: 'home.html'
+})
+export class HomePage {
+	
+	mySlideOptions = {
+	    initialSlide: 1,
+	    loop: true,
+	    paper: true,
+	    autoplay: 3000
+  	};
+
+	slides = [
+	    { image: "assets/img/bar1.jpg" },
+	    { image: "assets/img/bar2.jpg" }
+  	];
+
+  	constructor(public navCtrl: NavController, public navParams: NavParams) {
+  		
+  	}
+
+  	itemTapped(event,item){
+  		switch(item){
+  			case 1:
+  				this.navCtrl.push(WorkListPage);
+  			break;
+  			case 2:
+  				this.navCtrl.push(WorkListPage);
+  			break;
+  			case 3:
+  				this.navCtrl.push(WorkListPage);
+  			break;
+  			case 4:
+  				this.navCtrl.push(WorkListPage);
+  			break;
+  		}
+	    
+  	};
+
+}

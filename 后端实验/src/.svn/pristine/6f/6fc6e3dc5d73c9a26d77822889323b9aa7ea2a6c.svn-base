@@ -1,0 +1,44 @@
+import { Component } from '@angular/core';
+
+import { Geolocation, Camera } from 'ionic-native';
+import { NavController, NavParams } from 'ionic-angular';
+import { DataService } from '../../../services/data.service'
+
+@Component({
+    selector: 'page-home',
+    templateUrl: 'addRisk.html'
+})
+export class AddRiskPage{
+
+	imageUrl: any;
+    icons: string[];
+    items: Array<{title: string, note: string, icon: string}>;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams){
+
+	    Geolocation.getCurrentPosition().then((resp) => {
+		 	// resp.coords.latitude
+		 	// resp.coords.longitude
+		}).catch((error) => {
+		  	console.log('Error getting location', error);
+		})
+
+    }
+
+    takePicture(){
+		Camera.getPicture().then((imageData) => {
+		 	this.imageUrl = 'data:image/jpeg;base64,' + imageData;
+		}, (err) => {
+		 	// Handle error
+		});
+    }
+
+    cancel(){
+    	this.navCtrl.pop();
+    }
+
+    sure(){
+    	this.navCtrl.pop();
+    }
+
+}
