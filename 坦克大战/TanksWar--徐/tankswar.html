@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body onkeydown="move(event)">
+<body onkeydown="keyClient(event)">
 <canvas id="tankMap" width="720px" height="660px" style="color:black">
 </canvas>
 <script type="text/javascript">
@@ -24,6 +24,8 @@ var w = 60,h = 60;//w为墙(地面)宽，h为墙(地面)高
 var tw = 48,th = 48;//tw为坦克宽，th为坦克高
 
 var k = 0;//墙组长度
+
+var size = 15;//子弹大小
 
 var MAP = [//地图数据
 	[0,0,0,0,0,0,0,0,0,0,0,0],
@@ -46,7 +48,8 @@ var oImgs = {//建立图片数组，便于预加载
 		"up" : "image/Icon-mdpi-up.png",  
 		"wall" : "image/walls.png",
 		"road" : "image/GroundGravel_Sand.png",
-		"bullet" : "image/enemymissile.png"
+		"bullet" : "image/enemymissile.png",
+		"armor" :"image/enemymissile.png"
 }
 
 function imgPreload(srcs,callback){//图片预加载函数
@@ -69,7 +72,7 @@ function imgPreload(srcs,callback){//图片预加载函数
 	}
 }   
 
-var down,left,right,up,wall,road,bullet;//定义图片对象
+var down,left,right,up,wall,road,bullet,armor;//定义图片对象
 
 imgPreload(oImgs,function(images){
 		//console.log(images.road);
@@ -80,8 +83,27 @@ imgPreload(oImgs,function(images){
 		wall = images.wall;
 		road = images.road;
 		bullet = images.bullet;
+		armor = images.armor;
 		init();
 }); 
+
+//定义Armor类
+function Armor(x,y,direct){
+	this.x=x;
+	this.y=y;
+	this.direct=direct;
+	this.speed=3;
+	this.fly=function(){	
+		switch(direct){ 
+			case 1:this.y-=this.speed;break; 
+			case 2:this.x+=this.speed;break; 
+			case 0:this.x-=this.speed;break; 
+			case 3:this.y+=this.speed;break; 
+		}
+		console.log(x,y);
+		cxt.drawImage(armor,x,y,size,size);
+	}
+}
 
 //定义Tank类
 //属性：横坐标x，纵坐标y，移动速度speed,方向direct
@@ -114,7 +136,10 @@ function Tank(x,y,direct){
 		}
 	}
 	this.shot=function(){//子弹发射
-		
+		var armo=new Armor(x+tw/2,y+th/2,direct);
+		while(isMoveOk(this)){
+			armo.fly();
+		}
 	}
 }
 
@@ -189,7 +214,7 @@ function drawTank(tank){
 	}
 }
 
-function move(event){
+function keyClient(event){
 	switch(event.keyCode){
 		case 38:curTank.direct=0;curTank.moveUp(isMoveOk(curTank)); break;//上
 		case 39:curTank.direct=1;curTank.moveRight(isMoveOk(curTank)); break; //右
@@ -201,11 +226,12 @@ function move(event){
 	drawTank(curTank);
 }	
 
-//碰撞检测：坦克与墙，坦克与敌人，坦克与边界
+//碰撞检测：坦克与墙，坦克与敌人，子弹与坦克，坦克与边界
 //1、坦克与墙：判定坦克顶点的(x,y)是否在墙的范围内。
-//方法：首先判断当前方向，选取当前方向上坦克最前方的两点(若当前方向为上，则选取坦克最上方的两点，进行判断)，分别判断这两点是否在墙的范围内
+//	 方法：首先判断当前方向，选取当前方向上坦克最前方的两点(若当前方向为上，则选取坦克最上方的两点，进行判断)，分别判断这两点是否在墙的范围内
 //2、坦克与敌人：与墙的判断类似
-//3、坦克与边界：因为坦克不会超出墙外，所以可以不判断这一点，若敌人为随机生成，则后续添加这一检测
+//3、子弹与坦克：
+//4、坦克与边界：因为坦克不会超出墙外，所以可以不判断这一点，若敌人为随机生成，则后续添加这一检测
 function isMoveOk(curTank){
 	var t;
 	if(curTank.direct==0){//上
@@ -264,7 +290,8 @@ function isMoveOk(curTank){
 				continue;
 			}
 		}
-	}return true;
+	}
+	return true;
 }
 </script>
 
